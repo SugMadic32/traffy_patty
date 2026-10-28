@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Traffy Fondue Insight | Ctrl C + Ctrl V | ICT324</title>
+<meta name="description" content="ICT324 data mining project: labelling Bangkok city complaints from text and tracking how fast they get fixed.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<meta property="og:title" content="Traffy Fondue Insight | Team Ctrl C + Ctrl V">
+<meta property="og:description" content="ICT324 data mining project: labelling Bangkok city complaints from text and tracking how fast they get fixed.">
+<meta name="theme-color" content="#0E1324">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0E1324;
+  --night-2:#151B31;
+  --panel:#1A2139;
+  --line:#2A3354;
+  --text:#F1F2F5;
+  --muted:#9AA3BD;
+  --amber:#FFC23D;
+  --red:#FF4747;
+  --green:#3CCB8A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--night)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--night);color:var(--text);font-family:'IBM Plex Sans','IBM Plex Sans Thai',system-ui,sans-serif;font-size:17px;line-height:1.6}
+a{color:var(--amber);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px;border-radius:4px}
+.thai{font-family:'IBM Plex Sans Thai','Chakra Petch',sans-serif}
+
+/* ---------- top bar ---------- */
+.bar{position:fixed;top:0;left:0;right:0;z-index:30;padding-top:env(safe-area-inset-top,0px);transition:background .25s}
+.bar.solid{background:rgba(14,19,36,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.bar-in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:20px;height:60px}
+.brand{font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:21px;color:var(--text);text-decoration:none;white-space:nowrap}
+.brand i{font-style:inherit;color:var(--amber)}
+.nav{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;min-width:0;margin-left:auto}
+.nav::-webkit-scrollbar{display:none}
+.nav a{font-family:'Chakra Petch',sans-serif;font-weight:600;color:var(--muted);text-decoration:none;font-size:15px;padding:6px 12px;white-space:nowrap;transform:skewX(-10deg)}
+.nav a span{display:inline-block;transform:skewX(10deg)}
+.nav a:hover,.nav a.on{color:var(--night);background:var(--amber)}
+.meter{position:absolute;left:0;bottom:-1px;height:3px;width:0;background:linear-gradient(90deg,var(--amber),var(--red))}
+
+/* ---------- hero: the drive ---------- */
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;max-height:1000px;overflow:hidden;background:var(--night)}
+#drive{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-copy{position:absolute;left:0;right:0;top:calc(84px + env(safe-area-inset-top,0px));z-index:2;pointer-events:none}
+.hero-copy .in{max-width:1180px;margin:0 auto;padding:0 24px}
+.hero h1{font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:clamp(38px,6vw,78px);line-height:.95;letter-spacing:-1px;max-width:900px;text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.hero h1 span{display:block;color:var(--amber)}
+.hero .summary{margin-top:18px;font-size:19px;max-width:560px;color:#DCE0EA;text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.hud{position:absolute;left:0;right:0;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:2}
+.hud .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.counter{font-family:'Chakra Petch',sans-serif;background:rgba(14,19,36,.72);border:1px solid var(--line);padding:10px 16px;transform:skewX(-10deg)}
+.counter>div{transform:skewX(10deg)}
+.counter small{display:block;color:var(--muted);font-size:13px}
+.counter b{font-size:34px;font-weight:700;font-style:italic;line-height:1;color:var(--amber);font-variant-numeric:tabular-nums}
+.toast{font-family:'Chakra Petch',sans-serif;font-weight:600;background:rgba(14,19,36,.78);border-left:4px solid var(--green);padding:8px 14px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;max-width:60vw}
+.toast.show{opacity:1;transform:none}
+.toast small{display:block;color:var(--muted);font-weight:500;font-size:12px}
+.caption{position:absolute;right:24px;top:calc(70px + env(safe-area-inset-top,0px));z-index:2;font-size:12px;color:var(--muted)}
+.pausebtn{font:600 13px 'Chakra Petch',sans-serif;color:var(--text);background:rgba(14,19,36,.72);border:1px solid var(--line);padding:8px 12px;cursor:pointer}
+
+/* ---------- content ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.intro{padding:64px 0 24px;background:linear-gradient(180deg,#0B0F1D,var(--night))}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.fact{background:var(--panel);border:1px solid var(--line);padding:18px 20px;clip-path:polygon(0 0,100% 0,calc(100% - 14px) 100%,0 100%)}
+.fact small{display:block;color:var(--muted);font-size:13px}
+.fact b{font-family:'Chakra Petch',sans-serif;font-style:italic;font-size:34px;line-height:1.1;color:var(--amber)}
+.fact span{display:block;font-size:14px;color:#C9CEDC}
+.meta{margin-top:22px;color:var(--muted);font-size:16px;max-width:900px}
+.meta b{color:var(--text);font-weight:600}
+
+.track{margin-top:40px}
+.track-bar{position:relative;height:14px;background:var(--panel);border:1px solid var(--line)}
+.track-fill{position:absolute;left:0;top:0;bottom:0;width:37.5%;background:repeating-linear-gradient(90deg,var(--amber) 0 18px,#E0A82F 18px 36px)}
+.track-car{position:absolute;top:50%;left:37.5%;width:46px;height:22px;transform:translate(-50%,-50%)}
+.stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:10px}
+.stages button{all:unset;cursor:pointer;padding:10px 12px 0 0;color:var(--muted);font-size:15px}
+.stages button b{display:block;font-family:'Chakra Petch',sans-serif;font-style:italic;font-size:20px;color:var(--text)}
+.stages button[aria-selected="true"] b{color:var(--amber)}
+.stages button:focus-visible{outline:3px solid var(--amber)}
+.flag{display:inline-block;margin-top:4px;font-size:12px;font-weight:600;padding:1px 8px}
+.flag.done{color:var(--green);background:rgba(60,203,138,.12)}
+.flag.now{color:var(--amber);background:rgba(255,194,61,.14)}
+.flag.next{color:var(--muted);background:rgba(154,163,189,.12)}
+#stageText{margin-top:14px;min-height:52px;max-width:760px;color:#D5D9E4}
+
+main section{padding:84px 0;position:relative}
+main section+section{border-top:1px solid var(--line)}
+.head{display:flex;align-items:center;gap:18px;margin-bottom:28px}
+.plate{flex:none;font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:26px;color:var(--night);background:var(--amber);padding:4px 18px;clip-path:polygon(12px 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.head h2{font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:clamp(34px,4.4vw,52px);line-height:1}
+.lead{font-size:20px;line-height:1.5;max-width:760px}
+.prose{max-width:760px;color:#D5D9E4;margin-top:16px}
+.rq{margin:36px 0;padding:28px 32px;background:var(--panel);border-left:6px solid var(--red);max-width:880px}
+.rq small{display:block;color:var(--muted);font-size:14px;margin-bottom:8px}
+.rq p{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.3}
+h3{font-family:'Chakra Petch',sans-serif;font-style:italic;font-size:26px;font-weight:700;margin:44px 0 14px}
+.subq{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.subq div{background:var(--panel);border:1px solid var(--line);padding:22px}
+.subq svg{width:30px;height:30px;color:var(--amber);margin-bottom:10px}
+.subq b{display:block;font-family:'Chakra Petch',sans-serif;font-size:21px;margin-bottom:4px}
+.subq p{color:var(--muted);font-size:16px}
+.feedback{margin-top:28px;max-width:880px;border:1px solid var(--line);padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:16px}
+.feedback svg{width:28px;height:28px;color:var(--amber)}
+.feedback p{color:#D5D9E4}
+.feedback p+p{margin-top:8px;color:var(--muted)}
+ul.plain{padding-left:20px;max-width:800px;color:#D5D9E4}
+ul.plain li{margin:8px 0}
+ul.plain li::marker{color:var(--amber)}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);max-width:920px}
+table{border-collapse:collapse;width:100%;font-size:16px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600;color:var(--muted);background:var(--night-2)}
+tr:last-child th,tr:last-child td{border-bottom:0}
+td code{font-size:14.5px;background:var(--line);padding:2px 7px;color:var(--text)}
+
+.charts{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;margin-top:40px}
+.chart{background:var(--panel);border:1px solid var(--line);padding:24px;min-width:0}
+.chart h4{font-family:'Chakra Petch',sans-serif;font-style:italic;font-size:23px}
+.chart .note{color:var(--muted);font-size:14px;margin:2px 0 16px}
+.toggle{display:inline-flex;border:1px solid var(--line);margin-bottom:14px}
+.toggle button{font:600 14px 'Chakra Petch',sans-serif;border:0;background:transparent;color:var(--muted);padding:6px 14px;cursor:pointer}
+.toggle button.thai{font-family:'IBM Plex Sans Thai',sans-serif}
+.toggle button[aria-pressed="true"]{background:var(--amber);color:var(--night)}
+.hbar{display:grid;grid-template-columns:128px minmax(0,1fr) 70px;align-items:center;gap:10px;margin:8px 0;font-size:15px}
+.hbar .t{height:12px;background:var(--night-2);overflow:hidden}
+.hbar .f{display:block;height:100%;background:linear-gradient(90deg,var(--red),var(--amber));transform-origin:left;transform:scaleX(0);transition:transform .9s cubic-bezier(.2,.8,.2,1)}
+.charts.go .hbar .f{transform:scaleX(var(--w))}
+.hbar .v{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.vbars{display:flex;align-items:flex-end;gap:10px;height:210px;border-bottom:2px solid var(--line)}
+.vb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}
+.vb .v{font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.vb .b{width:100%;max-width:44px;background:var(--line)}
+.vb.used .b{background:var(--green)}
+.vb.excl .b{background:var(--red)}
+.vlabels{display:flex;gap:10px;margin-top:8px}
+.vlabels span{flex:1;text-align:center;font-size:14px;color:var(--muted)}
+.key{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;font-size:14px;color:var(--muted)}
+.key span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:10px;height:10px;display:inline-block}
+
+.route{list-style:none;max-width:880px;margin-top:28px;border-left:4px solid var(--line)}
+.route li{position:relative;padding:0 0 30px 34px}
+.route li::before{content:attr(data-n);position:absolute;left:-24px;top:0;width:44px;height:30px;background:var(--amber);color:var(--night);font:italic 700 18px 'Chakra Petch',sans-serif;display:grid;place-items:center;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.route h4{font-family:'Chakra Petch',sans-serif;font-size:23px;line-height:1.2;margin-bottom:6px}
+.route p{color:var(--muted)}
+.route p b{color:var(--text);font-weight:600}
+
+.laps{display:grid;gap:14px;max-width:900px}
+.lap{display:grid;grid-template-columns:170px minmax(0,1fr);background:var(--panel);border:1px solid var(--line)}
+.lap .stub{padding:20px;border-right:2px dashed var(--line)}
+.lap .stub small{display:block;color:var(--muted);font-size:13px}
+.lap .stub time{font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:25px;line-height:1.1}
+.lap .body{padding:18px 22px;display:grid;gap:10px}
+.lap .row{display:grid;grid-template-columns:66px minmax(0,1fr);gap:12px}
+.st{font:600 13px 'Chakra Petch',sans-serif;padding:2px 0;text-align:center;height:max-content;margin-top:2px}
+.st.done{color:var(--green);background:rgba(60,203,138,.12)}
+.st.stuck{color:var(--red);background:rgba(255,71,71,.12)}
+.st.next{color:var(--amber);background:rgba(255,194,61,.14)}
+
+.closed{max-width:900px;border:1px solid var(--line)}
+.closed .stripe{height:16px;background:repeating-linear-gradient(-45deg,var(--amber) 0 16px,var(--night) 16px 32px)}
+.closed .in{padding:26px 28px;background:var(--panel)}
+.closed b{font-family:'Chakra Petch',sans-serif;font-style:italic;font-size:26px;display:block;margin-bottom:6px}
+.closed p{color:var(--muted);max-width:700px}
+
+.files{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:920px}
+.file{display:flex;gap:14px;align-items:center;padding:18px;background:var(--panel);border:1px solid var(--line);text-decoration:none;color:var(--text)}
+.file:hover{border-color:var(--amber)}
+.file svg{width:28px;height:28px;color:var(--amber);flex:none}
+.file b{display:block;font-family:'Chakra Petch',sans-serif;font-size:18px}
+.file span{display:block;font-size:14px;color:var(--muted)}
+.refs{max-width:900px;padding-left:28px;color:#D5D9E4}
+.refs li{margin:10px 0;font-size:16px}
+.refs li::marker{color:var(--amber);font-weight:700}
+
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:15px;padding:30px 0 calc(30px + env(safe-area-inset-bottom,0px))}
+footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+@media (max-width:900px){
+  .facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .subq,.charts,.files{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .caption{display:none}
+  .hero .summary{font-size:17px}
+  .counter b{font-size:26px}
+  .toast{max-width:46vw;font-size:13px;padding:6px 10px}
+  .counter{padding:6px 12px}
+  .counter small{font-size:11px}
+  .stages{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 0}
+  .fact b{font-size:28px}
+  .hbar{grid-template-columns:92px minmax(0,1fr) 58px}
+  .lap{grid-template-columns:minmax(0,1fr)}
+  .lap .stub{border-right:0;border-bottom:2px dashed var(--line)}
+  .chart{padding:18px}
+  main section{padding:60px 0}
+}
+/* buttons */
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px;pointer-events:auto}
+.btn{display:inline-flex;align-items:center;gap:10px;font:italic 700 17px 'Chakra Petch',sans-serif;color:var(--night);background:var(--amber);text-decoration:none;padding:12px 24px;border:0;cursor:pointer;transform:skewX(-10deg);transition:transform .2s,box-shadow .2s,background .2s}
+.btn>span{display:inline-block;transform:skewX(10deg)}
+.btn:hover{transform:skewX(-10deg) translateY(-2px);box-shadow:0 10px 30px rgba(255,194,61,.35)}
+.btn:active{transform:skewX(-10deg) translateY(0)}
+.btn.ghost{background:rgba(14,19,36,.55);color:var(--text);box-shadow:inset 0 0 0 1.5px rgba(241,242,245,.6);backdrop-filter:blur(6px)}
+.btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--amber),0 10px 30px rgba(0,0,0,.4);color:var(--amber)}
+#drive{cursor:grab;touch-action:pan-y}
+#drive:active{cursor:grabbing}
+.hero-fallback{background:radial-gradient(ellipse at 50% 80%,#2a1f3c,var(--night) 70%)}
+
+/* mini game */
+.game-sec{padding:84px 0 0;border-top:1px solid var(--line)}
+.gnote{margin-top:12px;color:var(--muted);font-size:15px;max-width:760px}
+.game{position:relative;margin-top:32px;scroll-margin-top:64px;height:min(78vh,720px);min-height:480px;background:#0a0e1c;overflow:hidden;user-select:none;-webkit-user-select:none}
+#gameCanvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.g-top{position:absolute;left:0;right:0;top:0;display:flex;gap:28px;padding:18px 24px;background:linear-gradient(rgba(10,14,28,.85),rgba(10,14,28,0));pointer-events:none}
+.g-stat small{display:block;font-size:12px;color:var(--muted)}
+.g-stat b{font:italic 700 28px/1 'Chakra Petch',sans-serif;font-variant-numeric:tabular-nums}
+.g-stat:first-child b{color:var(--amber)}
+.g-prompt{position:absolute;left:50%;top:84px;transform:translate(-50%,-10px);opacity:0;transition:opacity .2s,transform .2s;text-align:center;background:rgba(10,14,28,.82);border-left:4px solid var(--red);padding:10px 18px;pointer-events:none;min-width:220px;backdrop-filter:blur(6px)}
+.g-prompt.show{opacity:1;transform:translate(-50%,0)}
+.g-prompt small{display:block;font-size:12px;color:var(--muted)}
+.g-prompt b{display:block;font:italic 700 24px/1.2 'Chakra Petch',sans-serif;color:var(--amber)}
+.g-prompt span{font-size:14px;color:#D5D9E4}
+.g-toast{position:absolute;right:20px;top:84px;font:600 15px 'Chakra Petch',sans-serif;background:rgba(10,14,28,.82);padding:8px 14px;border-left:4px solid var(--green);opacity:0;transition:opacity .2s;pointer-events:none;max-width:44%}
+.g-toast.show{opacity:1}
+.g-toast.bad{border-left-color:var(--red)}
+.g-controls{position:absolute;left:0;right:0;bottom:20px;display:flex;justify-content:center;gap:12px;padding:0 16px}
+.g-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:64px;height:58px;padding:0 18px;border:0;cursor:pointer;color:var(--text);background:rgba(14,19,36,.72);box-shadow:inset 0 0 0 1.5px var(--line);backdrop-filter:blur(6px);transform:skewX(-10deg);transition:background .15s,box-shadow .15s,transform .1s;font:italic 700 18px 'Chakra Petch',sans-serif}
+.g-btn>*{transform:skewX(10deg)}
+.g-btn svg{width:26px;height:26px}
+.g-btn:hover{box-shadow:inset 0 0 0 1.5px var(--amber)}
+.g-btn:active{transform:skewX(-10deg) scale(.96)}
+.g-btn.fix{min-width:170px;color:var(--night);background:var(--amber);box-shadow:none}
+.g-btn.fix:disabled{background:rgba(14,19,36,.72);color:var(--muted);box-shadow:inset 0 0 0 1.5px var(--line);cursor:default}
+.g-btn.fix.ready{animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(255,194,61,.5)}50%{box-shadow:0 0 0 10px rgba(255,194,61,0)}}
+.g-overlay{position:absolute;inset:0;display:grid;place-items:center;background:rgba(8,11,22,.55);backdrop-filter:blur(3px);padding:20px}
+.g-overlay[hidden]{display:none}
+.g-card{max-width:520px;text-align:center}
+.g-card h3{font:italic 700 clamp(30px,4vw,44px)/1.05 'Chakra Petch',sans-serif;margin:0 0 12px}
+.g-card p{color:#D5D9E4}
+.g-card .btn{margin-top:22px}
+.g-card .keys{margin-top:16px;font-size:14px;color:var(--muted)}
+.g-res{display:flex;justify-content:center;gap:30px;margin:6px 0 16px;flex-wrap:wrap}
+.g-res small{display:block;font-size:12px;color:var(--muted)}
+.g-res b{font:italic 700 34px/1 'Chakra Petch',sans-serif;color:var(--amber)}
+.g-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;color:var(--muted)}
+.g-fallback[hidden]{display:none}
+@media (max-width:600px){
+  .game{height:72vh;min-height:460px}
+  .g-top{gap:16px;padding:14px 16px}
+  .g-stat b{font-size:22px}
+  .g-prompt{top:70px;min-width:180px}
+  .g-prompt b{font-size:20px}
+  .g-toast{top:auto;bottom:92px;right:12px;max-width:70%;font-size:13px}
+  .g-btn{height:54px}
+  .g-btn.fix{min-width:140px}
+  .ctas .btn{font-size:15px;padding:10px 18px}
+}
+
+.g-ctl{margin-left:auto;display:flex;gap:8px;pointer-events:auto}
+.g-ctl[hidden]{display:none}
+.g-mini{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 14px;border:0;cursor:pointer;font:600 14px 'Chakra Petch',sans-serif;color:var(--text);background:rgba(14,19,36,.75);box-shadow:inset 0 0 0 1.5px var(--line);backdrop-filter:blur(6px)}
+.g-mini:hover{box-shadow:inset 0 0 0 1.5px var(--amber);color:var(--amber)}
+.g-mini svg{width:18px;height:18px}
+.pat{display:flex;gap:4px;margin-top:6px}
+.pat i{width:22px;height:10px;background:var(--green);transform:skewX(-14deg);transition:background .3s}
+.pat i.lost{background:rgba(255,255,255,.12)}
+.g-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.g-row .btn{margin-top:0}
+.g-kick{font:600 14px 'Chakra Petch',sans-serif;color:var(--red)!important;margin-bottom:4px}
+.g-rank{font:italic 700 20px 'Chakra Petch',sans-serif;color:var(--amber)!important;margin:-4px 0 14px}
+@media (max-width:600px){.g-mini span{display:none}.g-mini{padding:0 10px}.g-top{flex-wrap:wrap;row-gap:8px}.pat i{width:16px}}
+
+/* ---------- crew: driver-select cards ---------- */
+.crew{padding:84px 0 40px;border-top:1px solid var(--line);position:relative;overflow:hidden}
+.crew::before{content:"";position:absolute;inset:auto -10% -40% -10%;height:70%;background:radial-gradient(ellipse at center,rgba(255,194,61,.10),transparent 60%);pointer-events:none}
+.crew .lead b{color:var(--amber)}
+.crew-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:40px;perspective:1000px}
+.driver{position:relative;min-height:350px;padding:30px 28px 26px;background:linear-gradient(160deg,#1E2643 0%,#141A30 55%,#0F1426 100%);
+  clip-path:polygon(0 0,calc(100% - 34px) 0,100% 34px,100% 100%,34px 100%,0 calc(100% - 34px));
+  transform-style:preserve-3d;transition:transform .18s ease-out,opacity .7s cubic-bezier(.2,.8,.2,1),translate .7s cubic-bezier(.2,.8,.2,1);
+  outline:none;overflow:hidden;cursor:default;--mx:50%;--my:30%}
+.driver::before{content:"";position:absolute;inset:0;padding:1.5px;background:linear-gradient(160deg,var(--amber),rgba(255,194,61,.05) 40%,rgba(255,71,71,.5));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;clip-path:inherit;opacity:.55;transition:opacity .3s}
+.driver:hover::before,.driver:focus-visible::before{opacity:1}
+.d-glare{position:absolute;inset:0;background:radial-gradient(circle at var(--mx) var(--my),rgba(255,226,160,.18),transparent 45%);opacity:0;transition:opacity .3s;pointer-events:none}
+.driver:hover .d-glare{opacity:1}
+.d-speed{position:absolute;left:-20%;right:-20%;bottom:0;height:46%;background:repeating-linear-gradient(115deg,transparent 0 22px,rgba(255,194,61,.07) 22px 26px);animation:speed 1.6s linear infinite;mask:linear-gradient(transparent,#000);-webkit-mask:linear-gradient(transparent,#000);pointer-events:none}
+.driver:hover .d-speed{animation-duration:.5s}
+@keyframes speed{to{background-position:-104px 0}}
+.d-num{position:absolute;right:20px;top:6px;font:italic 700 120px/1 'Chakra Petch',sans-serif;color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.12);transform:translateZ(30px);transition:color .3s,-webkit-text-stroke-color .3s}
+.driver:hover .d-num{-webkit-text-stroke-color:rgba(255,194,61,.5)}
+.d-badge{position:relative;width:118px;height:118px;color:var(--amber);transform:translateZ(60px);filter:drop-shadow(0 0 18px rgba(255,194,61,.35))}
+.d-badge svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 18s linear infinite}
+.driver:hover .d-badge svg{animation-duration:4s}
+@keyframes spin{to{transform:rotate(360deg)}}
+.d-badge b{position:absolute;inset:0;display:grid;place-items:center;font:italic 700 42px 'Chakra Petch',sans-serif;color:var(--text);text-shadow:0 0 18px rgba(255,194,61,.6)}
+.d-tag{margin-top:24px;font:600 13px 'Chakra Petch',sans-serif;letter-spacing:.5px;color:var(--amber);transform:translateZ(40px)}
+.driver h3{margin:4px 0 0;font:italic 700 clamp(26px,2.4vw,32px)/1.08 'Chakra Petch',sans-serif;transform:translateZ(50px)}
+.d-plate{margin-top:22px;display:inline-flex;flex-direction:column;align-items:center;padding:6px 18px 5px;background:#F4F4EE;color:#14161C;border-radius:6px;box-shadow:inset 0 0 0 2px #14161C,inset 0 0 0 4px #F4F4EE,0 10px 24px rgba(0,0,0,.45);transform:translateZ(70px)}
+.d-plate small{font:600 10px 'Chakra Petch',sans-serif;letter-spacing:.6px;color:#555}
+.d-plate b{font:700 30px/1.05 'Chakra Petch',sans-serif;letter-spacing:2px;font-variant-numeric:tabular-nums}
+.d-plate span{font:600 10px 'Chakra Petch',sans-serif;color:#555}
+.d-bar{position:absolute;left:28px;right:28px;bottom:18px;height:4px;background:rgba(255,255,255,.08);overflow:hidden}
+.d-bar i{position:absolute;inset:0;width:30%;background:linear-gradient(90deg,transparent,var(--amber),transparent);animation:scan 2.4s ease-in-out infinite}
+@keyframes scan{0%{transform:translateX(-100%)}100%{transform:translateX(340%)}}
+.js-crew .driver{opacity:0;translate:0 50px}
+.js-crew .crew-grid.in .driver{opacity:1;translate:0 0}
+.js-crew .crew-grid.in .driver:nth-child(2){transition-delay:0s,.12s,.12s}
+.js-crew .crew-grid.in .driver:nth-child(3){transition-delay:0s,.24s,.24s}
+@media (prefers-reduced-motion:reduce){.d-speed,.d-badge svg,.d-bar i{animation:none}.js-crew .driver{opacity:1;translate:none}}
+@media (max-width:900px){.crew-grid{grid-template-columns:minmax(0,1fr);max-width:460px}.driver{min-height:330px}}
+</style>
+</head>
+<body>
+
+<header class="bar" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="#home">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#team"><span>Team</span></a><a href="#game"><span>Game</span></a><a href="#problem"><span>Problem</span></a><a href="#data"><span>Data</span></a><a href="#method"><span>Method</span></a><a href="#progress"><span>Progress</span></a><a href="#results"><span>Results</span></a><a href="#files"><span>Files</span></a>
+    </nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+
+<!-- 1 HOME -->
+<div class="hero" id="home">
+  <canvas id="drive" aria-label="3D animation: a sports car drives a Bangkok road at night and potholes are repaired as it passes. Drag to look around." role="img"></canvas>
+  <div class="hero-copy">
+    <div class="in">
+      <h1>Every pothole is a complaint. <span>We find the slow ones.</span></h1>
+      <p class="summary">We read real complaints sent to Traffy Fondue, label each one by problem type from its text, and show how fast each type of problem gets fixed in each Bangkok district.</p>
+      <div class="ctas">
+        <a class="btn" href="#game"><span>Play the mini game</span></a>
+        <a class="btn ghost" href="#data"><span>See the data</span></a>
+      </div>
+    </div>
+  </div>
+  <p class="caption">Illustration. Each pothole stands for one complaint. Drag to look around the car.</p>
+  <div class="hud">
+    <div class="in">
+      <div class="counter"><div><small>Potholes fixed this drive</small><b id="count">000</b></div></div>
+      <div style="display:flex;gap:10px;align-items:flex-end">
+        <div class="toast" id="toast" aria-live="polite"></div>
+        <button class="pausebtn" id="pause" type="button">Pause</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="intro">
+  <div class="wrap">
+    <div class="facts">
+      <div class="fact"><small>Dataset</small><b>1M+</b><span>real complaints</span></div>
+      <div class="fact"><small>Labelled period</small><b>41</b><span>months, Jun 2022 to Oct 2025</span></div>
+      <div class="fact"><small>Areas</small><b>50</b><span>Bangkok districts</span></div>
+      <div class="fact"><small>Checked</small><b>16</b><span>columns, one by one</span></div>
+    </div>
+    <p class="meta">Team <b>Ctrl C + Ctrl V</b>: Aung Myo, Aye Chan Ko, Phoo Myat May Zaw. <b>Track:</b> classification and clustering with text mining. <b>Course:</b> ICT324 Data Mining, Rangsit University International College. <b>Last updated:</b> <time datetime="2026-10-28">28 October 2026</time>.</p>
+
+    <div class="track">
+      <div class="track-bar">
+        <div class="track-fill"></div>
+        <svg class="track-car" viewBox="0 0 46 22" fill="none" stroke="#FFC23D" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M3 15l2-6 8-1 6-5h12l7 5 5 1v6z" fill="#0E1324"/><circle cx="12" cy="16" r="3.5" fill="#0E1324"/><circle cx="34" cy="16" r="3.5" fill="#0E1324"/></svg>
+      </div>
+      <div class="stages" role="tablist" aria-label="Milestones">
+        <button role="tab" aria-selected="false" data-i="0"><b>M1 Pitch</b>14–16 Oct<br><span class="flag done">Finished</span></button>
+        <button role="tab" aria-selected="true" data-i="1"><b>M2 Lock the data</b>27 / 29 Oct<br><span class="flag now">Racing now</span></button>
+        <button role="tab" aria-selected="false" data-i="2"><b>M3 First results</b>10 / 12 Nov<br><span class="flag next">Next</span></button>
+        <button role="tab" aria-selected="false" data-i="3"><b>M4 Paper and app</b>24 / 26 Nov<br><span class="flag next">Finish line</span></button>
+      </div>
+      <p id="stageText" aria-live="polite"></p>
+    </div>
+  </div>
+</div>
+
+<!-- TEAM -->
+<section class="crew" id="team">
+  <div class="wrap">
+    <div class="head"><span class="plate">Crew</span><h2>Meet the crew</h2></div>
+    <p class="lead">Team <b>Ctrl C + Ctrl V</b>. Three drivers, one city, over one million complaints.</p>
+    <div class="crew-grid" id="crewGrid">
+      <article class="driver" tabindex="0" aria-label="Team member Aung Myo, student ID 6702955">
+        <div class="d-glare" aria-hidden="true"></div>
+        <div class="d-speed" aria-hidden="true"></div>
+        <span class="d-num" aria-hidden="true">01</span>
+        <div class="d-badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><polygon points="60,4 110,32 110,88 60,116 10,88 10,32" fill="none" stroke="currentColor" stroke-width="2.5"/><polygon points="60,14 101,37 101,83 60,106 19,83 19,37" fill="none" stroke="currentColor" stroke-width="1" opacity=".45"/></svg>
+          <b>AM</b>
+        </div>
+        <p class="d-tag">Driver 01</p>
+        <h3>Aung Myo</h3>
+        <div class="d-plate"><small>Student ID</small><b>6702955</b><span>Rangsit ICT</span></div>
+        <div class="d-bar" aria-hidden="true"><i></i></div>
+      </article>
+      <article class="driver" tabindex="0" aria-label="Team member Aye Chan Ko, student ID 6703266">
+        <div class="d-glare" aria-hidden="true"></div>
+        <div class="d-speed" aria-hidden="true"></div>
+        <span class="d-num" aria-hidden="true">02</span>
+        <div class="d-badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><polygon points="60,4 110,32 110,88 60,116 10,88 10,32" fill="none" stroke="currentColor" stroke-width="2.5"/><polygon points="60,14 101,37 101,83 60,106 19,83 19,37" fill="none" stroke="currentColor" stroke-width="1" opacity=".45"/></svg>
+          <b>AK</b>
+        </div>
+        <p class="d-tag">Driver 02</p>
+        <h3>Aye Chan Ko</h3>
+        <div class="d-plate"><small>Student ID</small><b>6703266</b><span>Rangsit ICT</span></div>
+        <div class="d-bar" aria-hidden="true"><i></i></div>
+      </article>
+      <article class="driver" tabindex="0" aria-label="Team member Phoo Myat May Zaw, student ID 6703013">
+        <div class="d-glare" aria-hidden="true"></div>
+        <div class="d-speed" aria-hidden="true"></div>
+        <span class="d-num" aria-hidden="true">03</span>
+        <div class="d-badge" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><polygon points="60,4 110,32 110,88 60,116 10,88 10,32" fill="none" stroke="currentColor" stroke-width="2.5"/><polygon points="60,14 101,37 101,83 60,106 19,83 19,37" fill="none" stroke="currentColor" stroke-width="1" opacity=".45"/></svg>
+          <b>PZ</b>
+        </div>
+        <p class="d-tag">Driver 03</p>
+        <h3>Phoo Myat May Zaw</h3>
+        <div class="d-plate"><small>Student ID</small><b>6703013</b><span>Rangsit ICT</span></div>
+        <div class="d-bar" aria-hidden="true"><i></i></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- MINI GAME -->
+<section class="game-sec" id="game">
+  <div class="wrap">
+    <div class="head"><span class="plate">Play</span><h2>Fix it or pass it?</h2></div>
+    <p class="lead">You drive the road crew truck through Bangkok. Complaints appear on the road ahead. Stop and fix them, or keep driving and leave them waiting. Fixing takes time, and every complaint you leave behind hurts the city score.</p>
+    <p class="gnote">Problem types appear as often as they do in the real Traffy Fondue data. Districts are real. Waiting days are made up for the game.</p>
+  </div>
+  <div class="game" id="gameStage">
+    <canvas id="gameCanvas" aria-label="Mini game: drive a 3D road and decide whether to fix each problem" role="img"></canvas>
+    <div class="g-top">
+      <div class="g-stat"><small>Time</small><b id="gTime">60</b></div>
+      <div class="g-stat"><small>City score</small><b id="gScore">0</b></div>
+      <div class="g-stat"><small>Fixed</small><b id="gFixed">0</b></div>
+      <div class="g-stat"><small>Passed</small><b id="gPassed">0</b></div>
+      <div class="g-stat"><small>City patience</small><span class="pat" id="gPat"><i></i><i></i><i></i></span></div>
+      <div class="g-ctl" id="gCtl" hidden>
+        <button class="g-mini" id="gPauseBtn" type="button" aria-label="Pause the game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg><span>Pause</span></button>
+        <button class="g-mini" id="gExitBtn" type="button" aria-label="Exit the game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Exit</span></button>
+      </div>
+    </div>
+    <div class="g-prompt" id="gPrompt" aria-live="polite">
+      <small>Complaint ahead</small>
+      <b id="gType">Road</b>
+      <span id="gWhere">Din Daeng, waiting 12 days</span>
+    </div>
+    <div class="g-toast" id="gToast" aria-live="polite"></div>
+    <div class="g-controls">
+      <button class="g-btn" id="gL" type="button" aria-label="Move one lane left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button class="g-btn fix" id="gFix" type="button" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/></svg><span>Fix it</span></button>
+      <button class="g-btn" id="gR" type="button" aria-label="Move one lane right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+    <div class="g-overlay" id="gStart">
+      <div class="g-card">
+        <h3>Ready, crew?</h3>
+        <p>60 seconds on the road. Fix a complaint: +10 points, plus a bonus for long waits. Drive past one: −2. Drive over one you did not fix: −5 more and the city loses patience. Three bumps and it is game over.</p>
+        <button class="btn" id="gGo" type="button"><span>Start driving</span></button>
+        <p class="keys">Keys: left and right arrows (or A and D) change lane, F or Space fixes, P or Esc pauses. On a phone, use the buttons.</p>
+      </div>
+    </div>
+    <div class="g-overlay" id="gPause" hidden>
+      <div class="g-card">
+        <h3>Paused</h3>
+        <p>The road waits for you. So do the complaints.</p>
+        <div class="g-row">
+          <button class="btn" id="gResume" type="button"><span>Resume</span></button>
+          <button class="btn ghost" id="gRestart" type="button"><span>Restart</span></button>
+          <button class="btn ghost" id="gQuit" type="button"><span>Exit game</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="g-overlay" id="gOver" hidden>
+      <div class="g-card">
+        <p class="g-kick" id="gOverReason">Time is up</p>
+        <h3 id="gOverTitle">Game over</h3>
+        <p class="g-rank" id="gRank"></p>
+        <div class="g-res">
+          <div><small>City score</small><b id="rScore">0</b></div>
+          <div><small>Fixed</small><b id="rFixed">0</b></div>
+          <div><small>Passed</small><b id="rPassed">0</b></div>
+          <div><small>Bumps</small><b id="rBumps">0</b></div>
+        </div>
+        <p id="gOverText"></p>
+        <div class="g-row">
+          <button class="btn" id="gAgain" type="button"><span>Drive again</span></button>
+          <button class="btn ghost" id="gQuit2" type="button"><span>Exit game</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="g-fallback" id="gFallback" hidden><p>Your browser cannot show 3D graphics, so the game is turned off here. Try a recent version of Chrome, Edge, Safari or Firefox.</p></div>
+  </div>
+</section>
+
+<main class="wrap">
+<!-- 2 PROBLEM -->
+<section id="problem">
+  <div class="head"><span class="plate">02</span><h2>Problem</h2></div>
+  <p class="lead">Traffy Fondue is a LINE account where Bangkok residents report broken roads, flooding, dark streets and more. They send a photo, the location and a short message, and the report goes to the office in charge.</p>
+  <div class="prose"><p>Over one million complaints later [1], two things make the data hard to use. People pick the problem category themselves, so many reports land in the wrong category, and from November 2025 the category is empty for every complaint. Fixing speed is also very uneven: one complaint in our sample was fixed in under a day, another took 269 days. The city has no simple view of which problems and which areas are slow.</p></div>
+
+  <div class="rq">
+    <small>Research question</small>
+    <p>Can we label Traffy Fondue complaints by problem type from their text, including text translated from other languages, and use those labels to show how fast each type of problem is fixed in each Bangkok district?</p>
+  </div>
+
+  <div class="subq">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-7 7z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><b>Text labelling</b><p>Which model best predicts the problem type from the text, and which complaints were likely filed in the wrong category?</p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-10 4 10M14.5 17h5"/></svg><b>Translation</b><p>After machine translation between Thai and English, does the model still label complaints correctly?</p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><path d="M12 7v3l2 1.5"/></svg><b>Speed and areas</b><p>Which problem types and districts are fixed fast or slow, and which districts group together?</p></div>
+  </div>
+
+  <div class="feedback">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>
+    <div>
+      <p><b>What changed after Milestone 1.</b> Ajarn found the data interesting but noted our team cannot read the Thai text. He suggested an app to monitor problems and fixing speed by area and type, and labelling problem types from text because user-chosen categories can be wrong.</p>
+      <p>Text labelling is now our main task. Translation helps us read and test the text, and the results feed an interactive monitoring app.</p>
+    </div>
+  </div>
+
+  <h3>Related work</h3>
+  <ul class="plain">
+    <li>Machine learning already sorts public complaints in other countries [2].</li>
+    <li>On Traffy Fondue, a 2024 study built a multi-label text model for complaints filed under "Others" [3], and a Thai language model fine-tuned on Traffy text is public on Hugging Face [4]. Our text model must match or beat them.</li>
+    <li>A student project, Sed-Young-Wa, predicted fixing time with one regression model, with an average error of about 20 [5].</li>
+    <li>The full review, with 10 or more recent papers, comes by Milestone 4.</li>
+  </ul>
+</section>
+
+<!-- 3 DATA -->
+<section id="data">
+  <div class="head"><span class="plate">03</span><h2>Data</h2></div>
+  <p class="lead">Real, public data from the Bangkok Metropolitan Administration: every complaint sent to Traffy Fondue, in one CSV file.</p>
+  <div class="tbl" style="margin-top:28px">
+    <table>
+      <tr><th scope="row">Source</th><td>Traffy Fondue open data, BMA. <a href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv">Download the CSV</a> (large file)</td></tr>
+      <tr><th scope="row">Size</th><td>Over 1 million rows, about 25,000 to 35,000 new complaints per month</td></tr>
+      <tr><th scope="row">Period</th><td>June 2022 to October 2025 is labelled training data. November 2025 to 2026 has no categories, so the text model labels it.</td></tr>
+      <tr><th scope="row">Personal data</th><td>The public file has no names or phone numbers. We do not publish complaint photos.</td></tr>
+    </table>
+  </div>
+
+  <h3>Columns we use</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Column</th><th>What it means</th><th>Used for</th></tr></thead>
+      <tbody>
+        <tr><td><code>comment</code></td><td>The complaint message, mostly Thai</td><td>Text model, translation</td></tr>
+        <tr><td><code>type</code></td><td>Category chosen by the user, can be several</td><td>Training labels</td></tr>
+        <tr><td><code>district</code> <code>subdistrict</code> <code>coords</code></td><td>Where the problem is</td><td>Area stats, clustering, app map</td></tr>
+        <tr><td><code>organization</code></td><td>Office in charge</td><td>Speed analysis</td></tr>
+        <tr><td><code>timestamp</code> <code>last_activity</code></td><td>Reported and last updated</td><td>Fixing time</td></tr>
+        <tr><td><code>state</code></td><td>Finished or in progress</td><td>Keep finished cases for speed</td></tr>
+        <tr><td><code>count_reopen</code> <code>photo</code></td><td>Times reopened, photo sent</td><td>Extra features</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Cleaning plan</h3>
+  <ul class="plain">
+    <li>Remove duplicate tickets and early test records from 2021.</li>
+    <li>Split rows with several categories into multi-label targets.</li>
+    <li>Clean the Thai text (links, emojis, extra spaces) and cut it into words with a Thai tokenizer.</li>
+    <li>Fixing time is last update minus report time, finished cases only, with extreme values checked.</li>
+  </ul>
+
+  <div class="charts" id="charts">
+    <div class="chart">
+      <h4>Top 10 problem categories</h4>
+      <p class="note">Complaints in the full file. One complaint can have several categories.</p>
+      <div class="toggle" role="group" aria-label="Label language">
+        <button type="button" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" data-lang="th" aria-pressed="false" class="thai">ไทย</button>
+      </div>
+      <div id="types"></div>
+    </div>
+    <div class="chart">
+      <h4>Complaints with no category</h4>
+      <p class="note">Share of rows with an empty category, by year.</p>
+      <div class="vbars" id="missing"></div>
+      <div class="vlabels" id="missing-labels"></div>
+      <div class="key">
+        <span><i class="dot" style="background:var(--green)"></i>Training years</span>
+        <span><i class="dot" style="background:var(--red)"></i>Text model labels these</span>
+        <span><i class="dot" style="background:var(--line)"></i>Test records, not used</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 METHOD -->
+<section id="method">
+  <div class="head"><span class="plate">04</span><h2>Method</h2></div>
+  <p class="lead">We follow CRISP-DM. Every model is compared on the same split: train on 2022 to 2024, test on 2025.</p>
+  <ol class="route">
+    <li data-n="1"><h4>Understand and prepare the data</h4><p>Explore categories, districts and time patterns, then clean the text and labels.</p></li>
+    <li data-n="2"><h4>Label problem types from text</h4><p><b>Baseline:</b> TF-IDF with Logistic Regression. <b>Compared:</b> Linear SVM, Random Forest and a fine-tuned Thai language model (WangchanBERTa), checked against the published Traffy model [4]. <b>Measured by:</b> micro and macro F1 and Hamming loss.</p></li>
+    <li data-n="3"><h4>Test translation</h4><p>Translate a sample from Thai to English with an open translation model and compare labelling accuracy on both. In the app demo, complaints in other languages are translated to Thai before labelling.</p></li>
+    <li data-n="4"><h4>Measure speed and group districts</h4><p>Classify fast or slow with Logistic Regression (baseline), Random Forest and XGBoost, measured by F1 and ROC-AUC. Group the 50 districts with k-means and hierarchical clustering, measured by silhouette score.</p></li>
+    <li data-n="5"><h4>Explain and build the monitoring app</h4><p>Use SHAP to show what makes a complaint slow, then build an interactive app: filter by district and problem type, see fixing speed, and read complaints in English.</p></li>
+  </ol>
+</section>
+
+<!-- 5 PROGRESS -->
+<section id="progress">
+  <div class="head"><span class="plate">05</span><h2>Progress log</h2></div>
+  <div class="laps">
+    <article class="lap">
+      <div class="stub"><small>Log entry</small><time datetime="2026-10-28">28 Oct 2026</time></div>
+      <div class="body">
+        <div class="row"><span class="st done">Done</span><p>Updated the plan after Ajarn's feedback: text labelling first, with translation and a monitoring app. Wrote the 1-page Milestone 2 proposal and published this page.</p></div>
+        <div class="row"><span class="st stuck">Stuck</span><p>Our team cannot read Thai, so we cannot check labels by hand yet.</p></div>
+        <div class="row"><span class="st next">Next</span><p>Translate a sample of complaints to English and train the baseline text model.</p></div>
+      </div>
+    </article>
+    <article class="lap">
+      <div class="stub"><small>Log entry</small><time datetime="2026-10-15">15 Oct 2026</time></div>
+      <div class="body">
+        <div class="row"><span class="st done">Done</span><p>Downloaded the full CSV and checked all 16 columns. Empty categories jump to 57% in November 2025 and 100% after that.</p></div>
+        <div class="row"><span class="st stuck">Stuck</span><p>The last update time is not always the real fix date.</p></div>
+        <div class="row"><span class="st next">Next</span><p>Decide how to handle extreme fixing times.</p></div>
+      </div>
+    </article>
+    <article class="lap">
+      <div class="stub"><small>Log entry</small><time datetime="2026-10-14">14–16 Oct 2026</time></div>
+      <div class="body">
+        <div class="row"><span class="st done">Done</span><p>Milestone 1 consult: pitched the idea with a printed proposal, three slides and a 20-row data sample.</p></div>
+        <div class="row"><span class="st next">Next</span><p>Lock the data and publish this page by 29 October.</p></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- 6 RESULTS -->
+<section id="results">
+  <div class="head"><span class="plate">06</span><h2>Results</h2></div>
+  <div class="closed">
+    <div class="stripe"></div>
+    <div class="in">
+      <b>Road closed until Milestone 3</b>
+      <p>First results arrive on 10 / 12 November: model scores as mean ± standard deviation over five folds, charts of fixing speed by district and type, and what they mean for the city.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 FILES -->
+<section id="files">
+  <div class="head"><span class="plate">07</span><h2>Files and references</h2></div>
+  <div class="files">
+    <a class="file" href="proposal-m2.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>1-page proposal</b><span>PDF, Milestone 2</span></div></a>
+    <a class="file" href="proposal.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>First proposal</b><span>PDF, Milestone 1</span></div></a>
+    <a class="file" href="sample_20_rows.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Data sample</b><span>CSV, 20 rows from 2025–2026</span></div></a>
+    <a class="file" href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><div><b>Full dataset</b><span>Official Traffy CSV</span></div></a>
+  </div>
+  <p style="margin-top:14px;color:var(--muted);font-size:15px">Code, slides and the final paper will be added here as they are finished.</p>
+  <h3>References</h3>
+  <ol class="refs">
+    <li>BMA Public Relations Office, "Bangkok Celebrates Digital Milestone as Traffy Fondue Resolves One Million City Complaints," Mar. 2026. <a href="https://pr-bangkok.com/?p=583017">pr-bangkok.com</a></li>
+    <li>F. Caldeira, L. Nunes and R. Ribeiro, "Classification of Public Administration Complaints," SLATE 2022, OASIcs vol. 104, 2022. doi:10.4230/OASIcs.SLATE.2022.9</li>
+    <li>A. Pongsathornwiwat and P. Kaewvichit, "Developing Multi-Label Classification Model for Improving Text Categorizing Problems a Case of Traffy* Fondue Platform," Science &amp; Technology Asia, vol. 29, no. 2, pp. 138–147, 2024. <a href="https://ph02.tci-thaijo.org/index.php/SciTechAsia/article/view/254682">ThaiJO</a></li>
+    <li>KDAI-NLP, "wangchanberta-traffy-multi," Thai language model fine-tuned for Traffy Fondue complaint types, Hugging Face. <a href="https://huggingface.co/KDAI-NLP/wangchanberta-traffy-multi">Hugging Face</a></li>
+    <li>karnjj, NonKhuna et al., "Sed-Young-Wa: A service for estimating the end of the issues submitted in the Traffy Fondue platform," GitHub repository, 2023. <a href="https://github.com/karnjj/sed-young-wa">GitHub</a></li>
+  </ol>
+</section>
+</main>
+
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 28 October 2026</span></div></footer>
+
+<script>
+/* ---------- real data for the charts ---------- */
+const TYPES=[
+  {th:"ถนน",en:"Road",n:351502},{th:"ทางเท้า",en:"Sidewalk",n:155204},
+  {th:"ความปลอดภัย",en:"Safety",n:129443},{th:"แสงสว่าง",en:"Street lighting",n:104189},
+  {th:"กีดขวาง",en:"Obstruction",n:100738},{th:"ความสะอาด",en:"Cleanliness",n:95677},
+  {th:"ร้องเรียน",en:"General complaint",n:90557},{th:"จราจร",en:"Traffic",n:70716},
+  {th:"ป้าย",en:"Signs",n:60894},{th:"น้ำท่วม",en:"Flooding",n:59537}
+];
+const MISSING=[{y:"2021",p:25.0,s:""},{y:"2022",p:21.9,s:"used"},{y:"2023",p:9.8,s:"used"},{y:"2024",p:10.8,s:"used"},{y:"2025",p:27.4,s:"used"},{y:"2026",p:100,s:"excl"}];
+function drawTypes(lang){
+  const max=TYPES[0].n;
+  document.getElementById("types").innerHTML=TYPES.map(t=>`<div class="hbar"><span class="${lang==='th'?'thai':''}">${lang==='th'?t.th:t.en}</span><span class="t"><span class="f" style="--w:${(t.n/max).toFixed(3)}"></span></span><span class="v">${t.n.toLocaleString('en-US')}</span></div>`).join("");
+}
+document.querySelectorAll(".toggle button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".toggle button").forEach(x=>x.setAttribute("aria-pressed",x===b));drawTypes(b.dataset.lang)}));
+drawTypes("en");
+document.getElementById("missing").innerHTML=MISSING.map(m=>`<div class="vb ${m.s}"><span class="v">${m.p}%</span><span class="b" style="height:${Math.max(m.p*1.65,4)}px"></span></div>`).join("");
+document.getElementById("missing-labels").innerHTML=MISSING.map(m=>`<span>${m.y}</span>`).join("");
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("go");o.disconnect()}}),{threshold:.3}).observe(document.getElementById("charts"));
+
+/* ---------- milestones ---------- */
+const MS=["Milestone 1, finished. We pitched the idea to Ajarn with a printed proposal, three slides and a sample of real data.",
+"Milestone 2, racing now. This page goes live, the research question is set, and the data is locked: real, public, over 1 million rows.",
+"Milestone 3, next. Cleaned data, a baseline and at least two more models, and a first draft of what works and what does not.",
+"Milestone 4, finish line. A 10-minute talk, the IEEE paper and the monitoring app, with slides, code and data linked here."];
+const tabs=[...document.querySelectorAll(".stages button")];
+function pick(i){tabs.forEach((t,j)=>t.setAttribute("aria-selected",i===j));document.getElementById("stageText").textContent=MS[i]}
+tabs.forEach(t=>t.addEventListener("click",()=>pick(+t.dataset.i)));pick(1);
+
+/* ---------- top bar ---------- */
+const bar=document.getElementById("bar"),meter=document.getElementById("meter"),secs=[...document.querySelectorAll("#team, #game, main section")],navs=[...document.querySelectorAll(".nav a")];
+function onScroll(){
+  bar.classList.toggle("solid",scrollY>40);
+  const d=document.documentElement;meter.style.width=(scrollY/(d.scrollHeight-innerHeight))*100+"%";
+  const y=scrollY+innerHeight*.35;let cur=null;secs.forEach(s=>{if(y>=s.offsetTop)cur=s.id});
+  navs.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur));
+}
+addEventListener("scroll",onScroll,{passive:true});onScroll();
+
+
+
+/* ---------- crew cards: reveal + 3D tilt ---------- */
+(function(){
+  const grid=document.getElementById("crewGrid");if(!grid)return;
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.documentElement.classList.add("js-crew");
+  new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){grid.classList.add("in");o.disconnect()}}),{threshold:.2}).observe(grid);
+  if(reduce||matchMedia("(pointer: coarse)").matches)return;
+  grid.querySelectorAll(".driver").forEach(c=>{
+    c.addEventListener("pointermove",e=>{const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+      c.style.transform=`rotateX(${(.5-y)*14}deg) rotateY(${(x-.5)*16}deg) translateZ(10px)`;c.style.setProperty("--mx",x*100+"%");c.style.setProperty("--my",y*100+"%")});
+    c.addEventListener("pointerleave",()=>{c.style.transform=""});
+  });
+})();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ================= 3D: shared world builder (original car design) ================= */
+(function(){
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const glOK=(()=>{try{const c=document.createElement("canvas");return !!(window.THREE&&(c.getContext("webgl2")||c.getContext("webgl")))}catch(e){return false}})();
+  const DIST=["Din Daeng","Bang Sue","Chatuchak","Bang Kapi","Lat Phrao","Pathum Wan","Huai Khwang","Bang Na","Khlong Toei","Sathon","Bang Khen","Don Mueang"];
+  let seed=11;const rnd=()=>(seed=(seed*9301+49297)%233280)/233280;
+  const ROADW=9, LANES=[-3,0,3], TILE=20;
+
+  if(!glOK){
+    document.getElementById("home").classList.add("hero-fallback");
+    document.getElementById("drive").style.display="none";
+    document.getElementById("pause").style.display="none";
+    document.getElementById("gFallback").hidden=false;
+    ["gStart","gOver"].forEach(id=>document.getElementById(id).hidden=true);
+    return;
+  }
+
+  /* ---------- canvas textures ---------- */
+  function canvasTex(w,h,draw){const c=document.createElement("canvas");c.width=w;c.height=h;draw(c.getContext("2d"),w,h);const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;return t}
+  function roadTexture(){
+    return canvasTex(512,512,(g,w,h)=>{
+      g.fillStyle="#2b2e36";g.fillRect(0,0,w,h);
+      for(let i=0;i<9000;i++){const v=46+Math.random()*30|0;g.fillStyle=`rgba(${v},${v+2},${v+8},${Math.random()*.5})`;g.fillRect(Math.random()*w,Math.random()*h,1.5,1.5)}
+      for(let i=0;i<6;i++){g.fillStyle="rgba(0,0,0,.12)";g.beginPath();g.ellipse(60+Math.random()*390,Math.random()*h,30+Math.random()*60,10+Math.random()*30,Math.random(),0,7);g.fill()}
+      const kerb=22;for(let y=0;y<h;y+=64){g.fillStyle=(y/64)%2?"#e9eaee":"#d8262f";g.fillRect(0,y,kerb,64);g.fillRect(w-kerb,y,kerb,64)}
+      g.fillStyle="#e8e8e2";g.fillRect(kerb+8,0,6,h);g.fillRect(w-kerb-14,0,6,h);
+      g.fillStyle="rgba(240,240,232,.9)";for(const x of[w/3,2*w/3])g.fillRect(x-3,40,6,170);
+      g.fillStyle="rgba(240,240,232,.9)";for(const x of[w/3,2*w/3])g.fillRect(x-3,296,6,170);
+    });
+  }
+  function windowTexture(){
+    return canvasTex(64,128,(g,w,h)=>{g.fillStyle="#000";g.fillRect(0,0,w,h);
+      for(let y=4;y<h;y+=10)for(let x=4;x<w;x+=10){if(Math.random()<.28){g.fillStyle=Math.random()<.8?"#ffc470":"#9fc4ff";g.fillRect(x,y,5,6)}}});
+  }
+  function shadowTexture(){return canvasTex(128,128,(g,w,h)=>{const r=g.createRadialGradient(64,64,4,64,64,64);r.addColorStop(0,"rgba(0,0,0,.85)");r.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=r;g.fillRect(0,0,w,h)})}
+  function glowTexture(color){return canvasTex(128,128,(g,w,h)=>{const r=g.createRadialGradient(64,64,0,64,64,64);r.addColorStop(0,color);r.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=r;g.fillRect(0,0,w,h)})}
+
+  /* ---------- environment for reflections ---------- */
+  function envScene(){
+    const s=new THREE.Scene();
+    const sg=new THREE.SphereGeometry(60,32,16),pos=sg.attributes.position,cols=[];
+    for(let i=0;i<pos.count;i++){const h=pos.getY(i)/60*.5+.5;const top=Math.min(1,Math.max(0,(h-.45)/.55));const glow=Math.max(0,1-Math.abs(h-.48)/.06);
+      cols.push(.015+.08*top+.22*glow,.018+.07*top+.1*glow,.035+.17*top+.07*glow)}
+    sg.setAttribute("color",new THREE.Float32BufferAttribute(cols,3));
+    const sky=new THREE.Mesh(sg,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.BackSide}));
+    s.add(sky);
+    const warm=new THREE.MeshBasicMaterial({color:0xffe2b8});
+    for(let i=0;i<7;i++){const b=new THREE.Mesh(new THREE.BoxGeometry(36,.5,1.4),warm);b.position.set(0,20,-30+i*10);s.add(b)}
+    const cool=new THREE.Mesh(new THREE.BoxGeometry(.6,8,50),new THREE.MeshBasicMaterial({color:0x5b7bff}));cool.position.set(-34,8,0);s.add(cool);
+    const pink=new THREE.Mesh(new THREE.BoxGeometry(.6,5,40),new THREE.MeshBasicMaterial({color:0xff6a8a}));pink.position.set(34,6,0);s.add(pink);
+    return s;
+  }
+
+  function taper(geo,f){const p=geo.attributes.position;for(let i=0;i<p.count;i++){p.setZ(i,p.getZ(i)*f(p.getX(i),p.getY(i)))}p.needsUpdate=true;smooth(geo,.78)}
+  // smooth normals across shared positions, keeping sharp creases (geometry is non-indexed)
+  function smooth(geo,minDot){
+    geo.computeVertexNormals();
+    const p=geo.attributes.position,n=geo.attributes.normal,map=new Map(),key=i=>`${Math.round(p.getX(i)*1e4)},${Math.round(p.getY(i)*1e4)},${Math.round(p.getZ(i)*1e4)}`;
+    for(let i=0;i<p.count;i++){const k=key(i);(map.get(k)||map.set(k,[]).get(k)).push(i)}
+    const out=new Float32Array(n.count*3),v=new THREE.Vector3(),a=new THREE.Vector3(),b=new THREE.Vector3();
+    for(const ids of map.values())for(const i of ids){a.fromBufferAttribute(n,i);v.set(0,0,0);for(const j of ids){b.fromBufferAttribute(n,j);if(a.dot(b)>=minDot)v.add(b)}v.normalize();out.set([v.x,v.y,v.z],i*3)}
+    geo.setAttribute("normal",new THREE.BufferAttribute(out,3));
+  }
+  /* ---------- the car: original sports-coupe design ---------- */
+  function makeCar(color){
+    const car=new THREE.Group(), body=new THREE.Group();car.add(body);
+    const paint=new THREE.MeshPhysicalMaterial({color,metalness:.55,roughness:.34,clearcoat:1,clearcoatRoughness:.04,envMapIntensity:1.3});
+    const black=new THREE.MeshStandardMaterial({color:0x0b0c10,metalness:.4,roughness:.5});
+    const glass=new THREE.MeshPhysicalMaterial({color:0x04060b,metalness:.9,roughness:.04,clearcoat:1,envMapIntensity:1.6});
+    // body side profile (front points to +x)
+    const s=new THREE.Shape();
+    s.moveTo(-2.18,.32);s.lineTo(-1.80,.32);s.absarc(-1.36,.36,.44,Math.PI,0,true);
+    s.lineTo(.92,.32);s.absarc(1.36,.36,.44,Math.PI,0,true);s.lineTo(2.16,.32);
+    s.quadraticCurveTo(2.34,.38,2.3,.52);s.quadraticCurveTo(2.22,.64,1.95,.68);
+    s.quadraticCurveTo(1.25,.79,.55,.86);s.lineTo(-1.0,.92);
+    s.quadraticCurveTo(-1.8,.93,-2.12,.99);s.lineTo(-2.26,1.0);
+    s.quadraticCurveTo(-2.33,.8,-2.27,.58);s.quadraticCurveTo(-2.24,.38,-2.18,.32);
+    const bg=new THREE.ExtrudeGeometry(s,{depth:1.66,bevelEnabled:true,bevelThickness:.16,bevelSize:.09,bevelSegments:8,curveSegments:32,steps:14});
+    bg.translate(0,0,-.83);taper(bg,(x,y)=>(1-.18*Math.pow(Math.abs(x)/2.35,3))*(1-.16*Math.max(0,(y-.55)/.45)));body.add(new THREE.Mesh(bg,paint));
+    // glass canopy
+    const c=new THREE.Shape();
+    c.moveTo(.66,.83);c.quadraticCurveTo(.08,1.22,-.38,1.27);c.quadraticCurveTo(-1.1,1.25,-1.82,.95);c.lineTo(-1.5,.87);c.lineTo(.66,.83);
+    const cg=new THREE.ExtrudeGeometry(c,{depth:1.14,bevelEnabled:true,bevelThickness:.17,bevelSize:.09,bevelSegments:8,curveSegments:28,steps:10});
+    cg.translate(0,0,-.57);taper(cg,(x,y)=>(1-.24*Math.max(0,(-x-.3)/1.6))*(1-.2*Math.max(0,(y-.95)/.32))*(1-.1*Math.max(0,(x-.2)/.6)));body.add(new THREE.Mesh(cg,glass));
+    // roof spine in body colour
+    // black trim: skirts, splitter, diffuser
+    const skirt=new THREE.Mesh(new THREE.BoxGeometry(1.7,.1,2.02),black);skirt.position.set(0,.36,0);body.add(skirt);
+    const split=new THREE.Mesh(new THREE.BoxGeometry(.3,.06,1.5),black);split.position.set(2.18,.3,0);body.add(split);
+    const diff=new THREE.Mesh(new THREE.BoxGeometry(.3,.18,1.4),black);diff.position.set(-2.2,.38,0);body.add(diff);
+    for(const z of[-.5,-.3,.3,.5]){const ex=new THREE.Mesh(new THREE.CylinderGeometry(.06,.06,.12,20),new THREE.MeshStandardMaterial({color:0xaab0bb,metalness:1,roughness:.2}));ex.rotation.z=Math.PI/2;ex.position.set(-2.33,.4,z);body.add(ex)}
+    // spoiler
+    const sp=new THREE.Mesh(new THREE.BoxGeometry(.32,.04,1.5),black);sp.position.set(-2.12,1.07,0);sp.rotation.z=-.12;body.add(sp);
+    // mirrors
+    for(const z of[-1,1]){const m=new THREE.Mesh(new THREE.BoxGeometry(.18,.1,.14),paint);m.position.set(.45,.98,z*.86);body.add(m)}
+    // lights
+    const headM=new THREE.MeshBasicMaterial({color:0xfff3d6});
+    for(const z of[-1,1]){const h=new THREE.Mesh(new THREE.BoxGeometry(.06,.05,.46),headM);h.position.set(2.27,.57,z*.5);h.rotation.y=z*.25;body.add(h)}
+    const tailM=new THREE.MeshBasicMaterial({color:0xff2230});
+    const bar=new THREE.Mesh(new THREE.BoxGeometry(.04,.05,1.5),tailM);bar.position.set(-2.33,.84,0);body.add(bar);
+    for(const z of[-1,1]){const t=new THREE.Mesh(new THREE.BoxGeometry(.05,.11,.32),tailM);t.position.set(-2.32,.8,z*.62);body.add(t)}
+    // light glows (sprites)
+    const redGlow=new THREE.SpriteMaterial({map:glowTexture("rgba(255,40,50,.9)"),blending:THREE.AdditiveBlending,depthWrite:false,transparent:true});
+    for(const z of[-.62,0,.62]){const g=new THREE.Sprite(redGlow);g.scale.set(.55,.3,1);g.position.set(-2.42,.84,z);body.add(g)}
+    const whiteGlow=new THREE.SpriteMaterial({map:glowTexture("rgba(255,240,210,.9)"),blending:THREE.AdditiveBlending,depthWrite:false,transparent:true});
+    for(const z of[-.5,.5]){const g=new THREE.Sprite(whiteGlow);g.scale.set(.5,.28,1);g.position.set(2.38,.57,z);body.add(g)}
+    const tl=new THREE.PointLight(0xff2a2a,1.4,7,2);tl.position.set(-2.8,.7,0);body.add(tl);
+    const hl=new THREE.SpotLight(0xfff1d0,4,45,.45,.6,1.4);hl.position.set(2.3,.6,0);const ht=new THREE.Object3D();ht.position.set(14,0,0);body.add(ht);hl.target=ht;body.add(hl);
+    // wheels
+    const tyreM=new THREE.MeshStandardMaterial({color:0x0d0e11,roughness:.85});
+    const rimM=new THREE.MeshStandardMaterial({color:0xc4c8d0,metalness:1,roughness:.22});
+    const capM=new THREE.MeshStandardMaterial({color:0xffc23d,metalness:.6,roughness:.3});
+    const wheels=[];
+    for(const x of[-1.36,1.36])for(const z of[-.86,.86]){
+      const w=new THREE.Group();w.position.set(x,.36,z);
+      const spin=new THREE.Group();w.add(spin);
+      const tyre=new THREE.Mesh(new THREE.CylinderGeometry(.36,.36,.27,40),tyreM);tyre.rotation.x=Math.PI/2;spin.add(tyre);
+      const side=z>0?1:-1;
+      const rim=new THREE.Mesh(new THREE.CylinderGeometry(.25,.25,.02,32),rimM);rim.rotation.x=Math.PI/2;rim.position.z=side*.137;spin.add(rim);
+      for(let k=0;k<5;k++){const sp=new THREE.Mesh(new THREE.BoxGeometry(.05,.23,.03),rimM);sp.position.z=side*.15;const a=k/5*Math.PI*2;sp.rotation.z=a;sp.position.x=Math.sin(-a)*.115;sp.position.y=Math.cos(a)*.115;spin.add(sp)}
+      const cap=new THREE.Mesh(new THREE.CylinderGeometry(.055,.055,.03,20),capM);cap.rotation.x=Math.PI/2;cap.position.z=side*.16;spin.add(cap);
+      const disc=new THREE.Mesh(new THREE.CylinderGeometry(.2,.2,.02,24),new THREE.MeshStandardMaterial({color:0x444850,metalness:.8,roughness:.4}));disc.rotation.x=Math.PI/2;disc.position.z=side*.1;w.add(disc);
+      body.add(w);wheels.push(spin);
+    }
+    // soft contact shadow
+    const sh=new THREE.Mesh(new THREE.PlaneGeometry(5.6,2.9),new THREE.MeshBasicMaterial({map:shadowTexture(),transparent:true,depthWrite:false}));
+    sh.rotation.x=-Math.PI/2;sh.position.y=.012;car.add(sh);
+    car.rotation.y=Math.PI/2;           // nose points down the road (-z)
+    return {car,body,wheels};
+  }
+
+  /* ---------- props ---------- */
+  function makeLamp(side){
+    const g=new THREE.Group(),m=new THREE.MeshStandardMaterial({color:0x2e3446,metalness:.7,roughness:.4});
+    const pole=new THREE.Mesh(new THREE.CylinderGeometry(.08,.11,6.6,10),m);pole.position.y=3.3;g.add(pole);
+    const arm=new THREE.Mesh(new THREE.BoxGeometry(1.8,.08,.08),m);arm.position.set(-side*.9,6.5,0);g.add(arm);
+    const head=new THREE.Mesh(new THREE.BoxGeometry(.7,.12,.3),new THREE.MeshBasicMaterial({color:0xffd9a0}));head.position.set(-side*1.7,6.42,0);g.add(head);
+    const glow=new THREE.Sprite(new THREE.SpriteMaterial({map:glowTexture("rgba(255,200,120,.8)"),blending:THREE.AdditiveBlending,depthWrite:false,transparent:true}));
+    glow.scale.set(3.2,3.2,1);glow.position.set(-side*1.7,6.3,0);g.add(glow);
+    g.userData.side=side;return g;
+  }
+
+  function makeWorld(canvas,mode){
+    const renderer=new THREE.WebGLRenderer({canvas,antialias:true,powerPreference:"high-performance"});
+    renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.75));
+    renderer.outputEncoding=THREE.sRGBEncoding;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.0;
+    const scene=new THREE.Scene();scene.background=new THREE.Color(0x0a0e1c);scene.fog=new THREE.FogExp2(0x0b1022,mode==="game"?.014:.018);
+    const pm=new THREE.PMREMGenerator(renderer);scene.environment=pm.fromScene(envScene(),.04).texture;
+    const camera=new THREE.PerspectiveCamera(mode==="game"?58:36,1,.1,500);
+    scene.add(new THREE.HemisphereLight(0x8c98ff,0x1a1520,.38));scene.add(new THREE.AmbientLight(0x404660,.2));
+    const moon=new THREE.DirectionalLight(0xb8c6ff,.5);moon.position.set(-12,24,8);scene.add(moon);const rim=new THREE.DirectionalLight(0xffb070,.9);rim.position.set(10,6,-14);scene.add(rim);const key=new THREE.DirectionalLight(0xffffff,.25);key.position.set(6,10,12);scene.add(key);
+    const pools=[0,1,2].map(()=>{const l=new THREE.PointLight(0xffc77a,3,24,1.8);scene.add(l);return l});
+    const roadTex=roadTexture();roadTex.wrapT=THREE.RepeatWrapping;roadTex.repeat.set(1,400/TILE);roadTex.anisotropy=renderer.capabilities.getMaxAnisotropy();
+    const road=new THREE.Mesh(new THREE.PlaneGeometry(ROADW,400),new THREE.MeshStandardMaterial({map:roadTex,roughness:.5,metalness:.05,envMapIntensity:.35}));
+    road.rotation.x=-Math.PI/2;road.position.z=-180;scene.add(road);
+    const ground=new THREE.Mesh(new THREE.PlaneGeometry(500,500),new THREE.MeshStandardMaterial({color:0x080b14,roughness:1,envMapIntensity:.08}));ground.rotation.x=-Math.PI/2;ground.position.set(0,-.02,-200);scene.add(ground);
+    const lamps=[];for(let i=0;i<14;i++)for(const s of[-1,1]){const L=makeLamp(s);L.position.set(s*(ROADW/2+1),0,-i*24-(s>0?12:0)+10);scene.add(L);lamps.push(L)}
+    const win=windowTexture();win.wrapS=win.wrapT=THREE.RepeatWrapping;
+    const blocks=[];for(let i=0;i<48;i++){const s=i%2?1:-1,w=5+rnd()*8,h=8+rnd()*rnd()*46,d=5+rnd()*8;
+      const t=win.clone();t.needsUpdate=true;t.repeat.set(Math.max(1,w/5),Math.max(1,h/10));
+      const b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshStandardMaterial({color:0x0a0d18,emissive:0xffffff,emissiveMap:t,emissiveIntensity:.75,roughness:.9,envMapIntensity:.2}));
+      b.position.set(s*(ROADW/2+9+rnd()*26),h/2,-rnd()*330+20);scene.add(b);blocks.push(b)}
+    const {car,body,wheels}=makeCar(mode==="game"?0xe0a010:0x9a0f1e);scene.add(car);
+    function resize(){const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()}
+    addEventListener("resize",resize);resize();
+    function scroll(move){
+      roadTex.offset.y+=move/TILE;
+      for(const L of lamps){L.position.z+=move;if(L.position.z>14)L.position.z-=14*24}
+      for(const b of blocks){b.position.z+=move;if(b.position.z>40)b.position.z-=360}
+      // light pools follow the lamps nearest the car
+      const near=lamps.filter(L=>L.position.z>-34&&L.position.z<10).sort((a,b)=>b.position.z-a.position.z).slice(0,3);
+      pools.forEach((p,i)=>{const L=near[i];if(L){p.visible=true;p.position.set(L.position.x-L.userData.side*1.7,6,L.position.z)}else p.visible=false});
+      for(const w of wheels)w.rotation.z-=move/.36;
+    }
+    return {renderer,scene,camera,car,body,wheels,scroll,resize};
+  }
+
+  /* ================= HERO ================= */
+  (function hero(){
+    const cv=document.getElementById("drive");
+    const W=makeWorld(cv,"hero");
+    const countEl=document.getElementById("count"),toast=document.getElementById("toast"),pauseBtn=document.getElementById("pause");
+    let running=!reduce,visible=true,last=0,t=0,count=0,toastT=0,dragAz=0,dragging=false,lastX=0;
+    const SPEED=24;
+    // potholes that get patched as the car drives over them
+    const holeM=new THREE.MeshStandardMaterial({color:0x050608,roughness:1});
+    const patchM=new THREE.MeshStandardMaterial({color:0x3d4252,roughness:.8});
+    const ringM=new THREE.MeshBasicMaterial({color:0xffc23d,transparent:true});
+    const holes=[];for(let i=0;i<4;i++){const g=new THREE.Group();const m=new THREE.Mesh(new THREE.CircleGeometry(.75,28),holeM);m.rotation.x=-Math.PI/2;m.position.y=.015;m.scale.set(1,.7,1);g.add(m);
+      const r=new THREE.Mesh(new THREE.RingGeometry(.78,.9,32),ringM.clone());r.rotation.x=-Math.PI/2;r.position.y=.02;r.visible=false;g.add(r);
+      g.userData={m,r,fixed:false,age:0};g.position.set((rnd()*2-1)*2.4,0,-30-i*36);W.scene.add(g);holes.push(g)}
+    function fixHole(h){h.userData.fixed=true;h.userData.m.material=patchM;h.userData.r.visible=true;h.userData.age=0;count++;countEl.textContent=String(count).padStart(3,"0");
+      const ty=TYPES[count%TYPES.length].en,d=DIST[count%DIST.length];toast.innerHTML=`Fixed: ${ty}<small>${d} district</small>`;toast.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>toast.classList.remove("show"),1600)}
+    function frame(dt){
+      const move=running?SPEED*dt:0;t+=dt;
+      W.scroll(move);
+      for(const h of holes){h.position.z+=move;if(!h.userData.fixed&&h.position.z>.4)fixHole(h);
+        if(h.userData.fixed){h.userData.age+=dt;const a=h.userData.age;h.userData.r.scale.setScalar(1+a*1.5);h.userData.r.material.opacity=Math.max(0,1-a*1.2)}
+        if(h.position.z>16){h.position.z-=150+rnd()*30;h.position.x=(rnd()*2-1)*2.4;h.userData.fixed=false;h.userData.m.material=holeM;h.userData.r.visible=false}}
+      // car sways through the lane, body rolls a little, engine idles
+      const sway=Math.sin(t*.55);
+      W.car.position.x=sway*1.2;W.car.rotation.y=Math.PI/2+Math.cos(t*.55)*.06;
+      W.body.rotation.x=-Math.cos(t*.55)*.025;W.body.position.y=Math.sin(t*28)*.004;
+      // orbit camera, user can drag
+      const wide=innerWidth>760,az=.5+Math.sin(t*.18)*.2+dragAz,r=wide?8.6:15;
+      W.camera.position.set(W.car.position.x*.6+Math.sin(az)*r,wide?1.9:3.2,Math.cos(az)*r);
+      W.camera.lookAt(W.car.position.x*.8-(wide?2.4:0),wide?.9:2.6,-1.1);
+      W.renderer.render(W.scene,W.camera);
+    }
+    function loop(ts){const dt=Math.min((ts-last)/1000||0,.05);last=ts;if(visible)frame(dt);requestAnimationFrame(loop)}
+    new IntersectionObserver(es=>{visible=es[0].isIntersecting}).observe(cv);
+    pauseBtn.addEventListener("click",()=>{running=!running;pauseBtn.textContent=running?"Pause":"Play"});
+    if(reduce)pauseBtn.textContent="Play";
+    cv.addEventListener("pointerdown",e=>{dragging=true;lastX=e.clientX;cv.setPointerCapture(e.pointerId)});
+    cv.addEventListener("pointermove",e=>{if(!dragging)return;dragAz-=(e.clientX-lastX)*.008;dragAz=Math.max(-2.6,Math.min(2.6,dragAz));lastX=e.clientX});
+    addEventListener("pointerup",()=>dragging=false);
+    frame(0);requestAnimationFrame(loop);
+  })();
+
+  /* ================= MINI GAME ================= */
+  (function game(){
+    const cv=document.getElementById("gameCanvas"),stage=document.getElementById("gameStage");
+    const W=makeWorld(cv,"game");
+    const $=id=>document.getElementById(id);
+    const ui={time:$("gTime"),score:$("gScore"),fixed:$("gFixed"),passed:$("gPassed"),prompt:$("gPrompt"),type:$("gType"),where:$("gWhere"),toast:$("gToast"),fix:$("gFix"),start:$("gStart"),over:$("gOver")};
+    // hazard types weighted by real Traffy counts
+    const KINDS=[{k:"Road",n:351502},{k:"Street lighting",n:104189},{k:"Obstruction",n:100738},{k:"Cleanliness",n:95677},{k:"Signs",n:60894},{k:"Flooding",n:59537}];
+    const TOTAL=KINDS.reduce((a,b)=>a+b.n,0);
+    const pickKind=()=>{let r=Math.random()*TOTAL;for(const k of KINDS){if((r-=k.n)<0)return k.k}return "Road"};
+    const M={
+      hole:new THREE.MeshStandardMaterial({color:0x040506,roughness:1}),
+      rubble:new THREE.MeshStandardMaterial({color:0x4a4e58,roughness:.9}),
+      cone:new THREE.MeshStandardMaterial({color:0xff6a10,roughness:.5}),
+      white:new THREE.MeshStandardMaterial({color:0xf2f2ee,roughness:.5}),
+      metal:new THREE.MeshStandardMaterial({color:0x8a90a0,metalness:.9,roughness:.35}),
+      bag:new THREE.MeshPhysicalMaterial({color:0x0a0a0c,roughness:.25,clearcoat:1}),
+      box:new THREE.MeshStandardMaterial({color:0xa07a4a,roughness:.9}),
+      wood:new THREE.MeshStandardMaterial({color:0x5a3a22,roughness:.9}),
+      leaf:new THREE.MeshStandardMaterial({color:0x2f6b35,roughness:.8}),
+      sign:new THREE.MeshStandardMaterial({color:0x1f5ad6,roughness:.4,metalness:.2}),
+      water:new THREE.MeshPhysicalMaterial({color:0x1a3f88,metalness:.3,roughness:.02,clearcoat:1,transparent:true,opacity:.88}),
+      ring:new THREE.MeshBasicMaterial({color:0x3ccb8a,transparent:true})
+    };
+    function cone(x,z){const g=new THREE.Group();const c=new THREE.Mesh(new THREE.ConeGeometry(.2,.62,24),M.cone);c.position.y=.31;g.add(c);
+      const b=new THREE.Mesh(new THREE.CylinderGeometry(.13,.155,.1,24),M.white);b.position.y=.34;g.add(b);
+      const base=new THREE.Mesh(new THREE.BoxGeometry(.46,.04,.46),M.cone);base.position.y=.02;g.add(base);g.position.set(x,0,z);return g}
+    function makeHazard(kind){
+      const g=new THREE.Group();
+      if(kind==="Road"){const h=new THREE.Mesh(new THREE.CircleGeometry(1,32),M.hole);h.rotation.x=-Math.PI/2;h.scale.set(1.1,.75,1);h.position.y=.015;g.add(h);
+        for(let i=0;i<7;i++){const r=new THREE.Mesh(new THREE.DodecahedronGeometry(.08+Math.random()*.08),M.rubble);const a=Math.random()*7;r.position.set(Math.cos(a)*1.25,.05,Math.sin(a)*.95);g.add(r)}
+        g.add(cone(1.25,.2));}
+      else if(kind==="Street lighting"){const p=new THREE.Mesh(new THREE.CylinderGeometry(.09,.12,4.4,12),M.metal);p.rotation.z=Math.PI/2;p.rotation.y=.35;p.position.y=.13;g.add(p);
+        const hd=new THREE.Mesh(new THREE.BoxGeometry(.7,.14,.32),new THREE.MeshStandardMaterial({color:0x22252c}));hd.position.set(-2,.14,.75);hd.rotation.y=.35;g.add(hd);g.add(cone(1.6,-.6));}
+      else if(kind==="Obstruction"){const tr=new THREE.Mesh(new THREE.CylinderGeometry(.16,.24,3.6,10),M.wood);tr.rotation.z=Math.PI/2;tr.rotation.y=-.5;tr.position.y=.22;g.add(tr);
+        for(let i=0;i<5;i++){const l=new THREE.Mesh(new THREE.IcosahedronGeometry(.42+Math.random()*.25,0),M.leaf);l.position.set(-1.2+i*.6,.4+Math.random()*.3,(Math.random()-.5)*1.1);g.add(l)}}
+      else if(kind==="Cleanliness"){for(let i=0;i<4;i++){const b=new THREE.Mesh(new THREE.SphereGeometry(.38,20,14),M.bag);b.scale.set(1,.85,1);b.position.set(-.9+i*.6,.32,(Math.random()-.5)*.8);g.add(b)}
+        const bx=new THREE.Mesh(new THREE.BoxGeometry(.6,.4,.5),M.box);bx.position.set(1.2,.2,.3);bx.rotation.y=.6;g.add(bx);}
+      else if(kind==="Signs"){const post=new THREE.Mesh(new THREE.CylinderGeometry(.05,.05,2.4,10),M.metal);post.rotation.z=Math.PI/2;post.position.set(.4,.06,0);g.add(post);
+        const pl=new THREE.Mesh(new THREE.BoxGeometry(1.1,.06,.8),M.sign);pl.position.set(-.9,.18,.1);pl.rotation.set(.25,.4,.2);g.add(pl);
+        const bd=new THREE.Mesh(new THREE.BoxGeometry(.9,.065,.6),M.white);bd.position.copy(pl.position);bd.rotation.copy(pl.rotation);bd.position.y+=.005;g.add(bd);}
+      else {const w=new THREE.Mesh(new THREE.CircleGeometry(1.5,40),M.water);w.rotation.x=-Math.PI/2;w.scale.set(1.25,.8,1);w.position.y=.02;g.add(w);g.add(cone(-1.7,.3));}
+      return g;
+    }
+    let state="ready",patience=3,timeLeft=60,score=0,fixed=0,passed=0,bumps=0,lane=1,carX=0,fixing=0,fixTarget=null,spawnT=1,shake=0,visible=false,last=0,t=0,toastT=0,best=null;
+    const hazards=[],fx=[];
+    function toast(msg,bad){ui.toast.innerHTML=msg;ui.toast.classList.toggle("bad",!!bad);ui.toast.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>ui.toast.classList.remove("show"),1500)}
+    function hud(){ui.time.textContent=Math.ceil(timeLeft);ui.score.textContent=score;ui.fixed.textContent=fixed;ui.passed.textContent=passed;[...$("gPat").children].forEach((el,i)=>el.classList.toggle("lost",i>=patience))}
+    function reset(){hazards.splice(0).forEach(h=>W.scene.remove(h));fx.splice(0).forEach(f=>W.scene.remove(f));timeLeft=60;patience=3;score=0;fixed=0;passed=0;bumps=0;lane=1;carX=0;fixing=0;fixTarget=null;spawnT=.6;best=null;hud()}
+    function spawn(){
+      const kind=pickKind(),ln=Math.floor(Math.random()*3);
+      if(hazards.some(h=>h.position.z<-110))return;           // keep space between hazards
+      const h=makeHazard(kind);h.position.set(LANES[ln],0,-150);
+      h.userData={kind,lane:ln,days:3+Math.floor(Math.random()*Math.random()*120),where:DIST[Math.floor(Math.random()*DIST.length)],done:false};
+      W.scene.add(h);hazards.push(h);
+    }
+    function ahead(){return hazards.find(h=>!h.userData.done&&h.userData.lane===lane&&h.position.z>-17&&h.position.z<-2.5)}
+    function doFix(){
+      if(state!=="play"||fixing>0)return;const h=ahead();if(!h)return;
+      fixing=1.1;fixTarget=h;h.userData.done=true;fixed++;const bonus=Math.floor(h.userData.days/10);score+=10+bonus;
+      if(!best||h.userData.days>best.days)best={days:h.userData.days,kind:h.userData.kind,where:h.userData.where};
+      toast(`Fixed: ${h.userData.kind}<br><small>${h.userData.where}, waited ${h.userData.days} days. +${10+bonus}</small>`);
+      const r=new THREE.Mesh(new THREE.RingGeometry(1.4,1.6,40),M.ring.clone());r.rotation.x=-Math.PI/2;r.position.copy(h.position);r.position.y=.05;r.userData={a:0};W.scene.add(r);fx.push(r);hud();
+    }
+    function setLane(d){if(state!=="play")return;lane=Math.max(0,Math.min(2,lane+d))}
+    function showCtl(){$("gCtl").hidden=!(state==="play"||state==="paused");$("gPauseBtn").querySelector("span").textContent=state==="paused"?"Resume":"Pause"}
+    function start(){reset();state="play";ui.start.hidden=true;ui.over.hidden=true;$("gPause").hidden=true;showCtl()}
+    function pause(){if(state!=="play")return;state="paused";$("gPause").hidden=false;ui.prompt.classList.remove("show");ui.fix.disabled=true;ui.fix.classList.remove("ready");showCtl()}
+    function resume(){if(state!=="paused")return;state="play";$("gPause").hidden=true;showCtl()}
+    function exitGame(){reset();state="ready";$("gPause").hidden=true;ui.over.hidden=true;ui.start.hidden=false;ui.prompt.classList.remove("show");ui.fix.disabled=true;ui.fix.classList.remove("ready");showCtl()}
+    function end(reason){
+      state="over";$("gPause").hidden=true;showCtl();
+      $("gOverReason").textContent=reason==="crash"?"Three bumps. Bangkok ran out of patience.":reason==="quit"?"You ended the shift early.":"Time is up.";ui.prompt.classList.remove("show");ui.fix.disabled=true;ui.fix.classList.remove("ready");
+      $("rScore").textContent=score;$("rFixed").textContent=fixed;$("rPassed").textContent=passed;$("rBumps").textContent=bumps;
+      $("gOverTitle").textContent="Game over";$("gRank").textContent=score>=60?"Rank: City hero":score>=25?"Rank: Solid shift":"Rank: Bangkok is still waiting";
+      $("gOverText").textContent=(best?`Your longest-waiting fix was ${best.kind} in ${best.where}, ${best.days} days. `:"")+"Our real project asks the same question with one million complaints: which ones wait the longest, and where?";
+      ui.over.hidden=false;
+    }
+    $("gGo").addEventListener("click",start);$("gAgain").addEventListener("click",start);$("gRestart").addEventListener("click",start);
+    $("gResume").addEventListener("click",resume);$("gQuit").addEventListener("click",exitGame);$("gQuit2").addEventListener("click",exitGame);
+    $("gPauseBtn").addEventListener("click",()=>state==="paused"?resume():pause());$("gExitBtn").addEventListener("click",()=>{if(state==="play"||state==="paused")end("quit")});
+    document.addEventListener("visibilitychange",()=>{if(document.hidden)pause()});
+    $("gL").addEventListener("click",()=>setLane(-1));$("gR").addEventListener("click",()=>setLane(1));ui.fix.addEventListener("click",doFix);
+    addEventListener("keydown",e=>{
+      const k=e.key.toLowerCase();
+      if(visible&&(k==="p"||k==="escape")&&(state==="play"||state==="paused")){state==="play"?pause():resume();e.preventDefault();return}
+      if(state!=="play"||!visible)return;
+      if(k==="arrowleft"||k==="a"){setLane(-1);e.preventDefault()}
+      else if(k==="arrowright"||k==="d"){setLane(1);e.preventDefault()}
+      else if(k==="f"||k===" "){doFix();e.preventDefault()}
+    });
+    // swipe on touch
+    let sx=null;cv.addEventListener("touchstart",e=>{sx=e.touches[0].clientX},{passive:true});
+    cv.addEventListener("touchend",e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)setLane(dx<0?-1:1);sx=null},{passive:true});
+
+    function frame(dt){
+      t+=dt;
+      let speed=state==="play"?22:(state==="ready"?6:0);
+      if(state==="play"){
+        timeLeft-=dt;if(timeLeft<=0){timeLeft=0;hud();end("time")}
+        if(fixing>0){fixing-=dt;speed=0;if(fixTarget){const s=Math.max(0,fixing/1.1);fixTarget.scale.setScalar(s);if(fixing<=0){W.scene.remove(fixTarget);hazards.splice(hazards.indexOf(fixTarget),1);fixTarget=null}}}
+        spawnT-=dt;if(spawnT<=0&&fixing<=0){spawn();spawnT=1.1+Math.random()*1.1}
+      }
+      const move=speed*dt;W.scroll(move);
+      for(let i=hazards.length-1;i>=0;i--){const h=hazards[i];h.position.z+=move;
+        if(!h.userData.done&&h.position.z>-.6){h.userData.done=true;passed++;score-=2;
+          const hit=Math.abs(carX-h.position.x)<1.6;
+          if(hit){bumps++;score-=5;shake=.35;patience--;if(patience<=0){hud();end("crash")};toast(`Bump! ${h.userData.kind} left unfixed<br><small>${h.userData.where}, still waiting ${h.userData.days} days. −7</small>`,true)}
+          else toast(`Passed: ${h.userData.kind}<br><small>${h.userData.where}, still waiting. −2</small>`,true);hud()}
+        if(h.position.z>14){W.scene.remove(h);hazards.splice(i,1)}}
+      for(let i=fx.length-1;i>=0;i--){const f=fx[i];f.userData.a+=dt;f.position.z+=move;f.scale.setScalar(1+f.userData.a*2.2);f.material.opacity=Math.max(0,1-f.userData.a*1.4);if(f.userData.a>.8){W.scene.remove(f);fx.splice(i,1)}}
+      // prompt
+      const a=state==="play"&&fixing<=0?ahead():null;
+      if(a){ui.type.textContent=a.userData.kind;ui.where.textContent=`${a.userData.where}, waiting ${a.userData.days} days`;ui.prompt.classList.add("show");ui.fix.disabled=false;ui.fix.classList.add("ready")}
+      else{ui.prompt.classList.remove("show");ui.fix.disabled=true;ui.fix.classList.remove("ready")}
+      // car
+      const tx=LANES[lane];const prev=carX;carX+= (tx-carX)*Math.min(1,dt*7);
+      W.car.position.x=carX;W.car.rotation.y=Math.PI/2-(carX-prev)/Math.max(dt,1e-3)*.012;
+      W.body.position.y=Math.sin(t*30)*.004+(shake>0?Math.sin(t*90)*shake*.12:0);shake=Math.max(0,shake-dt);
+      W.body.rotation.x=(carX-prev)/Math.max(dt,1e-3)*.004;
+      W.camera.position.set(carX*.55,3.3,7.6);W.camera.lookAt(carX*.75,.7,-9);
+      W.renderer.render(W.scene,W.camera);
+    }
+    function loop(ts){const dt=Math.min((ts-last)/1000||0,.05);last=ts;if(visible)frame(dt);requestAnimationFrame(loop)}
+    new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(visible)W.resize();else pause()},{threshold:.15}).observe(stage);
+    hud();frame(0);requestAnimationFrame(loop);
+  })();
+})();
+
+</script>
+</body>
+</html>
