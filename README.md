@@ -2,7 +2,9 @@
 
 ICT324 Data Warehousing and Data Mining, Rangsit University International College.
 
-**Research question:** Can we label Traffy Fondue complaints by problem type from their text, including text translated from other languages, and use those labels to show how fast each type of problem is fixed in each Bangkok district?
+**Research question:** Where, when and what kinds of problems do Bangkok residents report most on Traffy Fondue, and which areas and times should the city focus on, using complaint types labelled from text (including translated text)?
+
+**Methods:** text classification, spatial clustering (DBSCAN/HDBSCAN hotspots), association rules (Apriori/FP-Growth) and next-week prediction (XGBoost).
 
 ## Team
 | Name | Student ID |
@@ -16,6 +18,7 @@ ICT324 Data Warehousing and Data Mining, Rangsit University International Colleg
 - `proposal-m2.pdf` — 1-page proposal for Milestone 2
 - `proposal.pdf` — first proposal from Milestone 1
 - `sample_20_rows.csv` — 20 random rows from the Traffy Fondue data (2025–2026)
+- `previews/` — page images used by the in-page file viewer
 
 Full dataset: https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv
 

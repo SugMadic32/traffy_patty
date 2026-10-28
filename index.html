@@ -104,6 +104,7 @@ main section+section{border-top:1px solid var(--line)}
 .rq p{font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(21px,2.4vw,27px);line-height:1.3}
 h3{font-family:'Chakra Petch',sans-serif;font-style:italic;font-size:26px;font-weight:700;margin:44px 0 14px}
 .subq{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.subq4{grid-template-columns:repeat(2,minmax(0,1fr))}
 .subq div{background:var(--panel);border:1px solid var(--line);padding:22px}
 .subq svg{width:30px;height:30px;color:var(--amber);margin-bottom:10px}
 .subq b{display:block;font-family:'Chakra Petch',sans-serif;font-size:21px;margin-bottom:4px}
@@ -322,6 +323,45 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
 .js-crew .crew-grid.in .driver:nth-child(3){transition-delay:0s,.24s,.24s}
 @media (prefers-reduced-motion:reduce){.d-speed,.d-badge svg,.d-bar i{animation:none}.js-crew .driver{opacity:1;translate:none}}
 @media (max-width:900px){.crew-grid{grid-template-columns:minmax(0,1fr);max-width:460px}.driver{min-height:330px}}
+.tracks{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:900px;margin-top:8px}
+.tracks div{background:var(--panel);border:1px solid var(--line);padding:14px 16px;clip-path:polygon(0 0,100% 0,calc(100% - 10px) 100%,0 100%)}
+.tracks b{display:block;font:italic 700 18px 'Chakra Petch',sans-serif;color:var(--amber)}
+.tracks span{font-size:14px;color:var(--muted)}
+.trackn{margin-top:12px;color:var(--muted);font-size:15px;max-width:800px}
+@media (max-width:900px){.tracks{grid-template-columns:repeat(2,minmax(0,1fr))}.subq4{grid-template-columns:minmax(0,1fr)}}
+
+/* ---------- file viewer (opens files inside the page) ---------- */
+.viewer{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.viewer[hidden]{display:none}
+.v-back{position:absolute;inset:0;background:rgba(6,9,20,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:vfade .2s ease-out}
+.v-panel{position:relative;width:100%;max-width:1000px;min-width:0;height:min(86vh,900px);display:flex;flex-direction:column;background:var(--night-2);border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.6);animation:vpop .25s cubic-bezier(.2,.8,.2,1)}
+@keyframes vfade{from{opacity:0}}
+@keyframes vpop{from{opacity:0;transform:translateY(16px) scale(.98)}}
+.v-head{display:flex;align-items:center;gap:12px;padding:12px 14px 12px 20px;border-bottom:1px solid var(--line)}
+.v-name{min-width:0;flex:1}
+.v-name small{display:block;font:600 12px 'Chakra Petch',sans-serif;color:var(--amber)}
+.v-name b{display:block;font:italic 700 20px/1.2 'Chakra Petch',sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v-acts{display:flex;gap:8px;align-items:center}
+.v-btn,.v-x{display:inline-flex;align-items:center;gap:6px;height:38px;padding:0 12px;font:600 14px 'Chakra Petch',sans-serif;color:var(--text);text-decoration:none;background:transparent;border:0;box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer}
+.v-btn:hover,.v-x:hover{box-shadow:inset 0 0 0 1.5px var(--amber);color:var(--amber)}
+.v-btn svg,.v-x svg{width:18px;height:18px}
+.v-x{width:38px;justify-content:center;padding:0}
+.v-body{flex:1;min-height:0;min-width:0;overflow:auto;background:var(--night)}
+.v-body iframe{display:block;width:100%;height:100%;border:0;background:#fff}
+.v-pages{display:flex;flex-direction:column;align-items:center;gap:18px;padding:22px 16px;background:#2A3047;min-height:100%}
+.v-pages img{display:block;width:100%;max-width:820px;height:auto;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.v-msg{padding:40px 28px;max-width:620px;color:#D5D9E4}
+.v-msg h4{font:italic 700 24px 'Chakra Petch',sans-serif;margin-bottom:8px;color:var(--text)}
+.v-msg p+p{margin-top:10px;color:var(--muted)}
+.v-msg .btn{margin-top:18px}
+.v-info{padding:10px 20px;font-size:14px;color:var(--muted);border-bottom:1px solid var(--line);position:sticky;left:0}
+.v-table{border-collapse:collapse;font-size:13.5px;font-family:'IBM Plex Sans','IBM Plex Sans Thai',sans-serif}
+.v-table th{position:sticky;top:0;z-index:1;background:var(--panel);color:var(--amber);font-weight:600;text-align:left;padding:9px 12px;white-space:nowrap;border-bottom:1px solid var(--line)}
+.v-table td{padding:8px 12px;border-bottom:1px solid var(--line);max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#D5D9E4}
+.v-table tr:hover td{background:rgba(255,194,61,.06)}
+.v-table td:first-child,.v-table th:first-child{color:var(--muted)}
+body.v-lock{overflow:hidden}
+@media (max-width:600px){.v-panel{height:88vh}.v-btn span{display:none}.v-btn{width:38px;justify-content:center;padding:0}.v-name b{font-size:17px}}
 </style>
 </head>
 <body>
@@ -342,7 +382,7 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
   <div class="hero-copy">
     <div class="in">
       <h1>Every pothole is a complaint. <span>We find the slow ones.</span></h1>
-      <p class="summary">We read real complaints sent to Traffy Fondue, label each one by problem type from its text, and show how fast each type of problem gets fixed in each Bangkok district.</p>
+      <p class="summary">We label Bangkok's Traffy Fondue complaints from their text, then map where and when each problem happens most, so the city knows exactly where and when to focus.</p>
       <div class="ctas">
         <a class="btn" href="#game"><span>Play the mini game</span></a>
         <a class="btn ghost" href="#data"><span>See the data</span></a>
@@ -369,7 +409,7 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
       <div class="fact"><small>Areas</small><b>50</b><span>Bangkok districts</span></div>
       <div class="fact"><small>Checked</small><b>16</b><span>columns, one by one</span></div>
     </div>
-    <p class="meta">Team <b>Ctrl C + Ctrl V</b>: Aung Myo, Aye Chan Ko, Phoo Myat May Zaw. <b>Track:</b> classification and clustering with text mining. <b>Course:</b> ICT324 Data Mining, Rangsit University International College. <b>Last updated:</b> <time datetime="2026-10-28">28 October 2026</time>.</p>
+    <p class="meta">Team <b>Ctrl C + Ctrl V</b>: Aung Myo, Aye Chan Ko, Phoo Myat May Zaw. <b>Track:</b> classification, clustering, association rules and prediction, with text and spatial mining. <b>Course:</b> ICT324 Data Mining, Rangsit University International College. <b>Last updated:</b> <time datetime="2026-10-28">28 October 2026</time>.</p>
 
     <div class="track">
       <div class="track-bar">
@@ -513,24 +553,25 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
 <section id="problem">
   <div class="head"><span class="plate">02</span><h2>Problem</h2></div>
   <p class="lead">Traffy Fondue is a LINE account where Bangkok residents report broken roads, flooding, dark streets and more. They send a photo, the location and a short message, and the report goes to the office in charge.</p>
-  <div class="prose"><p>Over one million complaints later [1], two things make the data hard to use. People pick the problem category themselves, so many reports land in the wrong category, and from November 2025 the category is empty for every complaint. Fixing speed is also very uneven: one complaint in our sample was fixed in under a day, another took 269 days. The city has no simple view of which problems and which areas are slow.</p></div>
+  <div class="prose"><p>Over one million complaints later [1], the data is still hard to use. People pick the problem category themselves, so many reports land in the wrong category, and from November 2025 the category is empty for every complaint. The city also has no clear view of <b>where</b> and <b>when</b> each problem happens most, which spots keep coming back, or where slow fixing and many complaints meet. Fixing speed is very uneven: one complaint in our sample was fixed in under a day, another took 269 days.</p></div>
 
   <div class="rq">
     <small>Research question</small>
-    <p>Can we label Traffy Fondue complaints by problem type from their text, including text translated from other languages, and use those labels to show how fast each type of problem is fixed in each Bangkok district?</p>
+    <p>Where, when and what kinds of problems do Bangkok residents report most on Traffy Fondue, and which areas and times should the city focus on, using complaint types labelled from text (including translated text)?</p>
   </div>
 
-  <div class="subq">
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-7 7z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><b>Text labelling</b><p>Which model best predicts the problem type from the text, and which complaints were likely filed in the wrong category?</p></div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-10 4 10M14.5 17h5"/></svg><b>Translation</b><p>After machine translation between Thai and English, does the model still label complaints correctly?</p></div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><path d="M12 7v3l2 1.5"/></svg><b>Speed and areas</b><p>Which problem types and districts are fixed fast or slow, and which districts group together?</p></div>
+  <div class="subq subq4">
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-7 7z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><b>1. What: text labelling</b><p>Which model reads the complaint text and gives the right problem type, fixing wrong and missing categories? Does it still work after Thai to English translation?</p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b>2. Where: spatial mining</b><p>Which districts and exact spots are hotspots for each problem, counted per 10,000 people so busy areas are not unfairly ranked? Which spots keep coming back?</p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>3. When and why</b><p>Which season, month, weekday and hour have the most complaints, and which problems rise in each season? Are flooding and road complaints linked with heavy rain?</p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg><b>4. Where and when to focus</b><p>Which place, time and problem go together, and which hotspots are both frequent and slow to fix? Where should the city focus next week?</p></div>
   </div>
 
   <div class="feedback">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.8 7L4 20l1.1-4.6A8 8 0 1 1 21 12z"/></svg>
     <div>
       <p><b>What changed after Milestone 1.</b> Ajarn found the data interesting but noted our team cannot read the Thai text. He suggested an app to monitor problems and fixing speed by area and type, and labelling problem types from text because user-chosen categories can be wrong.</p>
-      <p>Text labelling is now our main task. Translation helps us read and test the text, and the results feed an interactive monitoring app.</p>
+      <p>Text labelling comes first, because good labels are needed for everything else. Translation lets our team check the text. On top of the labels we add spatial and time mining, so the monitoring app can show problems by area, type, season and hour.</p>
     </div>
   </div>
 
@@ -552,6 +593,8 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
       <tr><th scope="row">Source</th><td>Traffy Fondue open data, BMA. <a href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv">Download the CSV</a> (large file)</td></tr>
       <tr><th scope="row">Size</th><td>Over 1 million rows, about 25,000 to 35,000 new complaints per month</td></tr>
       <tr><th scope="row">Period</th><td>June 2022 to October 2025 is labelled training data. November 2025 to 2026 has no categories, so the text model labels it.</td></tr>
+      <tr><th scope="row">Extra data</th><td>Daily rainfall for Bangkok (weather records) and district population (Thai open government data), joined by date and district at Milestone 3.</td></tr>
+      <tr><th scope="row">Seasons</th><td>Hot (March to May), rainy (June to October), cool (November to February).</td></tr>
       <tr><th scope="row">Personal data</th><td>The public file has no names or phone numbers. We do not publish complaint photos.</td></tr>
     </table>
   </div>
@@ -563,9 +606,9 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
       <tbody>
         <tr><td><code>comment</code></td><td>The complaint message, mostly Thai</td><td>Text model, translation</td></tr>
         <tr><td><code>type</code></td><td>Category chosen by the user, can be several</td><td>Training labels</td></tr>
-        <tr><td><code>district</code> <code>subdistrict</code> <code>coords</code></td><td>Where the problem is</td><td>Area stats, clustering, app map</td></tr>
+        <tr><td><code>coords</code> <code>district</code> <code>subdistrict</code></td><td>Where the problem is (GPS point)</td><td>Hotspots, spatial clustering, app map</td></tr>
         <tr><td><code>organization</code></td><td>Office in charge</td><td>Speed analysis</td></tr>
-        <tr><td><code>timestamp</code> <code>last_activity</code></td><td>Reported and last updated</td><td>Fixing time</td></tr>
+        <tr><td><code>timestamp</code> <code>last_activity</code></td><td>Reported and last updated</td><td>Season, month, weekday, hour, fixing time</td></tr>
         <tr><td><code>state</code></td><td>Finished or in progress</td><td>Keep finished cases for speed</td></tr>
         <tr><td><code>count_reopen</code> <code>photo</code></td><td>Times reopened, photo sent</td><td>Extra features</td></tr>
       </tbody>
@@ -578,6 +621,7 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
     <li>Split rows with several categories into multi-label targets.</li>
     <li>Clean the Thai text (links, emojis, extra spaces) and cut it into words with a Thai tokenizer.</li>
     <li>Fixing time is last update minus report time, finished cases only, with extreme values checked.</li>
+    <li>Drop GPS points outside Bangkok, and add season, weekday and hour columns from the report time.</li>
   </ul>
 
   <div class="charts" id="charts">
@@ -607,14 +651,22 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
 <!-- 4 METHOD -->
 <section id="method">
   <div class="head"><span class="plate">04</span><h2>Method</h2></div>
-  <p class="lead">We follow CRISP-DM. Every model is compared on the same split: train on 2022 to 2024, test on 2025.</p>
+  <p class="lead">We follow CRISP-DM. Models are compared on the same split: train on 2022 to 2024, test on 2025.</p>
   <ol class="route">
-    <li data-n="1"><h4>Understand and prepare the data</h4><p>Explore categories, districts and time patterns, then clean the text and labels.</p></li>
-    <li data-n="2"><h4>Label problem types from text</h4><p><b>Baseline:</b> TF-IDF with Logistic Regression. <b>Compared:</b> Linear SVM, Random Forest and a fine-tuned Thai language model (WangchanBERTa), checked against the published Traffy model [4]. <b>Measured by:</b> micro and macro F1 and Hamming loss.</p></li>
-    <li data-n="3"><h4>Test translation</h4><p>Translate a sample from Thai to English with an open translation model and compare labelling accuracy on both. In the app demo, complaints in other languages are translated to Thai before labelling.</p></li>
-    <li data-n="4"><h4>Measure speed and group districts</h4><p>Classify fast or slow with Logistic Regression (baseline), Random Forest and XGBoost, measured by F1 and ROC-AUC. Group the 50 districts with k-means and hierarchical clustering, measured by silhouette score.</p></li>
-    <li data-n="5"><h4>Explain and build the monitoring app</h4><p>Use SHAP to show what makes a complaint slow, then build an interactive app: filter by district and problem type, see fixing speed, and read complaints in English.</p></li>
+    <li data-n="1"><h4>Understand and prepare the data</h4><p>Clean the text, labels and GPS points, then join daily rainfall and district population.</p></li>
+    <li data-n="2"><h4>What: label problem types from text</h4><p><b>Baseline:</b> TF-IDF with Logistic Regression. <b>Compared:</b> Linear SVM, Random Forest and a fine-tuned Thai language model (WangchanBERTa), checked against the published Traffy model [4]. A translated Thai to English sample tests if labelling still works. <b>Measured by:</b> micro and macro F1, Hamming loss.</p></li>
+    <li data-n="3"><h4>Where: spatial mining</h4><p><b>DBSCAN</b> and <b>HDBSCAN</b> find hotspots from GPS points, <b>kernel density</b> draws heat maps, and <b>Getis-Ord Gi*</b> tests whether a hotspot is real or chance. Counts per 10,000 people make districts fair to compare. Repeat reports within about 50 m mark chronic spots. <b>Measured by:</b> silhouette score and hotspot significance.</p></li>
+    <li data-n="4"><h4>When and why: time patterns and association rules</h4><p>Complaints by season, month, weekday and hour, and their link with rainfall. <b>Apriori</b> and <b>FP-Growth</b> find rules such as <i>rainy season + evening + one district leads to flooding</i>. <b>Measured by:</b> support, confidence and lift.</p></li>
+    <li data-n="5"><h4>Where and when to focus</h4><p>A <b>priority score</b> combines how often a problem happens with how slowly it is fixed, per area and time slot. A <b>next-week forecast</b> per district compares a simple baseline (last week) with XGBoost, measured by MAE.</p></li>
+    <li data-n="6"><h4>Monitoring app</h4><p>A hotspot map with a season and hour slider, a priority list, the next-week forecast, and a box that translates a complaint in any language and predicts its type.</p></li>
   </ol>
+  <div class="tracks">
+    <div><b>Classification</b><span>Problem type from text</span></div>
+    <div><b>Clustering</b><span>DBSCAN hotspots, district groups</span></div>
+    <div><b>Association rules</b><span>Place + time + problem</span></div>
+    <div><b>Prediction</b><span>Next-week forecast</span></div>
+  </div>
+  <p class="trackn">One project, all four data mining tracks. Stretch goal if time allows: fast or slow fixing prediction explained with SHAP.</p>
 </section>
 
 <!-- 5 PROGRESS -->
@@ -624,9 +676,9 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
     <article class="lap">
       <div class="stub"><small>Log entry</small><time datetime="2026-10-28">28 Oct 2026</time></div>
       <div class="body">
-        <div class="row"><span class="st done">Done</span><p>Updated the plan after Ajarn's feedback: text labelling first, with translation and a monitoring app. Wrote the 1-page Milestone 2 proposal and published this page.</p></div>
+        <div class="row"><span class="st done">Done</span><p>Updated the plan after Ajarn's feedback: text labelling first, then where and when mining (hotspots, seasons, hours, rainfall), association rules and a next-week forecast, all shown in a monitoring app. Wrote the 1-page Milestone 2 proposal and published this page.</p></div>
         <div class="row"><span class="st stuck">Stuck</span><p>Our team cannot read Thai, so we cannot check labels by hand yet.</p></div>
-        <div class="row"><span class="st next">Next</span><p>Translate a sample of complaints to English and train the baseline text model.</p></div>
+        <div class="row"><span class="st next">Next</span><p>Clean the GPS points and report times, join rainfall and population, and train the baseline text model.</p></div>
       </div>
     </article>
     <article class="lap">
@@ -654,7 +706,7 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
     <div class="stripe"></div>
     <div class="in">
       <b>Road closed until Milestone 3</b>
-      <p>First results arrive on 10 / 12 November: model scores as mean ± standard deviation over five folds, charts of fixing speed by district and type, and what they mean for the city.</p>
+      <p>First results arrive on 10 / 12 November: text model scores as mean ± standard deviation over five folds, the first hotspot map, complaints by season and hour, and what they mean for the city.</p>
     </div>
   </div>
 </section>
@@ -663,8 +715,8 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
 <section id="files">
   <div class="head"><span class="plate">07</span><h2>Files and references</h2></div>
   <div class="files">
-    <a class="file" href="proposal-m2.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>1-page proposal</b><span>PDF, Milestone 2</span></div></a>
-    <a class="file" href="proposal.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>First proposal</b><span>PDF, Milestone 1</span></div></a>
+    <a class="file" href="proposal-m2.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>1-page proposal</b><span>PDF, Milestone 2, current plan</span></div></a>
+    <a class="file" href="proposal.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>First proposal</b><span>PDF, Milestone 1, earlier plan</span></div></a>
     <a class="file" href="sample_20_rows.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Data sample</b><span>CSV, 20 rows from 2025–2026</span></div></a>
     <a class="file" href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><div><b>Full dataset</b><span>Official Traffy CSV</span></div></a>
   </div>
@@ -679,6 +731,22 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
   </ol>
 </section>
 </main>
+
+<!-- FILE VIEWER -->
+<div class="viewer" id="viewer" hidden>
+  <div class="v-back" data-close></div>
+  <div class="v-panel" role="dialog" aria-modal="true" aria-labelledby="vTitle">
+    <header class="v-head">
+      <div class="v-name"><small id="vKind">PDF</small><b id="vTitle">File</b></div>
+      <div class="v-acts">
+        <a class="v-btn" id="vOpen" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg><span>New tab</span></a>
+        <a class="v-btn" id="vDown" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>Download</span></a>
+        <button class="v-x" type="button" data-close aria-label="Close the file viewer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+    </header>
+    <div class="v-body" id="vBody"></div>
+  </div>
+</div>
 
 <footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 28 October 2026</span></div></footer>
 
@@ -705,8 +773,8 @@ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.cl
 /* ---------- milestones ---------- */
 const MS=["Milestone 1, finished. We pitched the idea to Ajarn with a printed proposal, three slides and a sample of real data.",
 "Milestone 2, racing now. This page goes live, the research question is set, and the data is locked: real, public, over 1 million rows.",
-"Milestone 3, next. Cleaned data, a baseline and at least two more models, and a first draft of what works and what does not.",
-"Milestone 4, finish line. A 10-minute talk, the IEEE paper and the monitoring app, with slides, code and data linked here."];
+"Milestone 3, next. Cleaned data, the text baseline and two more models, the first hotspot map and season chart, and a first draft of what works and what does not.",
+"Milestone 4, finish line. Association rules, priority map and forecast, the monitoring app, a 10-minute talk and the IEEE paper, with slides, code and data linked here."];
 const tabs=[...document.querySelectorAll(".stages button")];
 function pick(i){tabs.forEach((t,j)=>t.setAttribute("aria-selected",i===j));document.getElementById("stageText").textContent=MS[i]}
 tabs.forEach(t=>t.addEventListener("click",()=>pick(+t.dataset.i)));pick(1);
@@ -723,6 +791,55 @@ addEventListener("scroll",onScroll,{passive:true});onScroll();
 
 
 
+
+/* ---------- file viewer ---------- */
+(function(){
+  const V=document.getElementById("viewer"),body=document.getElementById("vBody"),title=document.getElementById("vTitle"),kind=document.getElementById("vKind"),
+        openA=document.getElementById("vOpen"),downA=document.getElementById("vDown");
+  let lastFocus=null;
+  const PREVIEWS={"proposal-m2.pdf":["previews/proposal-m2-1.jpg"],"proposal.pdf":["previews/proposal-1.jpg","previews/proposal-2.jpg"]};
+  function parseCSV(t){const rows=[];let row=[],f="",q=false;
+    for(let i=0;i<t.length;i++){const c=t[i];
+      if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+      else if(c==='"')q=true;else if(c===","){row.push(f);f=""}
+      else if(c==="\n"||c==="\r"){if(c==="\r"&&t[i+1]==="\n")i++;row.push(f);f="";if(row.length>1||row[0]!=="")rows.push(row);row=[]}
+      else f+=c}
+    if(f!==""||row.length){row.push(f);rows.push(row)}return rows}
+  const esc=x=>String(x).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+  function show(){lastFocus=document.activeElement;V.hidden=false;document.body.classList.add("v-lock");V.querySelector(".v-x").focus()}
+  function close(){V.hidden=true;body.innerHTML="";document.body.classList.remove("v-lock");lastFocus&&lastFocus.focus()}
+  function open(a){
+    const href=a.getAttribute("href"),name=a.querySelector("b")?.textContent||href,ext=href.split("?")[0].split(".").pop().toLowerCase(),remote=/^https?:/i.test(href);
+    title.textContent=name;openA.href=href;downA.href=href;body.innerHTML="";
+    if(remote){
+      kind.textContent="Dataset, external link";
+      body.innerHTML=`<div class="v-msg"><h4>Too big to preview here</h4><p>The full Traffy Fondue file has over one million rows, so it opens as a download from the official Traffy server.</p><p>To look at the data now, open the 20-row sample instead.</p><button class="btn" type="button" id="vSample"><span>Preview the 20-row sample</span></button></div>`;
+      show();document.getElementById("vSample").addEventListener("click",()=>{const s=document.querySelector('.file[href="sample_20_rows.csv"]');if(s)open(s)});return}
+    if(ext==="pdf"){
+      kind.textContent="PDF document";
+      const pages=PREVIEWS[href];
+      body.innerHTML=pages?`<div class="v-pages">${pages.map((p,i)=>`<img src="${esc(p)}" alt="${esc(name)}, page ${i+1}" loading="lazy">`).join("")}</div>`
+                          :`<iframe src="${esc(href)}#view=FitH" title="${esc(name)}"></iframe>`;
+      show();return}
+    if(ext==="csv"){
+      kind.textContent="CSV data";body.innerHTML='<div class="v-msg"><p>Loading the table...</p></div>';show();
+      fetch(href).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{
+        const rows=parseCSV(t.replace(/^\ufeff/,""));if(!rows.length)throw 0;
+        const head=rows[0],data=rows.slice(1);
+        body.innerHTML=`<div class="v-info">${data.length} rows, ${head.length} columns. Scroll sideways to see every column, and hover a cell to read it in full.</div>
+          <table class="v-table"><thead><tr><th>#</th>${head.map(h=>`<th>${esc(h)}</th>`).join("")}</tr></thead>
+          <tbody>${data.map((r,i)=>`<tr><td>${i+1}</td>${head.map((_,j)=>`<td title="${esc(r[j]??"")}">${esc(r[j]??"")}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+      }).catch(()=>{body.innerHTML='<div class="v-msg"><h4>Preview not available here</h4><p>The table preview works once the page is online (for example on GitHub Pages). For now, use Download or New tab.</p></div>'});
+      return}
+    window.open(href,"_blank","noopener");
+  }
+  document.querySelectorAll("a.file").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();open(a)}));
+  V.querySelectorAll("[data-close]").forEach(el=>el.addEventListener("click",close));
+  addEventListener("keydown",e=>{if(!V.hidden&&e.key==="Escape"){e.preventDefault();e.stopPropagation();close()}},true);
+  // keep keyboard focus inside the viewer
+  V.addEventListener("keydown",e=>{if(e.key!=="Tab")return;const f=[...V.querySelectorAll("a[href],button,iframe")].filter(x=>x.offsetParent!==null);if(!f.length)return;
+    const first=f[0],last=f[f.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}});
+})();
 /* ---------- crew cards: reveal + 3D tilt ---------- */
 (function(){
   const grid=document.getElementById("crewGrid");if(!grid)return;
