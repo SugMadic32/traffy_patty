@@ -1,0 +1,5 @@
+Model,Macro F1 %,Precision %,Recall %,AUC %,Micro F1 %,Hamming loss,Parameters
+Baseline (majority),0.0 ± 0.0,0.0 ± 0.0,0.0 ± 0.0,50.0 ± 0.0,0.0 ± 0.0,0.151,predicts the most common value for every label
+Logistic Regression,90.7 ± 0.3,87.3 ± 0.5,94.6 ± 0.4,99.5 ± 0.0,92.1 ± 0.3,0.024,"TF-IDF char 2-4, 50k features; C=4, liblinear, class_weight=balanced"
+Linear SVM,91.5 ± 0.3,88.9 ± 0.5,94.3 ± 0.7,99.5 ± 0.0,92.9 ± 0.3,0.022,"TF-IDF char 2-4, 50k features; C=0.5, class_weight=balanced"
+Random Forest,82.8 ± 0.6,91.7 ± 0.7,76.1 ± 0.9,98.9 ± 0.0,86.3 ± 0.4,0.039,"TF-IDF char 2-4, 5k features; 100 trees, min_samples_leaf=2, balanced_subsample"

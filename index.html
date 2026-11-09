@@ -79,8 +79,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offs
 
 .track{margin-top:40px}
 .track-bar{position:relative;height:14px;background:var(--panel);border:1px solid var(--line)}
-.track-fill{position:absolute;left:0;top:0;bottom:0;width:37.5%;background:repeating-linear-gradient(90deg,var(--amber) 0 18px,#E0A82F 18px 36px)}
-.track-car{position:absolute;top:50%;left:37.5%;width:46px;height:22px;transform:translate(-50%,-50%)}
+.track-fill{position:absolute;left:0;top:0;bottom:0;width:62.5%;background:repeating-linear-gradient(90deg,var(--amber) 0 18px,#E0A82F 18px 36px)}
+.track-car{position:absolute;top:50%;left:62.5%;width:46px;height:22px;transform:translate(-50%,-50%)}
 .stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:10px}
 .stages button{all:unset;cursor:pointer;padding:10px 12px 0 0;color:var(--muted);font-size:15px}
 .stages button b{display:block;font-family:'Chakra Petch',sans-serif;font-style:italic;font-size:20px;color:var(--text)}
@@ -362,6 +362,24 @@ footer .in{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;justify-co
 .v-table td:first-child,.v-table th:first-child{color:var(--muted)}
 body.v-lock{overflow:hidden}
 @media (max-width:600px){.v-panel{height:88vh}.v-btn span{display:none}.v-btn{width:38px;justify-content:center;padding:0}.v-name b{font-size:17px}}
+.rstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:26px 0 8px}
+.rstats div{background:var(--panel);border:1px solid var(--line);padding:16px 18px;clip-path:polygon(0 0,100% 0,calc(100% - 12px) 100%,0 100%)}
+.rstats b{display:block;font:italic 700 34px/1.1 'Chakra Petch',sans-serif;color:var(--amber)}
+.rstats span{font-size:14px;color:var(--muted)}
+tr.best td{background:rgba(255,194,61,.08)}
+.figs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:8px;align-items:start}
+.fig{display:block;background:var(--panel);border:1px solid var(--line);text-decoration:none;color:var(--text);transition:border-color .2s,transform .2s}
+.fig:hover{border-color:var(--amber);transform:translateY(-2px)}
+.fig img{display:block;width:100%;height:auto;background:#fff}
+.fig span{display:block;padding:12px 14px;font-size:15px;color:#D5D9E4}
+.wwn{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:1000px}
+.wwn div{background:var(--panel);border:1px solid var(--line);padding:18px}
+.wwn b{font:600 14px 'Chakra Petch',sans-serif;padding:2px 10px}
+.wwn .ok{color:var(--green);background:rgba(60,203,138,.12)}.wwn .no{color:var(--red);background:rgba(255,71,71,.12)}.wwn .fix{color:var(--amber);background:rgba(255,194,61,.14)}
+.wwn p{margin-top:10px;color:#D5D9E4;font-size:15px}
+.v-img{display:block;max-width:100%;margin:0 auto;background:#fff}
+.v-pre{white-space:pre-wrap;padding:22px;font:14px/1.6 ui-monospace,Menlo,Consolas,monospace;color:#D5D9E4}
+@media (max-width:900px){.rstats{grid-template-columns:repeat(2,minmax(0,1fr))}.figs,.wwn{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -404,12 +422,12 @@ body.v-lock{overflow:hidden}
 <div class="intro">
   <div class="wrap">
     <div class="facts">
-      <div class="fact"><small>Dataset</small><b>1M+</b><span>real complaints</span></div>
+      <div class="fact"><small>Dataset</small><b>1.5M</b><span>real complaints</span></div>
       <div class="fact"><small>Labelled period</small><b>41</b><span>months, Jun 2022 to Oct 2025</span></div>
       <div class="fact"><small>Areas</small><b>50</b><span>Bangkok districts</span></div>
       <div class="fact"><small>Checked</small><b>16</b><span>columns, one by one</span></div>
     </div>
-    <p class="meta">Team <b>Ctrl C + Ctrl V</b>: Aung Myo, Aye Chan Ko, Phoo Myat May Zaw. <b>Track:</b> classification, clustering, association rules and prediction, with text and spatial mining. <b>Course:</b> ICT324 Data Mining, Rangsit University International College. <b>Last updated:</b> <time datetime="2026-10-28">28 October 2026</time>.</p>
+    <p class="meta">Team <b>Ctrl C + Ctrl V</b>: Aung Myo, Aye Chan Ko, Phoo Myat May Zaw. <b>Track:</b> classification, clustering, association rules and prediction, with text and spatial mining. <b>Course:</b> ICT324 Data Mining, Rangsit University International College. <b>Last updated:</b> <time datetime="2026-11-09">9 November 2026</time>.</p>
 
     <div class="track">
       <div class="track-bar">
@@ -418,8 +436,8 @@ body.v-lock{overflow:hidden}
       </div>
       <div class="stages" role="tablist" aria-label="Milestones">
         <button role="tab" aria-selected="false" data-i="0"><b>M1 Pitch</b>14–16 Oct<br><span class="flag done">Finished</span></button>
-        <button role="tab" aria-selected="true" data-i="1"><b>M2 Lock the data</b>27 / 29 Oct<br><span class="flag now">Racing now</span></button>
-        <button role="tab" aria-selected="false" data-i="2"><b>M3 First results</b>10 / 12 Nov<br><span class="flag next">Next</span></button>
+        <button role="tab" aria-selected="false" data-i="1"><b>M2 Lock the data</b>27 / 29 Oct<br><span class="flag done">Finished</span></button>
+        <button role="tab" aria-selected="true" data-i="2"><b>M3 First results</b>10 / 12 Nov<br><span class="flag now">Racing now</span></button>
         <button role="tab" aria-selected="false" data-i="3"><b>M4 Paper and app</b>24 / 26 Nov<br><span class="flag next">Finish line</span></button>
       </div>
       <p id="stageText" aria-live="polite"></p>
@@ -591,7 +609,7 @@ body.v-lock{overflow:hidden}
   <div class="tbl" style="margin-top:28px">
     <table>
       <tr><th scope="row">Source</th><td>Traffy Fondue open data, BMA. <a href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv">Download the CSV</a> (large file)</td></tr>
-      <tr><th scope="row">Size</th><td>Over 1 million rows, about 25,000 to 35,000 new complaints per month</td></tr>
+      <tr><th scope="row">Size</th><td>1,511,479 rows (1,508,776 after cleaning), about 25,000 to 35,000 new complaints per month</td></tr>
       <tr><th scope="row">Period</th><td>June 2022 to October 2025 is labelled training data. November 2025 to 2026 has no categories, so the text model labels it.</td></tr>
       <tr><th scope="row">Extra data</th><td>Daily rainfall for Bangkok (weather records) and district population (Thai open government data), joined by date and district at Milestone 3.</td></tr>
       <tr><th scope="row">Seasons</th><td>Hot (March to May), rainy (June to October), cool (November to February).</td></tr>
@@ -615,7 +633,7 @@ body.v-lock{overflow:hidden}
     </table>
   </div>
 
-  <h3>Cleaning plan</h3>
+  <h3>Cleaning steps (done, see Results)</h3>
   <ul class="plain">
     <li>Remove duplicate tickets and early test records from 2021.</li>
     <li>Split rows with several categories into multi-label targets.</li>
@@ -674,6 +692,14 @@ body.v-lock{overflow:hidden}
   <div class="head"><span class="plate">05</span><h2>Progress log</h2></div>
   <div class="laps">
     <article class="lap">
+      <div class="stub"><small>Log entry</small><time datetime="2026-11-09">9 Nov 2026</time></div>
+      <div class="body">
+        <div class="row"><span class="st done">Done</span><p>Cleaned 1.51M rows (early test rows, GPS outside Bangkok, district names) and removed 106k duplicate complaints. Trained a baseline plus Logistic Regression, Linear SVM and Random Forest with 10-fold stratified CV (best macro F1 91.5%). Machine-translated complaints to English with NLLB-200, built the first DBSCAN hotspot map, the seasonal index and the rain link (Spearman 0.64).</p></div>
+        <div class="row"><span class="st stuck">Stuck</span><p>Flooding dropped out of the top 10 text types after cleaning, and the Thai vs. English test covered only 2,569 complaints because the GPU was off.</p></div>
+        <div class="row"><span class="st next">Next</span><p>Force Flooding into the text model, translate all 30,000 complaints on GPU, then build association rules, the priority score, the next-week forecast and the monitoring app.</p></div>
+      </div>
+    </article>
+    <article class="lap">
       <div class="stub"><small>Log entry</small><time datetime="2026-10-28">28 Oct 2026</time></div>
       <div class="body">
         <div class="row"><span class="st done">Done</span><p>Updated the plan after Ajarn's feedback: text labelling first, then where and when mining (hotspots, seasons, hours, rainfall), association rules and a next-week forecast, all shown in a monitoring app. Wrote the 1-page Milestone 2 proposal and published this page.</p></div>
@@ -702,25 +728,99 @@ body.v-lock{overflow:hidden}
 <!-- 6 RESULTS -->
 <section id="results">
   <div class="head"><span class="plate">06</span><h2>Results</h2></div>
-  <div class="closed">
-    <div class="stripe"></div>
-    <div class="in">
-      <b>Road closed until Milestone 3</b>
-      <p>First results arrive on 10 / 12 November: text model scores as mean ± standard deviation over five folds, the first hotspot map, complaints by season and hour, and what they mean for the city.</p>
-    </div>
+  <p class="lead">Milestone 3: first results on the cleaned data. All text models use the same 10 stratified folds (seed 1992) on 30,000 complaints.</p>
+
+  <div class="rstats">
+    <div><b>91.5%</b><span>macro F1, Linear SVM (best text model)</span></div>
+    <div><b>4&times;</b><span>flooding complaints on heavy-rain days (153 vs 40 per day)</span></div>
+    <div><b>0.64</b><span>Spearman link, daily rain vs. flooding complaints</span></div>
+    <div><b>106k</b><span>copy-pasted duplicates removed before modelling</span></div>
+  </div>
+
+  <h3>1. Data cleaned</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Step</th><th>Rows after</th><th>Removed</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td>Raw download</td><td>1,511,479</td><td>0</td><td>Official Traffy Fondue CSV</td></tr>
+        <tr><td>Duplicate tickets</td><td>1,511,479</td><td>0</td><td>No ticket was counted twice</td></tr>
+        <tr><td>Early test records (before June 2022)</td><td>1,509,205</td><td>2,274</td><td>The system launched in mid-2022</td></tr>
+        <tr><td>GPS points outside Bangkok</td><td>1,508,776</td><td>429</td><td>Wrong or missing location</td></tr>
+        <tr><td>District names</td><td>1,508,776</td><td>0</td><td>1,508,376 rows matched to the 50 Bangkok districts</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="plain" style="margin-top:14px">
+    <li>Problem type is empty for 37.7% of clean rows (100% from November 2025), so those rows are left for the text model to label.</li>
+    <li>Fixing time (finished cases): median 7.0 days, a quarter fixed within 1.8 days; 76,503 cases flagged as outliers (below 0 or above 365 days).</li>
+    <li>In the text set, 106,458 copy-pasted duplicate complaints were removed so the same text cannot be in both training and test folds.</li>
+  </ul>
+
+  <h3>2. What: problem type from text (10 types, multi-label)</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Model</th><th>Macro F1 %</th><th>Precision %</th><th>Recall %</th><th>AUC %</th><th>Parameters</th></tr></thead>
+      <tbody>
+        <tr><td>Baseline (majority)</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>50.0 ± 0.0</td><td>predicts the most common value for every label</td></tr>
+        <tr><td>Logistic Regression</td><td>90.7 ± 0.3</td><td>87.3 ± 0.5</td><td>94.6 ± 0.4</td><td>99.5 ± 0.0</td><td>TF-IDF char 2–4, 50k; C=4, balanced</td></tr>
+        <tr class="best"><td><b>Linear SVM</b></td><td><b>91.5 ± 0.3</b></td><td>88.9 ± 0.5</td><td>94.3 ± 0.7</td><td>99.5 ± 0.0</td><td>TF-IDF char 2–4, 50k; C=0.5, balanced</td></tr>
+        <tr><td>Random Forest</td><td>82.8 ± 0.6</td><td>91.7 ± 0.7</td><td>76.1 ± 0.9</td><td>98.9 ± 0.0</td><td>TF-IDF char 2–4, 5k; 100 trees</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <ul class="plain" style="margin-top:14px">
+    <li><b>Linear SVM</b> is the best and also the simplest model that is good enough. Random Forest is precise but misses more complaints (recall 76%).</li>
+    <li>Easiest types: Road (95.7%) and Safety (95.5%). Hardest: Drainage (87.4%), Signs (88.3%) and General complaint (90.4%).</li>
+    <li><b>Thai vs. English:</b> on a 2,569-complaint machine-translated sample, Linear SVM scores 84.8% on Thai and 66.9% on English. Translation keeps the main meaning (top English words: dark for lighting, garbage for cleanliness, red light for traffic) but loses about 17 points of detail.</li>
+  </ul>
+
+  <h3>3. Where, when and why</h3>
+  <div class="figs">
+    <a class="fig" href="results/20_rain_vs_flooding.png"><img src="results/20_rain_vs_flooding.png" alt="Line chart of daily rain and flooding complaints, rising together in the rainy season" loading="lazy"><span><b>Rain and flooding.</b> Flooding complaints rise with heavy rain (Spearman 0.64).</span></a>
+    <a class="fig" href="results/16_seasonal_index.png"><img src="results/16_seasonal_index.png" alt="Bar chart of seasonal index per problem type" loading="lazy"><span><b>Seasons.</b> Rainy months are busiest (index 1.07), cool months quietest (0.86). General complaint +14%, Traffic +12%, Drainage +10% in the rainy season.</span></a>
+    <a class="fig" href="results/17_hour_weekday_heatmap.png"><img src="results/17_hour_weekday_heatmap.png" alt="Heat map of complaints by hour and weekday" loading="lazy"><span><b>Hours and days.</b> Most reports come on weekdays between about 8:00 and 19:00; weekends and nights are much quieter.</span></a>
+    <a class="fig" href="results/14_complaints_per_month.png"><img src="results/14_complaints_per_month.png" alt="Line chart of complaints per month from 2022 to 2026" loading="lazy"><span><b>Over time.</b> Complaints reported per month since mid-2022.</span></a>
+  </div>
+
+  <div class="tbl" style="margin-top:22px">
+    <table>
+      <thead><tr><th>Top hotspots (DBSCAN, 150 m)</th><th>District</th><th>Complaints</th><th>Median fix</th></tr></thead>
+      <tbody>
+        <tr><td>Road</td><td>Watthana</td><td>198</td><td>6.0 days</td></tr>
+        <tr><td>Road</td><td>Phra Nakhon</td><td>168</td><td>7.5 days</td></tr>
+        <tr><td>Road</td><td>Pom Prap Sattru Phai</td><td>115</td><td>7.9 days</td></tr>
+        <tr><td>Flooding</td><td>Prawet</td><td>77</td><td>3.0 days</td></tr>
+        <tr><td>Flooding</td><td>Din Daeng</td><td>76</td><td>7.0 days</td></tr>
+        <tr><td>Flooding</td><td>Bangkok Yai</td><td>67</td><td>1.8 days</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <a class="btn" href="results/12_hotspot_map.html" id="mapBtn" style="margin-top:18px"><span>Open the interactive hotspot map</span></a>
+
+  <h3>4. What works, what does not, and how we will fix it</h3>
+  <div class="wwn">
+    <div><b class="ok">Working</b><p>Cleaning pipeline, text models well above the baseline, a strong rain link for flooding, and clear road and flooding hotspots.</p></div>
+    <div><b class="no">Not yet</b><p>Flooding dropped out of the top 10 text types after cleaning, and the Thai vs. English test ran on 2,569 complaints only because the GPU was off.</p></div>
+    <div><b class="fix">Fix next</b><p>Always include Flooding in the text model, translate all 30,000 complaints on GPU, then add association rules, the priority score, the next-week forecast and the monitoring app.</p></div>
   </div>
 </section>
+
 
 <!-- 7 FILES -->
 <section id="files">
   <div class="head"><span class="plate">07</span><h2>Files and references</h2></div>
   <div class="files">
+    <a class="file" href="results/00_summary.txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><div><b>Milestone 3 summary</b><span>Text, all key numbers</span></div></a>
+    <a class="file" href="results/12_hotspot_map.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Hotspot map</b><span>Interactive map, Milestone 3</span></div></a>
+    <a class="file" href="results/06_text_model_results_table.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Text model results</b><span>CSV, 10-fold CV table</span></div></a>
+    <a class="file" href="results/11_translated_complaints_to_check.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-10 4 10M14.5 17h5"/></svg><div><b>Translated complaints</b><span>CSV, Thai and English, 2,569 rows</span></div></a>
+    <a class="file" href="code/ICT324_M3_Traffy_Results.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><div><b>Milestone 3 code</b><span>Colab notebook (.ipynb)</span></div></a>
     <a class="file" href="proposal-m2.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>1-page proposal</b><span>PDF, Milestone 2, current plan</span></div></a>
     <a class="file" href="proposal.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>First proposal</b><span>PDF, Milestone 1, earlier plan</span></div></a>
     <a class="file" href="sample_20_rows.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Data sample</b><span>CSV, 20 rows from 2025–2026</span></div></a>
     <a class="file" href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><div><b>Full dataset</b><span>Official Traffy CSV</span></div></a>
   </div>
-  <p style="margin-top:14px;color:var(--muted);font-size:15px">Code, slides and the final paper will be added here as they are finished.</p>
+  <p style="margin-top:14px;color:var(--muted);font-size:15px">Slides and the final paper will be added at Milestone 4.</p>
   <h3>References</h3>
   <ol class="refs">
     <li>BMA Public Relations Office, "Bangkok Celebrates Digital Milestone as Traffy Fondue Resolves One Million City Complaints," Mar. 2026. <a href="https://pr-bangkok.com/?p=583017">pr-bangkok.com</a></li>
@@ -748,7 +848,7 @@ body.v-lock{overflow:hidden}
   </div>
 </div>
 
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 28 October 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 9 November 2026</span></div></footer>
 
 <script>
 /* ---------- real data for the charts ---------- */
@@ -772,12 +872,12 @@ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.cl
 
 /* ---------- milestones ---------- */
 const MS=["Milestone 1, finished. We pitched the idea to Ajarn with a printed proposal, three slides and a sample of real data.",
-"Milestone 2, racing now. This page goes live, the research question is set, and the data is locked: real, public, over 1 million rows.",
-"Milestone 3, next. Cleaned data, the text baseline and two more models, the first hotspot map and season chart, and a first draft of what works and what does not.",
+"Milestone 2, finished. The page went live, the research question was set, and the data was locked: real, public, 1.5 million rows.",
+"Milestone 3, racing now. Data cleaned, a baseline plus three text models (best: Linear SVM, macro F1 91.5%), the first hotspot map, season and rain charts. See the Results section.",
 "Milestone 4, finish line. Association rules, priority map and forecast, the monitoring app, a 10-minute talk and the IEEE paper, with slides, code and data linked here."];
 const tabs=[...document.querySelectorAll(".stages button")];
 function pick(i){tabs.forEach((t,j)=>t.setAttribute("aria-selected",i===j));document.getElementById("stageText").textContent=MS[i]}
-tabs.forEach(t=>t.addEventListener("click",()=>pick(+t.dataset.i)));pick(1);
+tabs.forEach(t=>t.addEventListener("click",()=>pick(+t.dataset.i)));pick(2);
 
 /* ---------- top bar ---------- */
 const bar=document.getElementById("bar"),meter=document.getElementById("meter"),secs=[...document.querySelectorAll("#team, #game, main section")],navs=[...document.querySelectorAll(".nav a")];
@@ -809,7 +909,7 @@ addEventListener("scroll",onScroll,{passive:true});onScroll();
   function show(){lastFocus=document.activeElement;V.hidden=false;document.body.classList.add("v-lock");V.querySelector(".v-x").focus()}
   function close(){V.hidden=true;body.innerHTML="";document.body.classList.remove("v-lock");lastFocus&&lastFocus.focus()}
   function open(a){
-    const href=a.getAttribute("href"),name=a.querySelector("b")?.textContent||href,ext=href.split("?")[0].split(".").pop().toLowerCase(),remote=/^https?:/i.test(href);
+    const href=a.getAttribute("href"),name=a.querySelector("b")?.textContent||a.textContent.trim()||href,ext=href.split("?")[0].split(".").pop().toLowerCase(),remote=/^https?:/i.test(href);
     title.textContent=name;openA.href=href;downA.href=href;body.innerHTML="";
     if(remote){
       kind.textContent="Dataset, external link";
@@ -831,9 +931,14 @@ addEventListener("scroll",onScroll,{passive:true});onScroll();
           <tbody>${data.map((r,i)=>`<tr><td>${i+1}</td>${head.map((_,j)=>`<td title="${esc(r[j]??"")}">${esc(r[j]??"")}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
       }).catch(()=>{body.innerHTML='<div class="v-msg"><h4>Preview not available here</h4><p>The table preview works once the page is online (for example on GitHub Pages). For now, use Download or New tab.</p></div>'});
       return}
+    if(["png","jpg","jpeg","webp"].includes(ext)){kind.textContent="Chart";body.innerHTML=`<div class="v-pages"><img class="v-img" src="${esc(href)}" alt="${esc(name)}"></div>`;show();return}
+    if(ext==="html"){kind.textContent="Interactive map";body.innerHTML=`<iframe src="${esc(href)}" title="${esc(name)}" style="background:#fff"></iframe>`;show();return}
+    if(ext==="txt"){kind.textContent="Text";body.innerHTML='<div class="v-msg"><p>Loading...</p></div>';show();
+      fetch(href).then(r=>{if(!r.ok)throw 0;return r.text()}).then(t=>{body.innerHTML=`<pre class="v-pre">${esc(t)}</pre>`}).catch(()=>{body.innerHTML='<div class="v-msg"><h4>Preview not available here</h4><p>Use Download or New tab.</p></div>'});return}
+    if(ext==="ipynb"){kind.textContent="Colab notebook";body.innerHTML=`<div class="v-msg"><h4>Milestone 3 notebook</h4><p>This is the Python code that cleaned the data and produced every result on this page.</p><p>Download it, then open it in Google Colab (File, Upload notebook) and choose Run all.</p></div>`;show();return}
     window.open(href,"_blank","noopener");
   }
-  document.querySelectorAll("a.file").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();open(a)}));
+  document.querySelectorAll("a.file, a.fig, #mapBtn").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();open(a)}));
   V.querySelectorAll("[data-close]").forEach(el=>el.addEventListener("click",close));
   addEventListener("keydown",e=>{if(!V.hidden&&e.key==="Escape"){e.preventDefault();e.stopPropagation();close()}},true);
   // keep keyboard focus inside the viewer

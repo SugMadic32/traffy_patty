@@ -1,0 +1,3 @@
+Model,Thai macro F1 %,English macro F1 %,English std %,Difference (English - Thai)
+Logistic Regression,84.2,67.3,2.0,-16.9
+Linear SVM,84.8,66.9,2.2,-17.9

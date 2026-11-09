@@ -1,0 +1,11 @@
+,share of complaints %,Baseline (majority),Logistic Regression,Linear SVM,Random Forest
+Road,45.9,0.0,95.2,95.7,92.3
+Sidewalk,17.7,0.0,92.5,93.0,87.8
+Safety,16.9,0.0,95.2,95.5,91.2
+Street lighting,12.6,0.0,91.5,92.2,86.4
+Obstruction,11.4,0.0,88.4,89.2,83.8
+Cleanliness,12.0,0.0,92.5,93.1,84.6
+General complaint,11.4,0.0,88.3,90.4,69.0
+Traffic,9.0,0.0,89.0,90.2,73.7
+Signs,7.0,0.0,86.7,88.3,74.7
+Drainage,6.8,0.0,87.7,87.4,84.4

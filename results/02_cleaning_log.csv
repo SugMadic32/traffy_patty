@@ -1,0 +1,7 @@
+step,rows after,why,rows removed
+Start,1511479,Raw download,0
+Drop duplicate tickets,1511479,Same complaint counted twice,0
+Drop rows without a report time,1511479,Cannot place them in time,0
+Drop early test records (before June 2022),1509205,System launched in mid-2022; earlier rows are tests,2274
+Drop GPS points outside Bangkok,1508776,Wrong or missing location,429
+"Check district names: 1,508,376 rows match the 50 Bangkok districts",1508776,20 other spellings/areas kept but excluded from district analysis,0

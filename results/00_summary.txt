@@ -1,0 +1,14 @@
+Milestone 3 summary (auto-generated)
+- Data: 1,511,479 raw rows -> 1,508,776 clean rows (June 2022 onward, inside Bangkok, no duplicates). See 02_cleaning_log.csv.
+- Empty problem type: 37.7% of clean rows. Rows matched to the 50 Bangkok districts: 100.0%.
+- Text set: removed 106,458 copy-pasted duplicate complaints before sampling.
+- Text labelling (30,000 complaints, 10 types, 10-fold stratified CV, seed 1992):
+  - Baseline (majority): macro F1 0.0 ± 0.0%, AUC 50.0%
+  - Logistic Regression: macro F1 90.7 ± 0.3%, AUC 99.5%
+  - Linear SVM: macro F1 91.5 ± 0.3%, AUC 99.5%
+  - Random Forest: macro F1 82.8 ± 0.6%, AUC 98.9%
+- Best macro F1: Linear SVM (91.5%). Simplest model within one std of it: Linear SVM.
+- Thai vs. English (machine translated): Logistic Regression 84.2% vs 67.3%; Linear SVM 84.8% vs 66.9%
+- Hotspots: see 12_hotspot_map.html and 13_top_hotspots.csv.
+- Seasonal index (Rainy): General complaint 1.14, Traffic 1.12, Drainage 1.10, Safety 1.09
+- Rain vs. flooding complaints (Spearman): 0.64
