@@ -380,16 +380,18 @@ tr.best td{background:rgba(255,194,61,.08)}
 .v-img{display:block;max-width:100%;margin:0 auto;background:#fff}
 .v-pre{white-space:pre-wrap;padding:22px;font:14px/1.6 ui-monospace,Menlo,Consolas,monospace;color:#D5D9E4}
 @media (max-width:900px){.rstats{grid-template-columns:repeat(2,minmax(0,1fr))}.figs,.wwn{grid-template-columns:minmax(0,1fr)}}
+.head .more{margin-left:auto;font:600 14px 'Chakra Petch',sans-serif;color:var(--amber);text-decoration:none;padding:8px 14px;border:1px solid rgba(255,194,61,.4);white-space:nowrap}
+.head .more:hover{background:var(--amber);color:var(--night)}
+@media (max-width:600px){.head{flex-wrap:wrap}.head .more{margin-left:0}}
 </style>
+<link rel="stylesheet" href="assets/pages.css">
 </head>
 <body>
 
 <header class="bar" id="bar">
   <div class="bar-in">
     <a class="brand" href="#home">Ctrl C <i>+</i> Ctrl V</a>
-    <nav class="nav" aria-label="Sections">
-      <a href="#team"><span>Team</span></a><a href="#game"><span>Game</span></a><a href="#problem"><span>Problem</span></a><a href="#data"><span>Data</span></a><a href="#method"><span>Method</span></a><a href="#progress"><span>Progress</span></a><a href="#results"><span>Results</span></a><a href="#files"><span>Files</span></a>
-    </nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html" class="on" aria-current="page"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
   </div>
   <div class="meter" id="meter"></div>
 </header>
@@ -403,7 +405,7 @@ tr.best td{background:rgba(255,194,61,.08)}
       <p class="summary">We label Bangkok's Traffy Fondue complaints from their text, then map where and when each problem happens most, so the city knows exactly where and when to focus.</p>
       <div class="ctas">
         <a class="btn" href="#game"><span>Play the mini game</span></a>
-        <a class="btn ghost" href="#data"><span>See the data</span></a>
+        <a class="btn ghost" href="results.html"><span>See the results</span></a>
       </div>
     </div>
   </div>
@@ -441,6 +443,12 @@ tr.best td{background:rgba(255,194,61,.08)}
         <button role="tab" aria-selected="false" data-i="3"><b>M4 Paper and app</b>24 / 26 Nov<br><span class="flag next">Finish line</span></button>
       </div>
       <p id="stageText" aria-live="polite"></p>
+    </div>
+    <div class="journey">
+      <p class="crumb" style="margin-top:34px">The journey: CRISP-DM. Each step opens its page.</p>
+      <nav class="crisp" aria-label="CRISP-DM steps">
+        <a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="map.html"><b>Step 6</b>Deployment</a>
+      </nav>
     </div>
   </div>
 </div>
@@ -569,7 +577,7 @@ tr.best td{background:rgba(255,194,61,.08)}
 <main class="wrap">
 <!-- 2 PROBLEM -->
 <section id="problem">
-  <div class="head"><span class="plate">02</span><h2>Problem</h2></div>
+  <div class="head"><span class="plate">02</span><h2>Problem</h2><a class="more" href="problem.html">Full page</a></div>
   <p class="lead">Traffy Fondue is a LINE account where Bangkok residents report broken roads, flooding, dark streets and more. They send a photo, the location and a short message, and the report goes to the office in charge.</p>
   <div class="prose"><p>Over one million complaints later [1], the data is still hard to use. People pick the problem category themselves, so many reports land in the wrong category, and from November 2025 the category is empty for every complaint. The city also has no clear view of <b>where</b> and <b>when</b> each problem happens most, which spots keep coming back, or where slow fixing and many complaints meet. Fixing speed is very uneven: one complaint in our sample was fixed in under a day, another took 269 days.</p></div>
 
@@ -604,7 +612,7 @@ tr.best td{background:rgba(255,194,61,.08)}
 
 <!-- 3 DATA -->
 <section id="data">
-  <div class="head"><span class="plate">03</span><h2>Data</h2></div>
+  <div class="head"><span class="plate">03</span><h2>Data</h2><a class="more" href="data.html">Full page</a></div>
   <p class="lead">Real, public data from the Bangkok Metropolitan Administration: every complaint sent to Traffy Fondue, in one CSV file.</p>
   <div class="tbl" style="margin-top:28px">
     <table>
@@ -668,7 +676,7 @@ tr.best td{background:rgba(255,194,61,.08)}
 
 <!-- 4 METHOD -->
 <section id="method">
-  <div class="head"><span class="plate">04</span><h2>Method</h2></div>
+  <div class="head"><span class="plate">04</span><h2>Method</h2><a class="more" href="method.html">Full page</a></div>
   <p class="lead">We follow CRISP-DM. Models are compared on the same split: train on 2022 to 2024, test on 2025.</p>
   <ol class="route">
     <li data-n="1"><h4>Understand and prepare the data</h4><p>Clean the text, labels and GPS points, then join daily rainfall and district population.</p></li>
@@ -689,7 +697,7 @@ tr.best td{background:rgba(255,194,61,.08)}
 
 <!-- 5 PROGRESS -->
 <section id="progress">
-  <div class="head"><span class="plate">05</span><h2>Progress log</h2></div>
+  <div class="head"><span class="plate">05</span><h2>Progress log</h2><a class="more" href="progress.html">Full page</a></div>
   <div class="laps">
     <article class="lap">
       <div class="stub"><small>Log entry</small><time datetime="2026-11-09">9 Nov 2026</time></div>
@@ -727,12 +735,12 @@ tr.best td{background:rgba(255,194,61,.08)}
 
 <!-- 6 RESULTS -->
 <section id="results">
-  <div class="head"><span class="plate">06</span><h2>Results</h2></div>
+  <div class="head"><span class="plate">06</span><h2>Results</h2><a class="more" href="results.html">Full page</a></div>
   <p class="lead">Milestone 3: first results on the cleaned data. All text models use the same 10 stratified folds (seed 1992) on 30,000 complaints.</p>
 
   <div class="rstats">
     <div><b>91.5%</b><span>macro F1, Linear SVM (best text model)</span></div>
-    <div><b>4&times;</b><span>flooding complaints on heavy-rain days (153 vs 40 per day)</span></div>
+    <div><b>3.8&times;</b><span>flooding complaints on heavy-rain days, 20 mm+ (153 vs 40 per day)</span></div>
     <div><b>0.64</b><span>Spearman link, daily rain vs. flooding complaints</span></div>
     <div><b>106k</b><span>copy-pasted duplicates removed before modelling</span></div>
   </div>
@@ -808,7 +816,7 @@ tr.best td{background:rgba(255,194,61,.08)}
 
 <!-- 7 FILES -->
 <section id="files">
-  <div class="head"><span class="plate">07</span><h2>Files and references</h2></div>
+  <div class="head"><span class="plate">07</span><h2>Files and references</h2><a class="more" href="files.html">Full page</a></div>
   <div class="files">
     <a class="file" href="results/00_summary.txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><div><b>Milestone 3 summary</b><span>Text, all key numbers</span></div></a>
     <a class="file" href="results/12_hotspot_map.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Hotspot map</b><span>Interactive map, Milestone 3</span></div></a>
@@ -848,7 +856,7 @@ tr.best td{background:rgba(255,194,61,.08)}
   </div>
 </div>
 
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 9 November 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
 
 <script>
 /* ---------- real data for the charts ---------- */
@@ -873,7 +881,7 @@ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.cl
 /* ---------- milestones ---------- */
 const MS=["Milestone 1, finished. We pitched the idea to Ajarn with a printed proposal, three slides and a sample of real data.",
 "Milestone 2, finished. The page went live, the research question was set, and the data was locked: real, public, 1.5 million rows.",
-"Milestone 3, racing now. Data cleaned, a baseline plus three text models (best: Linear SVM, macro F1 91.5%), the first hotspot map, season and rain charts. See the Results section.",
+"Milestone 3, racing now. Data cleaned (Data page), a baseline plus three text models with best Linear SVM at macro F1 91.5% (Results page), the hotspot map (Map page) and the issue board (Progress page).",
 "Milestone 4, finish line. Association rules, priority map and forecast, the monitoring app, a 10-minute talk and the IEEE paper, with slides, code and data linked here."];
 const tabs=[...document.querySelectorAll(".stages button")];
 function pick(i){tabs.forEach((t,j)=>t.setAttribute("aria-selected",i===j));document.getElementById("stageText").textContent=MS[i]}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Problem | Traffy Fondue Insight | Ctrl C + Ctrl V</title>
+<meta name="description" content="ICT324 data mining project: Problem.">
+<meta name="theme-color" content="#0E1324">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body class="sub">
+<header class="bar solid" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html" class="on" aria-current="page"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+<div class="phero">
+  <div class="wrap">
+    <p class="crumb">CRISP-DM step 1 · Business understanding</p>
+    <h1>The problem</h1>
+    <p class="psub">Why Bangkok's complaint data is hard to use, how a complaint travels, and the questions we answer.</p>
+    <nav class="crisp" aria-label="CRISP-DM steps"><a href="problem.html" class="on"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="map.html"><b>Step 6</b>Deployment</a></nav>
+  </div>
+</div>
+<main class="wrap page" id="main">
+
+<section>
+  <div class="head"><span class="plate">01</span><h2>The problem</h2></div>
+  <p class="lead">Traffy Fondue is a LINE account where Bangkok residents report city problems. Over one million complaints later [1], the data is hard to use.</p>
+  <div class="grid3" style="margin-top:26px">
+    <div class="card"><h4>Wrong categories</h4><p class="note">People choose the problem type themselves, so many complaints are filed in the wrong category.</p></div>
+    <div class="card"><h4>Missing categories</h4><p class="note">From November 2025 the category is empty for every complaint (100% in 2026).</p></div>
+    <div class="card"><h4>No clear view</h4><p class="note">The city cannot easily see where and when each problem happens most, or which areas are slow to fix (under 1 day to 269 days).</p></div>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">02</span><h2>How a complaint travels</h2></div>
+  <p class="lead">The system today, and where our project plugs in.</p>
+  <div class="flow" style="margin-top:24px">
+    <div class="frow c3">
+      <div class="fnode src"><small>Step 1</small><b>Resident reports</b><p>Sends a photo, the location and a short message on LINE, and picks a category.</p></div>
+      <div class="fnode src"><small>Step 2</small><b>Traffy Fondue</b><p>Stores the complaint with time, GPS, district and the chosen type.</p></div>
+      <div class="fnode src"><small>Step 3</small><b>City office fixes it</b><p>The office in charge works on it; the status moves to finished.</p></div>
+    </div>
+    <div class="fdown" aria-hidden="true"></div>
+    <div class="frow c3">
+      <div class="fnode prep"><small>Our project</small><b>Label from text</b><p>Read the complaint text and give the right type, even when it is wrong or empty.</p></div>
+      <div class="fnode prep"><small>Our project</small><b>Where and when</b><p>Find hotspots on the map, and the seasons, hours and rain linked with each problem.</p></div>
+      <div class="fnode prep"><small>Our project</small><b>Where to focus</b><p>A priority list and a monitoring app for the city (Milestone 4).</p></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">03</span><h2>Research question</h2></div>
+  <div class="rq"><small>Research question</small><p>Where, when and what kinds of problems do Bangkok residents report most on Traffy Fondue, and which areas and times should the city focus on, using complaint types labelled from text (including translated text)?</p></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Sub-question</th><th>What we ask</th><th>Data mining track</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><b>RQ1 What</b></td><td>Which model labels the problem type from text best? Does it still work after Thai to English translation?</td><td>Classification</td><td>First results (M3)</td></tr>
+        <tr><td><b>RQ2 Where</b></td><td>Which districts and spots are hotspots per problem type? Which spots keep coming back?</td><td>Clustering (DBSCAN)</td><td>First results (M3)</td></tr>
+        <tr><td><b>RQ3 When and why</b></td><td>Which season and hour have the most complaints? Is flooding linked with heavy rain?</td><td>Time patterns, correlation</td><td>First results (M3)</td></tr>
+        <tr><td><b>RQ4 Focus</b></td><td>Which place + time + problem go together, and where should the city focus next week?</td><td>Association rules, prediction</td><td>Milestone 4</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">04</span><h2>Ajarn's feedback</h2></div>
+  <div class="callout"><b>Milestone 1 feedback.</b> The data is interesting, but our team cannot read Thai. Build an app to monitor problems and fixing speed by area and type, and label problem types from text because user-chosen categories can be wrong.<br><br><b>What we did:</b> text labelling became the main task, we machine-translate the Thai to English, and we added spatial and time mining that will feed the monitoring app.</div>
+</section>
+<section>
+  <div class="head"><span class="plate">05</span><h2>Related work</h2></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Ref</th><th>Work</th><th>What they did</th><th>What we add</th></tr></thead>
+      <tbody>
+        <tr><td>[1]</td><td>BMA, 2026</td><td>Traffy Fondue resolved one million complaints</td><td>Context and scale</td></tr>
+        <tr><td>[2]</td><td>Caldeira et al., 2022</td><td>Machine learning sorts public complaints (Portugal)</td><td>Same idea on Thai city data</td></tr>
+        <tr><td>[3]</td><td>Pongsathornwiwat &amp; Kaewvichit, 2024</td><td>Multi-label text model for Traffy "Others" complaints</td><td>Translation test, spatial and time mining</td></tr>
+        <tr><td>[4]</td><td>KDAI-NLP WangchanBERTa model</td><td>Thai language model fine-tuned on Traffy types</td><td>Baseline to compare with (M4)</td></tr>
+        <tr><td>[5]</td><td>Sed-Young-Wa, 2023</td><td>One regression model for fixing time (error about 20)</td><td>Several models, hotspots, priority score</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:12px;color:var(--muted);font-size:15px">Full references are on the <a href="files.html#refs">Files</a> page. The final paper will cite at least 10 recent papers.</p>
+</section>
+</main>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<script src="assets/chart.umd.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+
+</script>
+</body>
+</html>

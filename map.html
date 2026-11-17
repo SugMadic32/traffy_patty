@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Map | Traffy Fondue Insight | Ctrl C + Ctrl V</title>
+<meta name="description" content="ICT324 data mining project: Map.">
+<meta name="theme-color" content="#0E1324">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body class="sub">
+<header class="bar solid" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html" class="on" aria-current="page"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+<div class="phero">
+  <div class="wrap">
+    <p class="crumb">CRISP-DM step 6 · Deployment</p>
+    <h1>Hotspot map</h1>
+    <p class="psub">Where road and flooding problems cluster in Bangkok, and how fast each hotspot is fixed.</p>
+    <nav class="crisp" aria-label="CRISP-DM steps"><a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="map.html" class="on"><b>Step 6</b>Deployment</a></nav>
+  </div>
+</div>
+<main class="wrap page" id="main">
+
+<section>
+  <div class="head"><span class="plate">01</span><h2>Hotspot map</h2></div>
+  <div class="kpis" style="margin-bottom:22px">
+    <div class="kpi"><b>30</b><span>hotspots found by DBSCAN (Road and Flooding)</span><div class="kmini kpair"><div><span>Road</span><div class="kbar"><i id="kRoad" style="--w:.5;background:#FF8A3D"></i></div><em id="nRoad"></em></div><div><span>Flooding</span><div class="kbar"><i id="kFlood" style="--w:.5;background:#4dabf7"></i></div><em id="nFlood"></em></div></div></div>
+    <div class="kpi"><b>198</b><span>complaints in the biggest hotspot (Watthana, Road)</span></div>
+    <div class="kpi"><b>19.7 days</b><span>slowest median fix (Khlong Toei, Road)</span></div>
+    <div class="kpi"><b>150 m</b><span>hotspot radius; at least 25 complaints each</span></div>
+  </div>
+  <p class="lead">Road (orange) and Flooding (blue) hotspots, 2024 – October 2025. Use the layer menu to switch heat maps; click a circle for details.</p>
+  <iframe class="mapframe" src="results/12_hotspot_map.html" title="Interactive hotspot map of Bangkok" loading="lazy" style="margin-top:20px"></iframe>
+  <p style="margin-top:10px"><a href="results/12_hotspot_map.html" target="_blank" rel="noopener">Open the map in a new tab</a></p>
+</section>
+<section>
+  <div class="head"><span class="plate">02</span><h2>Top hotspots</h2></div>
+  <div class="chips" id="hsChips" role="group" aria-label="Problem type"><button type="button" data-t="Road" aria-pressed="true">Road</button><button type="button" data-t="Flooding" aria-pressed="false">Flooding</button></div>
+  <div class="grid2">
+    <div class="tbl" style="max-width:none"><table><thead><tr><th>#</th><th>District</th><th>Complaints</th><th>Median fix (days)</th></tr></thead><tbody id="hsBody"></tbody></table></div>
+    <div class="card"><h4>Complaints vs. fixing time</h4><p class="note">Each circle is a hotspot. Above the dashed line = slower than the median hotspot: fix these first.</p><div class="chartbox" style="height:520px"><canvas id="hsChart" aria-label="Scatter chart of hotspot size versus fixing time"></canvas></div></div>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">03</span><h2>How DBSCAN finds hotspots</h2></div>
+  <div class="steps3">
+    <div><b>01</b><h4>Measure real distance</h4><p>GPS points are compared with the haversine distance, the real distance on the Earth.</p></div>
+    <div><b>02</b><h4>Find dense groups</h4><p>A hotspot needs at least 25 complaints within 150 m of each other. Lonely points are marked as noise.</p></div>
+    <div><b>03</b><h4>Describe each hotspot</h4><p>Size, centre, most common district and median fixing time. Checked with the silhouette score.</p></div>
+  </div>
+</section>
+</main>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<script src="assets/chart.umd.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+
+const T=window.TRAFFY, AMBER="#FFC23D", BLUE="#4dabf7", GREEN="#3CCB8A", RED="#FF4747", GREY="#9AA3BD";
+
+const HS=T.hotspots,body=document.getElementById("hsBody"),C={Road:"#FF8A3D",Flooding:BLUE};
+const nR=HS.filter(h=>h.type==="Road").length,nF=HS.length-nR;nRoad.textContent=nR;nFlood.textContent=nF;kRoad.style.setProperty("--w",nR/Math.max(nR,nF));kFlood.style.setProperty("--w",nF/Math.max(nR,nF));
+const med=a=>{const s=[...a].sort((x,y)=>x-y),m=s.length>>1;return s.length%2?s[m]:(s[m-1]+s[m])/2};
+let cur="Road";
+const medLine={id:"medLine",afterDraw(ch){const rows=HS.filter(h=>h.type===cur);if(!rows.length)return;const m=med(rows.map(h=>h.fix)),y=ch.scales.y.getPixelForValue(m),a=ch.chartArea,g=ch.ctx;
+  g.save();g.strokeStyle="rgba(241,242,245,.6)";g.setLineDash([5,4]);g.beginPath();g.moveTo(a.left,y);g.lineTo(a.right,y);g.stroke();g.setLineDash([]);g.fillStyle="#F1F2F5";g.font="600 11px 'Chakra Petch',sans-serif";g.textAlign="left";g.fillText("median hotspot: "+m.toFixed(1)+" days",a.left+6,y-6);g.restore()}};
+const hc=new Chart(hsChart,{type:"bubble",plugins:[medLine],data:{datasets:[]},options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.d}: ${c.raw.x} complaints, median fix ${c.raw.y} days`}}},
+ scales:{x:{beginAtZero:true,title:{display:true,text:"Complaints in hotspot"}},y:{title:{display:true,text:"Median fixing days"},beginAtZero:true}}}});
+function show(t){cur=t;document.querySelectorAll("#hsChips button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.t===t));
+ const rows=HS.filter(h=>h.type===t),mn=Math.max(...rows.map(h=>h.n)),mf=Math.max(...rows.map(h=>h.fix)),m=med(rows.map(h=>h.fix));
+ body.innerHTML=rows.map((h,i)=>`<tr><td>${i+1}</td><td>${h.district}</td><td class="db"><i style="--w:${(h.n/mn).toFixed(3)};background:${C[t]}"></i><span>${h.n}</span></td><td class="db"><i style="--w:${(h.fix/mf).toFixed(3)};background:${h.fix>m?RED:GREEN}"></i><span>${h.fix}</span></td></tr>`).join("");
+ hc.data.datasets=[{data:rows.map(h=>({x:h.n,y:h.fix,r:Math.max(5,Math.sqrt(h.n)/1.2),d:h.district})),backgroundColor:rows.map(h=>(h.fix>m?C[t]:C[t]+"66")),borderColor:C[t],borderWidth:1}];hc.update()}
+document.querySelectorAll("#hsChips button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.t)));show("Road");
+</script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Results | Traffy Fondue Insight | Ctrl C + Ctrl V</title>
+<meta name="description" content="ICT324 data mining project: Results.">
+<meta name="theme-color" content="#0E1324">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body class="sub">
+<header class="bar solid" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html" class="on" aria-current="page"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+<div class="phero">
+  <div class="wrap">
+    <p class="crumb">CRISP-DM step 5 · Evaluation</p>
+    <h1>Results</h1>
+    <p class="psub">Milestone 3: text models, translation, seasons, rain and hotspots, with interactive charts.</p>
+    <nav class="crisp" aria-label="CRISP-DM steps"><a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html" class="on"><b>Step 5</b>Evaluation</a><a href="map.html"><b>Step 6</b>Deployment</a></nav>
+  </div>
+</div>
+<main class="wrap page" id="main">
+
+<section id="key">
+  <div class="head"><span class="plate">01</span><h2>Key results</h2></div>
+  <div class="kpis">
+    <div class="kpi"><b>91.5%</b><span>macro F1, Linear SVM (best text model)</span>
+      <div class="kmini"><div class="kbar"><i style="--w:.915"></i></div></div></div>
+    <div class="kpi"><b>3.8&times;</b><span>flooding complaints on heavy-rain days (20 mm+)</span>
+      <div class="kmini kpair"><div><span>Heavy rain</span><div class="kbar"><i style="--w:1;background:#4dabf7"></i></div><em>153</em></div><div><span>Other days</span><div class="kbar"><i style="--w:.264;background:#9AA3BD"></i></div><em>40</em></div></div></div>
+    <div class="kpi"><b>0.64</b><span>Spearman link, daily rain vs. flooding complaints</span>
+      <div class="kmini"><div class="kbar"><i style="--w:.64;background:#4dabf7"></i></div></div></div>
+    <div class="kpi"><b>1.07</b><span>rainy-season index, the busiest season</span>
+      <div class="kmini kcols"><div><i style="--h:.96"></i>Hot</div><div class="top"><i style="--h:1"></i>Rainy</div><div><i style="--h:.80"></i>Cool</div></div></div>
+  </div>
+</section>
+
+<section id="models">
+  <div class="head"><span class="plate">02</span><h2>What: text models</h2></div>
+  <p class="lead">30,000 complaints, 10 problem types, 10-fold stratified cross-validation. Hover any chart to read the numbers.</p>
+  <div class="grid2" style="margin-top:20px">
+    <div class="card"><div class="cardhead"><div><h4>Model comparison</h4><p class="note">Mean of 10 folds. The white whisker is ± 1 std.</p></div>
+      <div class="chips sm" id="metricChips" role="group" aria-label="Metric"><button type="button" data-k="macro_f1" aria-pressed="true">Macro F1</button><button type="button" data-k="precision" aria-pressed="false">Precision</button><button type="button" data-k="recall" aria-pressed="false">Recall</button><button type="button" data-k="auc" aria-pressed="false">AUC</button></div></div>
+      <div class="chartbox"><canvas id="modelChart" aria-label="Bar chart comparing the four models"></canvas></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Every model beats the baseline by far.</b> The baseline guesses "no" for every type, so its F1 is 0.</span></p></div>
+    <div class="card"><h4>Model profile</h4><p class="note">Five scores on one picture. Bigger shape = better model. Scale starts at 70%.</p>
+      <div class="chartbox"><canvas id="radarChart" aria-label="Radar chart of five scores for three models"></canvas></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Random Forest is careful but misses a lot:</b> best precision (91.7%), worst recall (76.1%).</span></p></div>
+  </div>
+  <div class="tbl" style="margin-top:16px;max-width:none">
+    <table><thead><tr><th>Model</th><th>Macro F1 %</th><th>Precision %</th><th>Recall %</th><th>AUC %</th><th>Hamming loss</th><th>Train time</th></tr></thead><tbody id="modelBody"></tbody></table>
+  </div>
+  <p class="callout" style="margin-top:16px"><b>Linear SVM wins, and it is also fast.</b> It is the best on macro F1 and the quickest of the three real models. The ± is small (0.3), so the result is stable across the 10 folds.</p>
+
+  <h3>F1 per problem type</h3>
+  <div class="card" style="margin-top:14px">
+    <div class="cardhead"><div class="legend2"><span><i style="background:#FFC23D"></i>Linear SVM</span><span><i style="background:#4dabf7"></i>Logistic Regression</span><span><i style="background:#9AA3BD"></i>Random Forest</span></div>
+      <div class="chips sm" id="sortChips" role="group" aria-label="Sort"><button type="button" data-s="f1" aria-pressed="true">Sort by F1</button><button type="button" data-s="share" aria-pressed="false">Sort by share</button><button type="button" data-s="gap" aria-pressed="false">Sort by gap</button></div></div>
+    <div class="dots" id="dots"></div>
+    <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Road and Safety are easiest; Signs and Drainage are hardest.</b> The long grey line shows Random Forest falls far behind on General complaint (69%) and Traffic (74%).</span></p>
+  </div>
+
+  <h3>Thai vs. English</h3>
+  <div class="grid2" style="margin-top:14px">
+    <div class="card slope"><h4>What translation costs</h4><p class="note">Same models, same folds, 2,569 machine-translated complaints.</p>
+      <div id="slope"></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>About 17 points lost in translation.</b> We keep Thai for the model and use English only so our team can read and check it.</span></p></div>
+    <div class="card"><h4>What the model reads</h4><p class="note">Top 10 English words for each type, strongest first. Pick a type.</p>
+      <div class="chips sm" id="kwChips" role="group" aria-label="Problem type"></div><ol class="rank" id="kwBox"></ol></div>
+  </div>
+</section>
+
+<section id="when">
+  <div class="head"><span class="plate">03</span><h2>When and why</h2></div>
+  <div class="card"><div class="cardhead"><div><h4>Rain and flooding complaints</h4><p class="note">Weekly averages per day. Bars = rain, line = flooding complaints.</p></div>
+    <div class="chips sm" id="yearChips" role="group" aria-label="Year"><button type="button" data-y="all" aria-pressed="true">All</button><button type="button" data-y="2022" aria-pressed="false">2022</button><button type="button" data-y="2023" aria-pressed="false">2023</button><button type="button" data-y="2024" aria-pressed="false">2024</button><button type="button" data-y="2025" aria-pressed="false">2025</button></div></div>
+    <div class="chartbox tall"><canvas id="rainChart" aria-label="Weekly rain and flooding complaints"></canvas></div></div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card"><h4>Heavy-rain days</h4><p class="note">Average flooding complaints per day.</p>
+      <div class="vs" id="vs">
+        <div class="r"><b>Heavy rain<small>20 mm or more</small></b><div class="bar"><i style="--w:1;background:#4dabf7"></i><em>153</em></div></div>
+        <div class="r"><b>Other days<small>under 20 mm</small></b><div class="bar lo"><i style="--w:.264;background:#3A4466"></i><em>40</em></div></div>
+        <div class="r"><b>Difference</b><div class="mult">3.8&times;</div></div>
+      </div></div>
+    <div class="card"><h4>Rain vs. complaints, every week</h4><p class="note">Each dot is one week. The upward cloud = the link (Spearman rho 0.64).</p>
+      <div class="chartbox"><canvas id="scatterChart" aria-label="Scatter of weekly rain and flooding complaints"></canvas></div></div>
+  </div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card"><div class="cardhead"><div><h4>Seasonal index</h4><p class="note">1.0 = an average month. Right = busier, left = quieter.</p></div>
+      <div class="chips sm" id="seasonChips" role="group" aria-label="Season"><button type="button" data-s="Hot" aria-pressed="false">Hot</button><button type="button" data-s="Rainy" aria-pressed="true">Rainy</button><button type="button" data-s="Cool" aria-pressed="false">Cool</button></div></div>
+      <div class="chartbox tall"><canvas id="seasonChart" aria-label="Seasonal index per problem type"></canvas></div>
+      <p class="insight" id="seasonNote"></p></div>
+    <div class="card"><h4>When people report</h4><p class="note">Complaints by weekday and hour (Bangkok time). Hover a square.</p>
+      <div class="hwrap"><div class="hgrid" id="hgrid"></div><div class="dayt" id="dayt"></div></div>
+      <div class="hscale"><span>Fewer</span><i></i><span>More</span></div>
+      <p class="htip" id="htip">Busiest: weekdays between about 8:00 and 19:00.</p>
+      <div class="chartbox" style="height:170px;margin-top:6px"><canvas id="hourChart" aria-label="Complaints per hour, weekdays vs weekend"></canvas></div></div>
+  </div>
+</section>
+
+<section id="where">
+  <div class="head"><span class="plate">04</span><h2>Where</h2></div>
+  <div class="grid2">
+    <div class="card"><h4>Hotspot positions</h4><p class="note">30 DBSCAN hotspots on longitude and latitude. Bigger circle = more complaints.</p>
+      <div class="chartbox tall"><canvas id="miniMap" aria-label="Hotspots plotted by longitude and latitude"></canvas></div></div>
+    <div class="card"><h4>Biggest hotspots</h4><p class="note">Complaints in each hotspot. Colour = type.</p>
+      <div class="chartbox tall"><canvas id="hsBar" aria-label="Biggest hotspots"></canvas></div></div>
+  </div>
+  <p class="callout" style="margin-top:16px"><b>Road hotspots sit in the old centre</b> (Watthana, Phra Nakhon); <b>flooding hotspots are on the east side</b> (Prawet, Bang Na, Saphan Sung). <a href="map.html">Open the full map</a>.</p>
+</section>
+
+<section id="next">
+  <div class="head"><span class="plate">05</span><h2>What works, what does not, how we fix it</h2></div>
+  <div class="wwn">
+    <div><b class="ok">Working</b><p>Cleaning pipeline, text models far above the baseline, a strong rain link for flooding, clear road and flooding hotspots.</p></div>
+    <div><b class="no">Not yet</b><p>Flooding dropped out of the top 10 text types after cleaning; the Thai vs. English test covered 2,569 complaints only (GPU was off).</p></div>
+    <div><b class="fix">Fix next</b><p>Always include Flooding, translate all 30,000 complaints on GPU, add a time-based test (train 2022–24, test 2025), ROC curves, association rules, priority score, forecast and the app.</p></div>
+  </div>
+</section>
+</main>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<script src="assets/chart.umd.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+const T=window.TRAFFY, AMBER="#FFC23D", BLUE="#4dabf7", GREEN="#3CCB8A", RED="#FF4747", GREY="#9AA3BD", ORANGE="#FF8A3D";
+const pct=v=>v.toFixed(1)+"%";
+const press=(sel,el)=>document.querySelectorAll(sel+" button").forEach(b=>b.setAttribute("aria-pressed",b===el));
+
+/* ---- model comparison: bars + std whiskers ---- */
+const M=T.models;let K="macro_f1";
+const whisk={id:"whisk",afterDatasetsDraw(ch){const g=ch.ctx,x=ch.scales.x;g.save();g.strokeStyle="#F1F2F5";g.lineWidth=2;
+  ch.getDatasetMeta(0).data.forEach((b,i)=>{const sd=M[i][K+"_sd"]||0;if(!sd)return;const a=x.getPixelForValue(M[i][K]-sd),z=x.getPixelForValue(M[i][K]+sd);
+  g.beginPath();g.moveTo(a,b.y);g.lineTo(z,b.y);g.moveTo(a,b.y-5);g.lineTo(a,b.y+5);g.moveTo(z,b.y-5);g.lineTo(z,b.y+5);g.stroke()});g.restore()}};
+let mc;
+whenSeen("modelChart",()=>{mc=new Chart(modelChart,{type:"bar",plugins:[whisk],data:{labels:M.map(m=>m.name.replace(" (majority)","")),
+  datasets:[{data:M.map(m=>m[K]),backgroundColor:M.map(m=>m.name==="Linear SVM"?AMBER:"rgba(255,194,61,.38)"),borderRadius:2,barPercentage:.7}]},
+  options:{indexAxis:"y",layout:{padding:{right:60}},plugins:{legend:{display:false},vlabels:{fmt:v=>K==="auc"&&v===50?"50% (coin flip)":v.toFixed(1)+"%"},
+   tooltip:{callbacks:{label:c=>{const m=M[c.dataIndex],sd=m[K+"_sd"];return `${c.raw.toFixed(1)}%`+(sd!==undefined?` ± ${sd.toFixed(1)}`:"")}}}},
+  scales:{x:{min:0,max:100,ticks:{callback:v=>v+"%"}},y:{grid:{display:false},ticks:{color:"#D5D9E4",font:{weight:600}}}}}})});
+document.querySelectorAll("#metricChips button").forEach(b=>b.addEventListener("click",()=>{press("#metricChips",b);K=b.dataset.k;if(!mc)return;
+  mc.data.datasets[0].data=M.map(m=>m[K]);mc.update()}));
+
+/* ---- radar ---- */
+const RM=M.filter(m=>!m.name.startsWith("Baseline")),RC={"Logistic Regression":BLUE,"Linear SVM":AMBER,"Random Forest":GREY};
+whenSeen("radarChart",()=>new Chart(radarChart,{type:"radar",data:{labels:["Macro F1","Micro F1","Precision","Recall","AUC"],
+  datasets:RM.map(m=>({label:m.name,data:[m.macro_f1,m.micro_f1,m.precision,m.recall,m.auc],borderColor:RC[m.name],backgroundColor:RC[m.name]+"22",pointBackgroundColor:RC[m.name],borderWidth:2,pointRadius:3}))},
+  options:{scales:{r:{min:70,max:100,ticks:{stepSize:10,backdropColor:"transparent",callback:v=>v+"%"},grid:{color:"rgba(255,255,255,.08)"},angleLines:{color:"rgba(255,255,255,.08)"},pointLabels:{color:"#D5D9E4",font:{size:12,weight:600}}}},
+   plugins:{legend:{position:"bottom"},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw}%`}}}}}));
+
+/* ---- model table ---- */
+const mins=s=>s<60?s+" s":(s/60).toFixed(1)+" min";
+modelBody.innerHTML=M.map(m=>`<tr${m.name==="Linear SVM"?' class="best"':""}><td>${m.name==="Linear SVM"?"<b>Linear SVM</b>":m.name}</td><td>${m.macro_f1.toFixed(1)} ± ${m.macro_f1_sd.toFixed(1)}</td><td>${m.precision.toFixed(1)} ± ${m.precision_sd.toFixed(1)}</td><td>${m.recall.toFixed(1)} ± ${m.recall_sd.toFixed(1)}</td><td>${m.auc.toFixed(1)}</td><td>${m.hamming.toFixed(3)}</td><td>${mins(m.secs)}</td></tr>`).join("");
+
+/* ---- dot plot per type ---- */
+const P=T.perType,LO=65,HI=100,pos=v=>((Math.max(LO,v)-LO)/(HI-LO)*100).toFixed(2)+"%";
+const rowsDP=P.types.map((t,i)=>{const lr=P.models["Logistic Regression"][i],sv=P.models["Linear SVM"][i],rf=P.models["Random Forest"][i];
+  return {t,share:P.share[i],lr,sv,rf,best:Math.max(lr,sv,rf),gap:Math.max(lr,sv,rf)-Math.min(lr,sv,rf)}});
+function drawDots(by){
+  const r=[...rowsDP].sort((a,b)=>by==="share"?b.share-a.share:by==="gap"?b.gap-a.gap:b.sv-a.sv);
+  const ticks=[65,70,75,80,85,90,95,100].map(v=>`<span style="left:${pos(v)}">${v}</span>`).join("");
+  dots.innerHTML=`<div class="axis"><span>Type</span><span>Share</span><div class="ticks">${ticks}</div><span style="text-align:right">Best</span></div>`+
+   r.map(d=>{const mn=Math.min(d.lr,d.sv,d.rf),mx=d.best;
+    return `<div class="drow" title="${d.t}: SVM ${d.sv}%, LogReg ${d.lr}%, RF ${d.rf}%"><span class="name">${d.t}</span><span class="share"><i style="--s:${d.share}"></i>${d.share}%</span>
+     <div class="track"><span class="span" style="left:${pos(mn)};width:calc(${pos(mx)} - ${pos(mn)})"></span>
+     <span class="dot" style="left:${pos(d.rf)};background:${GREY}"></span><span class="dot" style="left:${pos(d.lr)};background:${BLUE}"></span><span class="dot" style="left:${pos(d.sv)};background:${AMBER}"></span></div>
+     <span class="best">${mx.toFixed(1)}</span></div>`}).join("")}
+drawDots("f1");
+document.querySelectorAll("#sortChips button").forEach(b=>b.addEventListener("click",()=>{press("#sortChips",b);drawDots(b.dataset.s)}));
+
+/* ---- slope chart Thai -> English ---- */
+(function(){const W=460,H=270,x1=120,x2=340,y=v=>30+(90-v)/(90-60)*(H-70);const C={"Logistic Regression":BLUE,"Linear SVM":AMBER};
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Slope chart: macro F1 drops from about 84 to 67 percent after translation">`;
+  [60,70,80,90].forEach(v=>s+=`<line x1="${x1}" x2="${x2}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.07)"/><text x="${x1-14}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#9AA3BD">${v}%</text>`);
+  s+=`<text x="${x1}" y="${H-12}" text-anchor="middle" font-size="14" font-weight="700" fill="#F1F2F5">Thai</text><text x="${x2}" y="${H-12}" text-anchor="middle" font-size="14" font-weight="700" fill="#F1F2F5">English</text>`;
+  T.thaiEn.forEach((r,i)=>{const a=r["Thai macro F1 %"],b=r["English macro F1 %"],c=C[r.Model],dy=i?-8:10;
+    s+=`<line x1="${x1}" y1="${y(a)}" x2="${x2}" y2="${y(b)}" stroke="${c}" stroke-width="3"/><circle cx="${x1}" cy="${y(a)}" r="6" fill="${c}"/><circle cx="${x2}" cy="${y(b)}" r="6" fill="${c}"/>
+    <text x="${x2+12}" y="${y(b)+dy+4}" font-size="13" font-weight="700" fill="${c}">${b}%</text><text x="${x1-14}" y="${y(a)-dy*0-12+i*0}" text-anchor="end" font-size="0"></text>`});
+  const a0=T.thaiEn[0]["Thai macro F1 %"],a1=T.thaiEn[1]["Thai macro F1 %"];
+  s+=`<text x="${x1+10}" y="${y(Math.max(a0,a1))-14}" font-size="13" font-weight="700" fill="#F1F2F5">84–85%</text>`;
+  const d=Math.round((T.thaiEn[0]["Difference (English - Thai)"]+T.thaiEn[1]["Difference (English - Thai)"])/2);
+  s+=`<text x="${(x1+x2)/2+18}" y="${y(76)+4}" font-size="22" font-style="italic" font-weight="700" fill="#FF4747">${d} pts</text></svg>`;
+  s+=`<div class="legend2" style="margin-top:8px"><span><i style="background:${AMBER}"></i>Linear SVM</span><span><i style="background:${BLUE}"></i>Logistic Regression</span></div>`;
+  slope.innerHTML=s})();
+
+/* ---- keywords ---- */
+const kc=document.getElementById("kwChips"),types=Object.keys(T.keywords);
+function kw(t){kwBox.innerHTML=T.keywords[t].map((w,i)=>`<li style="animation-delay:${i*40}ms">${w}</li>`).join("");kc.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.t===t))}
+kc.innerHTML=types.map(t=>`<button type="button" data-t="${t}" aria-pressed="false">${t}</button>`).join("");kc.querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>kw(b.dataset.t)));kw("Street lighting");
+
+/* ---- rain over time ---- */
+const RW=T.rainWeekly;let rc;
+function rainData(y){const idx=RW.w.map((w,i)=>i).filter(i=>y==="all"||RW.w[i].startsWith(y));return{l:idx.map(i=>RW.w[i]),r:idx.map(i=>RW.rain[i]),f:idx.map(i=>RW.flood[i])}}
+whenSeen("rainChart",()=>{const d=rainData("all");const g=rainChart.getContext("2d").createLinearGradient(0,0,0,400);g.addColorStop(0,"rgba(77,171,247,.45)");g.addColorStop(1,"rgba(77,171,247,0)");
+  rc=new Chart(rainChart,{data:{labels:d.l,datasets:[
+  {type:"line",label:"Flooding complaints / day",data:d.f,borderColor:BLUE,backgroundColor:g,fill:true,pointRadius:0,pointHoverRadius:4,tension:.35,borderWidth:2,yAxisID:"y"},
+  {type:"bar",label:"Rain mm / day",data:d.r,backgroundColor:"rgba(154,163,189,.35)",yAxisID:"y1",barPercentage:1,categoryPercentage:.9}]},
+  options:{interaction:{mode:"index",intersect:false},plugins:{tooltip:{callbacks:{title:c=>"Week of "+c[0].label,label:c=>`${c.dataset.label}: ${c.raw.toFixed(1)}`}}},
+  scales:{x:{grid:{display:false},ticks:{maxTicksLimit:9,maxRotation:0,callback:function(v){const s=this.getLabelForValue(v);const m=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][+s.slice(5,7)-1];return m+" "+s.slice(2,4)}}},
+   y:{position:"left",beginAtZero:true,title:{display:true,text:"Flooding complaints / day"}},y1:{position:"right",beginAtZero:true,grid:{drawOnChartArea:false},title:{display:true,text:"Rain mm / day"}}}}})});
+document.querySelectorAll("#yearChips button").forEach(b=>b.addEventListener("click",()=>{press("#yearChips",b);if(!rc)return;const d=rainData(b.dataset.y);
+  rc.data.labels=d.l;rc.data.datasets[0].data=d.f;rc.data.datasets[1].data=d.r;rc.update()}));
+
+/* ---- scatter rain vs flood ---- */
+whenSeen("scatterChart",()=>new Chart(scatterChart,{type:"scatter",data:{datasets:[{data:RW.w.map((w,i)=>({x:RW.rain[i],y:RW.flood[i],w})),backgroundColor:"rgba(77,171,247,.55)",pointRadius:4,pointHoverRadius:6}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`Week of ${c.raw.w}: ${c.raw.x.toFixed(1)} mm rain, ${c.raw.y.toFixed(0)} complaints/day`}}},
+  scales:{x:{beginAtZero:true,title:{display:true,text:"Rain mm / day (weekly average)"}},y:{beginAtZero:true,title:{display:true,text:"Flooding complaints / day"}}}}}));
+
+/* ---- seasonal index: diverging from 1.0 ---- */
+const S=T.season;let sc,SEA="Rainy";
+function seasonRows(s){return S.rows.map((r,i)=>({r,v:S[s][i]})).sort((a,b)=>b.v-a.v)}
+function setSeasonNote(s){const r=seasonRows(s),top=r[0],low=r[r.length-1],f=v=>(v>=1?"+":"")+Math.round((v-1)*100)+"%";
+  document.getElementById("seasonNote").innerHTML=`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span>${s} season: <b>${top.r} ${f(top.v)}</b> (most above normal), <b>${low.r} ${f(low.v)}</b> (least).</span>`}
+const oneLine={id:"one",afterDraw(ch){const x=ch.scales.x.getPixelForValue(1),a=ch.chartArea,g=ch.ctx;g.save();g.strokeStyle="#F1F2F5";g.lineWidth=1.5;g.beginPath();g.moveTo(x,a.top);g.lineTo(x,a.bottom);g.stroke();
+  g.fillStyle="#F1F2F5";g.font="600 11px 'Chakra Petch',sans-serif";g.textAlign="center";g.fillText("normal = 1.0",x,a.top-6);g.restore()}};
+function seasonDS(s){const r=seasonRows(s);return{labels:r.map(x=>x.r),data:r.map(x=>[1,x.v]),col:r.map(x=>x.r==="All complaints"?"#F1F2F5":x.v>=1?AMBER:"#5C6A94")}}
+whenSeen("seasonChart",()=>{const d=seasonDS(SEA);sc=new Chart(seasonChart,{type:"bar",plugins:[oneLine],data:{labels:d.labels,datasets:[{data:d.data,backgroundColor:d.col,borderRadius:2,barPercentage:.75}]},
+  options:{indexAxis:"y",layout:{padding:{top:14}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const v=c.raw[1];return `${v.toFixed(2)} (${v>=1?"+":""}${Math.round((v-1)*100)}% vs. normal)`}}}},
+  scales:{x:{min:.7,max:1.2,ticks:{stepSize:.1}},y:{grid:{display:false},ticks:{color:"#D5D9E4"}}}}})});
+setSeasonNote(SEA);
+document.querySelectorAll("#seasonChips button").forEach(b=>b.addEventListener("click",()=>{press("#seasonChips",b);SEA=b.dataset.s;setSeasonNote(SEA);if(!sc)return;const d=seasonDS(SEA);
+  sc.data.labels=d.labels;sc.data.datasets[0].data=d.data;sc.data.datasets[0].backgroundColor=d.col;sc.update()}));
+
+/* ---- hour x weekday heat + margins ---- */
+const H=T.hourWeek,max=Math.max(...H.m.flat()),hg=document.getElementById("hgrid"),tip=document.getElementById("htip");
+let h='<span></span>'+Array.from({length:24},(_,i)=>`<span class="hh">${i%3===0?i:""}</span>`).join("");
+H.days.forEach((d,r)=>{h+=`<span class="hl">${d}</span>`+H.m[r].map((v,c)=>{const t=v/max;return `<span class="c" data-d="${d}" data-h="${c}" data-v="${v}" style="background:rgba(255,${Math.round(194-120*t)},${Math.round(61-40*t)},${(0.08+0.92*t).toFixed(2)})"></span>`}).join("")});
+hg.innerHTML=h;
+hg.addEventListener("mouseover",e=>{const c=e.target.closest(".c");if(c)tip.textContent=`${c.dataset.d} ${String(c.dataset.h).padStart(2,"0")}:00 – ${Number(c.dataset.v).toLocaleString("en-US")} complaints`});
+const dt=H.m.map(r=>r.reduce((a,b)=>a+b,0)),dmax=Math.max(...dt);
+dayt.innerHTML=dt.map((v,i)=>`<div title="${H.days[i]}: ${v.toLocaleString("en-US")}"><i style="--w:${(v/dmax).toFixed(3)}"></i>${Math.round(v/1000)}k</div>`).join("");
+const avg=rows=>Array.from({length:24},(_,c)=>Math.round(rows.reduce((a,r)=>a+H.m[r][c],0)/rows.length));
+whenSeen("hourChart",()=>new Chart(hourChart,{type:"line",data:{labels:Array.from({length:24},(_,i)=>String(i).padStart(2,"0")+":00"),datasets:[
+  {label:"Weekday (avg)",data:avg([0,1,2,3,4]),borderColor:AMBER,pointRadius:0,tension:.35,borderWidth:2},
+  {label:"Weekend (avg)",data:avg([5,6]),borderColor:BLUE,pointRadius:0,tension:.35,borderWidth:2,borderDash:[5,4]}]},
+  options:{interaction:{mode:"index",intersect:false},plugins:{legend:{position:"top",align:"end"}},scales:{x:{grid:{display:false},ticks:{maxTicksLimit:8,maxRotation:0}},y:{beginAtZero:true,ticks:{callback:v=>v/1000+"k"}}}}}));
+
+/* ---- where: mini map + biggest hotspots ---- */
+const HS=T.hotspots,TC={Road:ORANGE,Flooding:BLUE};
+whenSeen("miniMap",()=>new Chart(miniMap,{type:"bubble",data:{datasets:["Road","Flooding"].map(t=>({label:t,data:HS.filter(h=>h.type===t).map(h=>({x:h.lon,y:h.lat,r:Math.max(4,Math.sqrt(h.n)*1.1),d:h.district,n:h.n,f:h.fix})),backgroundColor:TC[t]+"AA",borderColor:TC[t],borderWidth:1}))},
+  options:{plugins:{legend:{position:"top",align:"end"},tooltip:{callbacks:{label:c=>`${c.dataset.label} · ${c.raw.d}: ${c.raw.n} complaints, median fix ${c.raw.f} days`}}},
+  scales:{x:{title:{display:true,text:"Longitude (west → east)"},ticks:{callback:v=>v.toFixed(2)}},y:{title:{display:true,text:"Latitude (south → north)"},ticks:{callback:v=>v.toFixed(2)}}}}}));
+const topHS=[...HS].sort((a,b)=>b.n-a.n).slice(0,12);const seen={};topHS.forEach(h=>{seen[h.district]=(seen[h.district]||0)+1;h.lab=h.district+(seen[h.district]>1?" ("+seen[h.district]+")":"")});
+whenSeen("hsBar",()=>new Chart(hsBar,{type:"bar",data:{labels:topHS.map(h=>h.lab),datasets:[{data:topHS.map(h=>h.n),backgroundColor:topHS.map(h=>TC[h.type]),borderRadius:2,barPercentage:.75}]},
+  options:{indexAxis:"y",layout:{padding:{right:36}},plugins:{legend:{display:false},vlabels:{fmt:v=>v},tooltip:{callbacks:{label:c=>`${topHS[c.dataIndex].type}: ${c.raw} complaints, median fix ${topHS[c.dataIndex].fix} days`}}},
+  scales:{x:{beginAtZero:true},y:{grid:{display:false},ticks:{color:"#D5D9E4"}}}}}));
+</script>
+</body>
+</html>

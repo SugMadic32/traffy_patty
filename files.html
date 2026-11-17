@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Files | Traffy Fondue Insight | Ctrl C + Ctrl V</title>
+<meta name="description" content="ICT324 data mining project: Files.">
+<meta name="theme-color" content="#0E1324">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body class="sub">
+<header class="bar solid" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html" class="on" aria-current="page"><span>Files</span></a></nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+<div class="phero">
+  <div class="wrap">
+    <p class="crumb">Team Ctrl C + Ctrl V · ICT324</p>
+    <h1>Files</h1>
+    <p class="psub">Proposals, results, charts, data and code. Click to preview.</p>
+    <nav class="crisp" aria-label="CRISP-DM steps"><a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="map.html"><b>Step 6</b>Deployment</a></nav>
+  </div>
+</div>
+<main class="wrap page" id="main">
+
+<section class="lib">
+  <div class="head"><span class="plate">01</span><h2>File library</h2></div>
+  <p class="lead">Everything in one place. Click a file to preview it on this page.</p>
+  <div class="chips" id="fileChips" role="group" aria-label="Filter files" style="margin-top:18px">
+    <button type="button" data-f="all" aria-pressed="true">All</button><button type="button" data-f="prop" aria-pressed="false">Proposals</button><button type="button" data-f="res" aria-pressed="false">Results</button><button type="button" data-f="chart" aria-pressed="false">Charts</button><button type="button" data-f="data" aria-pressed="false">Data</button><button type="button" data-f="code" aria-pressed="false">Code</button>
+  </div>
+  <div class="files" id="fileGrid">
+    <a class="file" href="proposal-m2.pdf" data-tag="prop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>1-page proposal</b><span>PDF, Milestone 2, current plan</span></div></a>
+    <a class="file" href="proposal.pdf" data-tag="prop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>First proposal</b><span>PDF, Milestone 1, earlier plan</span></div></a>
+    <a class="file" href="results/00_summary.txt" data-tag="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><div><b>Milestone 3 summary</b><span>Text, all key numbers</span></div></a>
+    <a class="file" href="results/06_text_model_results_table.csv" data-tag="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Text model results</b><span>CSV, 10-fold CV table</span></div></a>
+    <a class="file" href="results/08_f1_per_problem_type.csv" data-tag="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>F1 per problem type</b><span>CSV, all models</span></div></a>
+    <a class="file" href="results/09_thai_vs_english.csv" data-tag="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Thai vs. English</b><span>CSV, translation test</span></div></a>
+    <a class="file" href="results/13_top_hotspots.csv" data-tag="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Top hotspots</b><span>CSV, Road and Flooding</span></div></a>
+    <a class="file" href="results/15_seasonal_index.csv" data-tag="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Seasonal index</b><span>CSV, per type</span></div></a>
+    <a class="file" href="results/02_cleaning_log.csv" data-tag="res"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Cleaning log</b><span>CSV, every step</span></div></a>
+    <a class="file" href="results/12_hotspot_map.html" data-tag="chart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Hotspot map</b><span>Interactive map</span></div></a>
+    <a class="file" href="results/20_rain_vs_flooding.png" data-tag="chart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><b>Rain and flooding chart</b><span>PNG</span></div></a>
+    <a class="file" href="results/16_seasonal_index.png" data-tag="chart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><b>Seasonal index chart</b><span>PNG</span></div></a>
+    <a class="file" href="results/17_hour_weekday_heatmap.png" data-tag="chart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><b>Hour and weekday heat map</b><span>PNG</span></div></a>
+    <a class="file" href="results/14_complaints_per_month.png" data-tag="chart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><b>Complaints per month</b><span>PNG</span></div></a>
+    <a class="file" href="results/07_text_model_macro_f1.png" data-tag="chart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><div><b>Model macro F1 chart</b><span>PNG</span></div></a>
+    <a class="file" href="sample_20_rows.csv" data-tag="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Data sample</b><span>CSV, 20 rows from 2025–2026</span></div></a>
+    <a class="file" href="results/11_translated_complaints_to_check.csv" data-tag="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-10 4 10M14.5 17h5"/></svg><div><b>Translated complaints</b><span>CSV, Thai and English, 2,569 rows</span></div></a>
+    <a class="file" href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv" data-tag="data"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><div><b>Full dataset</b><span>Official Traffy CSV, 1.5M rows</span></div></a>
+    <a class="file" href="code/ICT324_M3_Traffy_Results.ipynb" data-tag="code"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><div><b>Milestone 3 code</b><span>Colab notebook (.ipynb)</span></div></a>
+  </div>
+</section>
+<section id="refs">
+  <div class="head"><span class="plate">02</span><h2>References</h2></div>
+  <ol class="refs">
+    <li>BMA Public Relations Office, "Bangkok Celebrates Digital Milestone as Traffy Fondue Resolves One Million City Complaints," Mar. 2026. <a href="https://pr-bangkok.com/?p=583017">pr-bangkok.com</a></li>
+    <li>F. Caldeira, L. Nunes and R. Ribeiro, "Classification of Public Administration Complaints," SLATE 2022, OASIcs vol. 104, 2022. doi:10.4230/OASIcs.SLATE.2022.9</li>
+    <li>A. Pongsathornwiwat and P. Kaewvichit, "Developing Multi-Label Classification Model for Improving Text Categorizing Problems a Case of Traffy* Fondue Platform," Science &amp; Technology Asia, vol. 29, no. 2, pp. 138–147, 2024. <a href="https://ph02.tci-thaijo.org/index.php/SciTechAsia/article/view/254682">ThaiJO</a></li>
+    <li>KDAI-NLP, "wangchanberta-traffy-multi," Thai language model fine-tuned for Traffy Fondue complaint types, Hugging Face. <a href="https://huggingface.co/KDAI-NLP/wangchanberta-traffy-multi">Hugging Face</a></li>
+    <li>karnjj, NonKhuna et al., "Sed-Young-Wa: A service for estimating the end of the issues submitted in the Traffy Fondue platform," GitHub repository, 2023. <a href="https://github.com/karnjj/sed-young-wa">GitHub</a></li>
+  </ol>
+</section>
+</main>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<script src="assets/chart.umd.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+
+document.querySelectorAll("#fileChips button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#fileChips button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+ const f=b.dataset.f;document.querySelectorAll("#fileGrid .file").forEach(a=>a.hidden=!(f==="all"||a.dataset.tag===f))}));
+
+</script>
+</body>
+</html>

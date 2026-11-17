@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Method | Traffy Fondue Insight | Ctrl C + Ctrl V</title>
+<meta name="description" content="ICT324 data mining project: Method.">
+<meta name="theme-color" content="#0E1324">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body class="sub">
+<header class="bar solid" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html" class="on" aria-current="page"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+<div class="phero">
+  <div class="wrap">
+    <p class="crumb">CRISP-DM step 4 · Modeling</p>
+    <h1>How it works</h1>
+    <p class="psub">The system flow from the raw file to the results, the models we compare and how we test them fairly.</p>
+    <nav class="crisp" aria-label="CRISP-DM steps"><a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html" class="on"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="map.html"><b>Step 6</b>Deployment</a></nav>
+  </div>
+</div>
+<main class="wrap page" id="main">
+
+<section>
+  <div class="head"><span class="plate">01</span><h2>System flow</h2></div>
+  <p class="lead">From the raw file to the results on this site. The dashed boxes come in Milestone 4.</p>
+  <div class="flow" style="margin-top:24px">
+    <div class="frow c3">
+      <div class="fnode src"><small>Source</small><b>Traffy Fondue CSV</b><p>1.51M complaints, official BMA open data</p></div>
+      <div class="fnode src"><small>Source</small><b>Open-Meteo rainfall</b><p>Daily rain in Bangkok, 2022–2025</p></div>
+      <div class="fnode src"><small>Source</small><b>District list</b><p>The 50 Bangkok districts in English</p></div>
+    </div>
+    <div class="fdown" aria-hidden="true"></div>
+    <div class="frow c2">
+      <div class="fnode prep"><small>Data preparation</small><b>Clean and de-duplicate</b><p>Test rows, GPS outside Bangkok and 106k copy-pasted complaints removed</p></div>
+      <div class="fnode prep"><small>Data preparation</small><b>Build features</b><p>Season, hour, weekday, GPS, fixing days, multi-label types</p></div>
+    </div>
+    <div class="fdown" aria-hidden="true"></div>
+    <div class="lanes">
+      <div class="lane"><h5>A · What (text)</h5>
+        <div class="step"><b>TF-IDF</b>character 2–4 grams, 50k features</div><div class="arr"></div>
+        <div class="step"><b>4 models</b>Baseline, Logistic Regression, Linear SVM, Random Forest</div><div class="arr"></div>
+        <div class="step"><b>10-fold stratified CV</b>same folds, seed 1992</div>
+        <div class="res"><span>Macro F1 91.5%</span></div></div>
+      <div class="lane"><h5>B · Translation</h5>
+        <div class="step"><b>NLLB-200</b>Meta's neural translator, Thai to English, on GPU</div><div class="arr"></div>
+        <div class="step"><b>English models</b>word TF-IDF, Logistic Regression and SVM</div><div class="arr"></div>
+        <div class="step"><b>Thai vs. English</b>same rows, same folds</div>
+        <div class="res"><span>85% vs 67%</span></div></div>
+      <div class="lane"><h5>C · Where (spatial)</h5>
+        <div class="step"><b>GPS points</b>Road and Flooding, 2024–2025</div><div class="arr"></div>
+        <div class="step"><b>DBSCAN</b>haversine distance, 150 m, at least 25 complaints</div><div class="arr"></div>
+        <div class="step"><b>Hotspots + heat map</b>top 15 per type, median fixing time</div>
+        <div class="res"><span>Map ready</span></div></div>
+      <div class="lane"><h5>D · When and why</h5>
+        <div class="step"><b>Monthly counts</b>per type, June 2022 – Oct 2025</div><div class="arr"></div>
+        <div class="step"><b>Seasonal index</b>per-month average, fair across seasons</div><div class="arr"></div>
+        <div class="step"><b>Rain join</b>daily rain vs. flooding, Spearman</div>
+        <div class="res"><span>rho 0.64</span></div></div>
+    </div>
+    <div class="fdown" aria-hidden="true"></div>
+    <div class="frow c3">
+      <div class="fnode plan"><small>Milestone 4</small><b>Association rules</b><p>Apriori, FP-Growth: place + time + problem</p></div>
+      <div class="fnode plan"><small>Milestone 4</small><b>Priority + forecast</b><p>Frequency × slowness; next-week XGBoost vs. last week</p></div>
+      <div class="fnode plan"><small>Milestone 4</small><b>Monitoring app</b><p>Map with season and hour slider, priority list, translate box</p></div>
+    </div>
+    <div class="fdown" aria-hidden="true"></div>
+    <div class="frow c1"><div class="fnode eval"><small>Evaluation and deployment</small><b>This website, the paper and the app</b><p>Macro F1, precision, recall, AUC, silhouette, Spearman. Results on the <a href="results.html">Results</a> and <a href="map.html">Map</a> pages.</p></div></div>
+  </div>
+  <div class="legend"><span><i style="background:#4dabf7"></i>Data source</span><span><i style="background:var(--amber)"></i>Preparation</span><span><i style="background:var(--green)"></i>Evaluation</span><span><i style="background:transparent;border-top:2px dashed var(--muted)"></i>Planned for Milestone 4</span></div>
+</section>
+<section>
+  <div class="head"><span class="plate">02</span><h2>Models and settings</h2></div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Model</th><th>Why we use it</th><th>Settings</th></tr></thead>
+      <tbody><tr><td><b>Baseline (majority)</b></td><td>Ajarn's rule: every result needs a baseline</td><td>predicts the most common value for every label</td></tr><tr><td><b>Logistic Regression</b></td><td>Simple, fast, explainable; strong text baseline</td><td>TF-IDF char 2-4, 50k features; C=4, liblinear, class_weight=balanced</td></tr><tr><td><b>Linear SVM</b></td><td>Widest margin between classes; strong on text</td><td>TF-IDF char 2-4, 50k features; C=0.5, class_weight=balanced</td></tr><tr><td><b>Random Forest</b></td><td>Many trees vote; no scaling needed</td><td>TF-IDF char 2-4, 5k features; 100 trees, min_samples_leaf=2, balanced_subsample</td></tr></tbody>
+    </table>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">03</span><h2>How we test</h2></div>
+  <div class="grid3">
+    <div class="card"><h4>10-fold stratified CV</h4><p class="note">Train on 9 parts, test on 1, ten times. Every model uses the same folds and seed 1992 (as in Lab 4).</p></div>
+    <div class="card"><h4>No leakage</h4><p class="note">Duplicates removed before splitting, and TF-IDF is fitted inside each fold only.</p></div>
+    <div class="card"><h4>Metrics</h4><p class="note">Macro F1 (main, every type counts equally), precision, recall, AUC, Hamming loss; silhouette for clusters; Spearman for rain.</p></div>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">04</span><h2>All four data mining tracks</h2></div>
+  <div class="tracks">
+    <div><b>Classification</b><span>Problem type from text</span></div>
+    <div><b>Clustering</b><span>DBSCAN hotspots</span></div>
+    <div><b>Association rules</b><span>Place + time + problem (M4)</span></div>
+    <div><b>Prediction</b><span>Next-week forecast (M4)</span></div>
+  </div>
+</section>
+</main>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<script src="assets/chart.umd.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+
+</script>
+</body>
+</html>

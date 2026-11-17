@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Progress | Traffy Fondue Insight | Ctrl C + Ctrl V</title>
+<meta name="description" content="ICT324 data mining project: Progress.">
+<meta name="theme-color" content="#0E1324">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+</head>
+<body class="sub">
+<header class="bar solid" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html" class="on" aria-current="page"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+<div class="phero">
+  <div class="wrap">
+    <p class="crumb">Team Ctrl C + Ctrl V · ICT324</p>
+    <h1>Progress</h1>
+    <p class="psub">Milestones, the issue board and the dated progress log.</p>
+    <nav class="crisp" aria-label="CRISP-DM steps"><a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="map.html"><b>Step 6</b>Deployment</a></nav>
+  </div>
+</div>
+<main class="wrap page" id="main">
+
+<section>
+  <div class="head"><span class="plate">01</span><h2>Milestones</h2></div>
+  <div class="ringrow" style="margin-bottom:40px">
+    <div class="ring" id="ring"><svg viewBox="0 0 180 180" aria-hidden="true"><defs><linearGradient id="rg" x1="0" x2="1"><stop offset="0" stop-color="#3CCB8A"/><stop offset="1" stop-color="#FFC23D"/></linearGradient></defs>
+      <circle class="bg" cx="90" cy="90" r="76"/><circle class="fg" id="ringFg" cx="90" cy="90" r="76" stroke-dasharray="477.5" stroke-dashoffset="477.5"/></svg>
+      <div class="mid"><div><b id="ringPct">0%</b><span>of board tasks done</span></div></div></div>
+    <div>
+      <p class="lead" style="margin-top:0">Two milestones finished, Milestone 3 results are in. Task status from the issue board below:</p>
+      <div class="stack" id="stack" role="img"></div>
+      <div class="legend2"><span><i style="background:#3CCB8A;border-radius:0"></i>Done <b id="cDone"></b></span><span><i style="background:#FFC23D;border-radius:0"></i>In progress <b id="cDoing"></b></span><span><i style="background:#FF4747;border-radius:0"></i>Open <b id="cOpen"></b></span></div>
+      <div class="countdown" id="countdown" style="margin-top:14px"></div>
+    </div>
+  </div>
+  <div class="mtl">
+    <div class="done"><div class="dot">M1</div><b>Pitch</b><span>14–16 Oct · done</span></div>
+    <div class="done"><div class="dot">M2</div><b>Lock the data</b><span>27 / 29 Oct · done</span></div>
+    <div class="now"><div class="dot">M3</div><b>First results</b><span>10 / 12 Nov · now</span></div>
+    <div><div class="dot">M4</div><b>Paper and app</b><span>24 / 26 Nov</span></div>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">02</span><h2>Issue board</h2></div>
+  <div class="board">
+    <div class="col open"><h4>Open <span>4</span></h4>
+      <div class="issue"><b>Association rules</b><p>Apriori / FP-Growth on district, season, hour band and rain.</p><em>M4</em></div>
+      <div class="issue"><b>Priority score and forecast</b><p>Frequency × slowness; next-week XGBoost vs. last week.</p><em>M4</em></div>
+      <div class="issue"><b>Monitoring app</b><p>Map with season and hour slider, priority list, translate box.</p><em>M4</em></div>
+      <div class="issue"><b>Paper and references</b><p>IEEE 4–6 pages, 10–15 references (5 so far).</p><em>M4</em></div>
+    </div>
+    <div class="col doing"><h4>In progress <span>4</span></h4>
+      <div class="issue"><b>Flooding in the text model</b><p>Fell out of the top 10 types after cleaning; force it in.</p><em>Fix found</em></div>
+      <div class="issue"><b>Full translation</b><p>Only 2,569 of 30,000 translated (GPU was off).</p><em>Re-run on GPU</em></div>
+      <div class="issue"><b>Time-based test</b><p>Train 2022–2024, test on 2025 months the model never saw.</p><em>Before M4</em></div>
+      <div class="issue"><b>ROC curves and errors</b><p>ROC per type; read the most confident wrong answers in English.</p><em>Before M4</em></div>
+    </div>
+    <div class="col done"><h4>Done <span>6</span></h4>
+      <div class="issue"><b>Data cleaned</b><p>1,511,479 → 1,508,776 clean rows; 106k duplicates out of the text set.</p></div>
+      <div class="issue"><b>Baseline + 3 text models</b><p>Best Linear SVM, macro F1 91.5 ± 0.3%.</p></div>
+      <div class="issue"><b>Thai to English translation</b><p>NLLB-200 on GPU; Thai 85% vs. English 67%.</p></div>
+      <div class="issue"><b>Hotspot map</b><p>DBSCAN, Road and Flooding.</p></div>
+      <div class="issue"><b>Seasons and rain</b><p>Seasonal index; rain link rho 0.64.</p></div>
+      <div class="issue"><b>Project page</b><p>Live since Milestone 2, updated each milestone.</p></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="head"><span class="plate">03</span><h2>Progress log</h2></div>
+  <div class="laps">
+    <article class="lap"><div class="stub"><small>Log entry</small><time datetime="2026-11-09">9 Nov 2026</time></div><div class="body">
+      <div class="row"><span class="st done">Done</span><p>Cleaned 1.51M rows and removed 106k duplicate complaints. Baseline plus Logistic Regression, Linear SVM and Random Forest with 10-fold stratified CV (best macro F1 91.5%). Translated complaints with NLLB-200, built the hotspot map, the seasonal index and the rain link (0.64). Split the site into pages.</p></div>
+      <div class="row"><span class="st stuck">Stuck</span><p>Flooding dropped out of the top 10 types; the translation test covered 2,569 complaints only.</p></div>
+      <div class="row"><span class="st next">Next</span><p>Force Flooding in, translate all 30,000 on GPU, time-based test, ROC curves, then association rules, priority score, forecast and the app.</p></div></div></article>
+    <article class="lap"><div class="stub"><small>Log entry</small><time datetime="2026-10-28">28 Oct 2026</time></div><div class="body">
+      <div class="row"><span class="st done">Done</span><p>Updated the plan after Ajarn's feedback: text labelling first, then where and when mining, association rules and a forecast, in a monitoring app. Wrote the 1-page M2 proposal and published this page.</p></div>
+      <div class="row"><span class="st stuck">Stuck</span><p>Our team cannot read Thai.</p></div>
+      <div class="row"><span class="st next">Next</span><p>Clean the data and train the baseline text model.</p></div></div></article>
+    <article class="lap"><div class="stub"><small>Log entry</small><time datetime="2026-10-15">15 Oct 2026</time></div><div class="body">
+      <div class="row"><span class="st done">Done</span><p>Downloaded the full CSV and checked all 16 columns. Empty categories jump to 57% in November 2025 and 100% after that.</p></div>
+      <div class="row"><span class="st stuck">Stuck</span><p>The last update time is not always the real fix date.</p></div>
+      <div class="row"><span class="st next">Next</span><p>Decide how to handle extreme fixing times.</p></div></div></article>
+    <article class="lap"><div class="stub"><small>Log entry</small><time datetime="2026-10-14">14–16 Oct 2026</time></div><div class="body">
+      <div class="row"><span class="st done">Done</span><p>Milestone 1 consult: pitched the idea with a printed proposal, three slides and a 20-row data sample.</p></div>
+      <div class="row"><span class="st next">Next</span><p>Lock the data and publish the project page by 29 October.</p></div></div></article>
+  </div>
+</section>
+</main>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<script src="assets/chart.umd.js"></script>
+<script src="assets/data.js"></script>
+<script src="assets/site.js"></script>
+<script>
+const n=k=>document.querySelectorAll(".col."+k+" .issue").length,D=n("done"),G=n("doing"),O=n("open"),A=D+G+O;
+cDone.textContent=D;cDoing.textContent=G;cOpen.textContent=O;
+stack.setAttribute("aria-label",`${D} done, ${G} in progress, ${O} open`);
+stack.innerHTML=`<i style="width:${D/A*100}%;background:#3CCB8A"></i><i style="width:${G/A*100}%;background:#FFC23D"></i><i style="width:${O/A*100}%;background:#FF4747"></i>`;
+const pct=Math.round(D/A*100);
+whenSeen("ring",()=>{ringFg.style.strokeDashoffset=477.5*(1-pct/100);const t0=performance.now();(function s(t){const p=Math.min(1,(t-t0)/1400);ringPct.textContent=Math.round(pct*(1-Math.pow(1-p,3)))+"%";if(p<1)requestAnimationFrame(s)})(t0)});
+const days=d=>Math.ceil((new Date(d+"T09:00:00+07:00")-Date.now())/864e5);
+const M4=[["2026-11-24","Milestone 4 (24 Nov)"]];
+countdown.innerHTML=M4.map(([d,l])=>{const k=days(d);return `<div><b>${k>0?k:k===0?"Today":"Done"}</b><span>${k>0?"days to ":""}${l}</span></div>`}).join("")+`<div><b>${A}</b><span>tasks on the board</span></div>`;
+</script>
+</body>
+</html>
