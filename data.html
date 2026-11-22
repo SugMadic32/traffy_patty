@@ -17,7 +17,7 @@
 <header class="bar solid" id="bar">
   <div class="bar-in">
     <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
-    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html" class="on" aria-current="page"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html" class="on" aria-current="page"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="app.html"><span>App</span></a><a href="translate.html"><span>Translate</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
   </div>
   <div class="meter" id="meter"></div>
 </header>
@@ -34,8 +34,8 @@
 <section>
   <div class="head"><span class="plate">01</span><h2>The dataset</h2></div>
   <div class="kpis">
-    <div class="kpi"><b>1,511,479</b><span>raw complaints downloaded</span><div class="kmini"><div class="kbar"><i style="--w:1;background:#9AA3BD"></i></div></div></div>
-    <div class="kpi"><b>99.8%</b><span>rows kept after cleaning (1,508,776)</span><div class="kmini"><div class="kbar"><i style="--w:.998"></i></div></div></div>
+    <div class="kpi"><b>1,526,532</b><span>raw complaints downloaded</span><div class="kmini"><div class="kbar"><i style="--w:1;background:#9AA3BD"></i></div></div></div>
+    <div class="kpi"><b>99.8%</b><span>rows kept after cleaning (1,523,828)</span><div class="kmini"><div class="kbar"><i style="--w:.998"></i></div></div></div>
     <div class="kpi"><b>50</b><span>Bangkok districts matched</span><div class="kmini"><div class="kbar"><i style="--w:1;background:#3CCB8A"></i></div></div></div>
     <div class="kpi"><b>7.0 days</b><span>median fixing time (finished cases)</span><div class="kmini kcols" title="Quarter fixed within 1.8 days, half within 7.0, three quarters within 35.5"><div><i style="--h:.25"></i>1.8 d</div><div class="top"><i style="--h:.5"></i>7.0 d</div><div><i style="--h:1"></i>35.5 d</div></div></div>
   </div>
@@ -43,7 +43,7 @@
     <table>
       <tr><th scope="row">Source</th><td>Traffy Fondue open data, Bangkok Metropolitan Administration. <a href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv">Official CSV</a></td></tr>
       <tr><th scope="row">Real data</th><td>Real complaints from Bangkok residents; no names or phone numbers</td></tr>
-      <tr><th scope="row">Period</th><td>June 2022 to October 2025 = labelled training data. From November 2025 the category is empty.</td></tr>
+      <tr><th scope="row">Period</th><td>June 2022 to October 2025 = labelled training data. From November 2025 the category is empty (our model fills it). Data up to 22 November 2026.</td></tr>
       <tr><th scope="row">Extra data</th><td>Daily Bangkok rainfall (Open-Meteo), district list (50 districts). Seasons: hot Mar–May, rainy Jun–Oct, cool Nov–Feb.</td></tr>
     </table>
   </div>
@@ -58,7 +58,7 @@
         <tr><td><code>type</code></td><td>Category chosen by the user, can be several</td><td>Training labels</td></tr>
         <tr><td><code>coords</code></td><td>GPS point (longitude, latitude)</td><td>Hotspots, map</td></tr>
         <tr><td><code>district</code> <code>subdistrict</code></td><td>Area name</td><td>District analysis</td></tr>
-        <tr><td><code>organization</code></td><td>Office in charge</td><td>Workload (M4)</td></tr>
+        <tr><td><code>organization</code></td><td>Office in charge</td><td>Not used yet (future work)</td></tr>
         <tr><td><code>timestamp</code> <code>last_activity</code></td><td>Reported and last updated</td><td>Season, hour, fixing time</td></tr>
         <tr><td><code>state</code> <code>count_reopen</code> <code>photo</code></td><td>Finished or not, times reopened, photo sent</td><td>Filters, extra features</td></tr>
       </tbody>
@@ -74,24 +74,24 @@
     <div class="card"><h4>Empty category by year</h4><p class="note">Share of rows with no problem type.</p><div class="chartbox tall"><canvas id="emptyChart" aria-label="Bar chart of empty category share by year"></canvas></div>
       <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>2026 is 100% empty.</b> That is why we train a text model: it fills in the missing type from the message.</span></p></div>
   </div>
-  <div class="card" style="margin-top:16px"><h4>How long fixing takes</h4><p class="note">Finished cases, report to last update, log scale (each step is about 10 times longer). 1,159,225 cases.</p>
+  <div class="card" style="margin-top:16px"><h4>How long fixing takes</h4><p class="note">Finished cases, report to last update, log scale (each step is about 10 times longer). 1,173,491 cases.</p>
     <div class="boxs" id="boxs"></div>
-    <div class="legend2" style="margin-top:4px"><span><i style="background:#FFC23D;border-radius:0"></i>Median 7.0 days</span><span><i style="background:rgba(255,194,61,.3);border:1px solid #FFC23D;border-radius:0"></i>Middle half: 1.8 to 35.5 days</span><span><i style="background:#4dabf7;border-radius:0;transform:rotate(45deg)"></i>Average 39.7 days</span></div>
-    <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Half are fixed within a week, but a long tail of slow cases pulls the average up to 40 days.</b> So we report the median, not the average. 76,503 odd times (below 0 or over 365 days) are left out.</span></p>
+    <div class="legend2" style="margin-top:4px"><span><i style="background:#FFC23D;border-radius:0"></i>Median 7.0 days</span><span><i style="background:rgba(255,194,61,.3);border:1px solid #FFC23D;border-radius:0"></i>Middle half: 1.8 to 35.5 days</span><span><i style="background:#4dabf7;border-radius:0;transform:rotate(45deg)"></i>Average 39.5 days</span></div>
+    <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Half are fixed within a week, but a long tail of slow cases pulls the average up to 40 days.</b> So we report the median, not the average. 76,850 odd times (below 0 or over 365 days) are left out.</span></p>
   </div>
 </section>
 <section id="cleaning">
   <div class="head"><span class="plate">04</span><h2>Data preparation</h2></div>
   <p class="lead">Every cleaning step, with rows kept and rows removed.</p>
-  <div class="funnel" style="margin-top:22px"><div class="frow2"><div class="lbl"><b>Start</b><span>Raw download</span></div><div class="fbar"><i style="--w:1.0000"></i><em>1,511,479</em></div></div><div class="frow2"><div class="lbl"><b>Drop duplicate tickets</b><span>Same complaint counted twice</span></div><div class="fbar"><i style="--w:1.0000"></i><em>1,511,479</em></div></div><div class="frow2"><div class="lbl"><b>Drop rows without a report time</b><span>Cannot place them in time</span></div><div class="fbar"><i style="--w:1.0000"></i><em>1,511,479</em></div></div><div class="frow2"><div class="lbl"><b>Drop early test records (before June 2022)</b><span>System launched in mid-2022; earlier rows are tests</span></div><div class="fbar"><i style="--w:0.9985"></i><em>1,509,205<small>−2,274</small></em></div></div><div class="frow2"><div class="lbl"><b>Drop GPS points outside Bangkok</b><span>Wrong or missing location</span></div><div class="fbar"><i style="--w:0.9982"></i><em>1,508,776<small>−429</small></em></div></div><div class="frow2"><div class="lbl"><b>Check district names</b><span>20 other spellings/areas kept but excluded from district analysis</span></div><div class="fbar"><i style="--w:0.9982"></i><em>1,508,776</em></div></div><div class="frow2"><div class="lbl"><b>Text set: remove copy-pasted duplicates</b><span>So the same text cannot be in train and test</span></div><div class="fbar"><i style="--w:0.9278"></i><em>labelled text set<small>−106,458</small></em></div></div></div>
+  <div class="funnel" style="margin-top:22px"><div class="frow2"><div class="lbl"><b>Start</b><span>Raw download</span></div><div class="fbar"><i style="--w:1.0000"></i><em>1,526,532</em></div></div><div class="frow2"><div class="lbl"><b>Drop duplicate tickets</b><span>Same complaint counted twice</span></div><div class="fbar"><i style="--w:1.0000"></i><em>1,526,532</em></div></div><div class="frow2"><div class="lbl"><b>Drop rows without a report time</b><span>Cannot place them in time</span></div><div class="fbar"><i style="--w:1.0000"></i><em>1,526,532</em></div></div><div class="frow2"><div class="lbl"><b>Drop early test records (before June 2022)</b><span>System launched in mid-2022; earlier rows are tests</span></div><div class="fbar"><i style="--w:0.9985"></i><em>1,524,258<small>−2,274</small></em></div></div><div class="frow2"><div class="lbl"><b>Drop GPS points outside Bangkok</b><span>Wrong or missing location</span></div><div class="fbar"><i style="--w:0.9982"></i><em>1,523,828<small>−430</small></em></div></div><div class="frow2"><div class="lbl"><b>Check district names</b><span>20 other spellings/areas kept but excluded from district analysis</span></div><div class="fbar"><i style="--w:0.9982"></i><em>1,523,828</em></div></div><div class="frow2"><div class="lbl"><b>Text set: remove copy-pasted duplicates</b><span>So the same text cannot be in train and test</span></div><div class="fbar"><i style="--w:0.9278"></i><em>labelled text set<small>−110,474</small></em></div></div></div>
   <div class="grid3" style="margin-top:26px">
     <div class="card"><h4>New columns</h4><p class="note">Season, month, weekday, hour (Bangkok time), latitude and longitude from GPS, fixing days.</p></div>
-    <div class="card"><h4>Outliers</h4><p class="note">76,503 fixing times below 0 or above 365 days are flagged and left out of speed analysis. A quarter of complaints are fixed within 1.8 days.</p></div>
+    <div class="card"><h4>Outliers</h4><p class="note">76,850 fixing times below 0 or above 365 days are flagged and left out of speed analysis. A quarter of complaints are fixed within 1.8 days.</p></div>
     <div class="card"><h4>Text cleaning</h4><p class="note">Links and extra spaces removed. Thai text is read as short character pieces (2–4 letters), so no Thai word splitter is needed.</p></div>
   </div>
 </section>
 </main>
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
 <script src="assets/chart.umd.js"></script>
 <script src="assets/data.js"></script>
 <script src="assets/site.js"></script>

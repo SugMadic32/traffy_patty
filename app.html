@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Monitoring app | Traffy Fondue Insight | Ctrl C + Ctrl V</title>
+<meta name="description" content="ICT324 data mining project: monitoring app for Bangkok complaints by district, problem type, season and hour.">
+<meta name="theme-color" content="#0E1324">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M12 4h8l7 22H5z' fill='%23FFC23D'/%3E%3Cpath d='M10 13h12M8 19h16' stroke='%230E1324' stroke-width='3'/%3E%3Crect x='3' y='26' width='26' height='3' fill='%23FFC23D'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/pages.css">
+<link rel="stylesheet" href="assets/leaflet/leaflet.css">
+</head>
+<body class="sub">
+<header class="bar solid" id="bar">
+  <div class="bar-in">
+    <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="app.html" class="on" aria-current="page"><span>App</span></a><a href="translate.html"><span>Translate</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+  </div>
+  <div class="meter" id="meter"></div>
+</header>
+<div class="phero">
+  <div class="wrap">
+    <p class="crumb">CRISP-DM step 6 · Deployment</p>
+    <h1>Monitoring app</h1>
+    <p class="psub">Pick a problem, a season and a time of day. See which districts need help first, what to expect next week, and read complaints in English.</p>
+    <nav class="crisp" aria-label="CRISP-DM steps"><a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="app.html" class="on"><b>Step 6</b>Deployment</a></nav>
+  </div>
+</div>
+<main class="wrap page" id="main">
+
+<section id="board">
+  <div class="head"><span class="plate">01</span><h2>City board</h2></div>
+  <p class="appstat" id="appStat">Loading data…</p>
+  <div class="ctrl card">
+    <div class="crow"><span class="clab">Problem</span><div class="chips sm" id="fType" role="group" aria-label="Problem type"></div></div>
+    <div class="crow"><span class="clab">Season</span><div class="chips sm" id="fSeason" role="group" aria-label="Season"></div></div>
+    <div class="crow"><span class="clab">Time</span><div class="chips sm" id="fBand" role="group" aria-label="Time of day"></div></div>
+    <div class="crow"><span class="clab">Colour</span><div class="chips sm" id="fColor" role="group" aria-label="Colour districts by">
+      <button type="button" data-v="count" aria-pressed="true">Complaints</button><button type="button" data-v="priority" aria-pressed="false">Priority</button><button type="button" data-v="change" aria-pressed="false">Next week change</button></div>
+      <label class="tog"><input type="checkbox" id="lGi" checked> Gi* hot cells</label><label class="tog"><input type="checkbox" id="lDb"> DBSCAN hotspots</label></div>
+  </div>
+  <div class="appgrid">
+    <div class="card mapcard"><div id="amap" role="region" aria-label="Map of Bangkok districts"></div>
+      <div class="mlegend" id="mLegend"></div></div>
+    <aside class="card side">
+      <div class="sumrow"><div><b id="sTotal">–</b><span id="sTotalLab">type labels</span></div><div><b id="sTop">–</b><span>top district</span></div><div><b id="sTop5">–</b><span>share of top 5</span></div></div>
+      <h4 style="margin-top:18px">Districts, most first</h4><p class="note">Click a row or a circle.</p>
+      <ol class="drank" id="dRank"></ol>
+    </aside>
+  </div>
+  <div class="card detail" id="detail"><p class="note">Click a district on the map or in the list to see its details.</p></div>
+</section>
+
+<section id="priority">
+  <div class="head"><span class="plate">02</span><h2>Act first: priority list</h2></div>
+  <p class="lead">Last 12 months of labelled data. <b>Priority = 40% how often + 40% how slow + 20% left unfinished</b>, each ranked 0–1 across all district × problem pairs. The weights are our choice, so every part is shown.</p>
+  <div class="tbl" style="margin-top:16px;max-width:none"><table><thead><tr><th>#</th><th>District</th><th>Problem</th><th>Per month</th><th>Median fix (days)</th><th>Unfinished %</th><th>Reopened %</th><th>Priority</th></tr></thead><tbody id="pBody"></tbody></table></div>
+  <p class="note" id="pNote" style="margin-top:8px"></p>
+</section>
+
+<section id="forecast">
+  <div class="head"><span class="plate">03</span><h2>Next week</h2></div>
+  <div class="grid2">
+    <div class="card"><h4>Which model forecasts best?</h4><p class="note">Trained on weeks before 2025, tested on 2025 onward. MAE = average miss, in complaints per district per week (lower is better).</p>
+      <div class="chartbox"><canvas id="fcChart" aria-label="Forecast error per model"></canvas></div><p class="insight" id="fcNote"></p></div>
+    <div class="card"><h4 id="fcTitle">Forecast for next week</h4><p class="note">All complaints per district. Bar = forecast (red = more than last week, green = fewer). White mark = last week.</p>
+      <div class="chartbox tall"><canvas id="nwChart" aria-label="Next week forecast per district"></canvas></div></div>
+  </div>
+</section>
+
+<section id="rules">
+  <div class="head"><span class="plate">04</span><h2>Patterns that go together</h2></div>
+  <p class="lead">Association rules (FP-Growth). <b>Lift 1.5</b> = this happens 50% more often than by chance. <b>Confidence</b> = how often the "then" follows the "if". Follows the Problem filter above.</p>
+  <div class="rules" id="rulesBox"></div>
+</section>
+
+<section id="reader">
+  <div class="head"><span class="plate">05</span><h2>Complaint reader</h2></div>
+  <p class="lead">Real complaints, machine translated from Thai (NLLB-200). Compare the type the resident chose with the type our model reads from the text.</p>
+  <div class="rbar"><input type="search" id="rSearch" placeholder="Search English text, e.g. light, water, motorbike" aria-label="Search complaints">
+    <div class="chips sm" id="rAgree" role="group" aria-label="Agreement"><button type="button" data-v="all" aria-pressed="true">All</button><button type="button" data-v="no" aria-pressed="false">Model disagrees</button><button type="button" data-v="yes" aria-pressed="false">Model agrees</button></div></div>
+  <p class="note" id="rCount"></p>
+  <div class="rlist" id="rList"></div>
+</section>
+</main>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
+<script src="assets/chart.umd.js"></script>
+<script src="assets/leaflet/leaflet.js"></script>
+<script src="assets/site.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

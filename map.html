@@ -17,7 +17,7 @@
 <header class="bar solid" id="bar">
   <div class="bar-in">
     <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
-    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html" class="on" aria-current="page"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html" class="on" aria-current="page"><span>Map</span></a><a href="app.html"><span>App</span></a><a href="translate.html"><span>Translate</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
   </div>
   <div class="meter" id="meter"></div>
 </header>
@@ -35,13 +35,14 @@
   <div class="head"><span class="plate">01</span><h2>Hotspot map</h2></div>
   <div class="kpis" style="margin-bottom:22px">
     <div class="kpi"><b>30</b><span>hotspots found by DBSCAN (Road and Flooding)</span><div class="kmini kpair"><div><span>Road</span><div class="kbar"><i id="kRoad" style="--w:.5;background:#FF8A3D"></i></div><em id="nRoad"></em></div><div><span>Flooding</span><div class="kbar"><i id="kFlood" style="--w:.5;background:#4dabf7"></i></div><em id="nFlood"></em></div></div></div>
-    <div class="kpi"><b>198</b><span>complaints in the biggest hotspot (Watthana, Road)</span></div>
-    <div class="kpi"><b>19.7 days</b><span>slowest median fix (Khlong Toei, Road)</span></div>
+    <div class="kpi"><b>184</b><span>complaints in the biggest hotspot (Watthana, Road)</span></div>
+    <div class="kpi"><b>450</b><span>Gi* hot cells (1 km) at 95%+: 201 Road, 249 Flooding</span></div>
     <div class="kpi"><b>150 m</b><span>hotspot radius; at least 25 complaints each</span></div>
   </div>
-  <p class="lead">Road (orange) and Flooding (blue) hotspots, 2024 – October 2025. Use the layer menu to switch heat maps; click a circle for details.</p>
-  <iframe class="mapframe" src="results/12_hotspot_map.html" title="Interactive hotspot map of Bangkok" loading="lazy" style="margin-top:20px"></iframe>
-  <p style="margin-top:10px"><a href="results/12_hotspot_map.html" target="_blank" rel="noopener">Open the map in a new tab</a></p>
+  <div class="chips" id="mapChips" role="group" aria-label="Map"><button type="button" data-m="results/12_hotspot_map.html" aria-pressed="true">DBSCAN hotspots + heat map</button><button type="button" data-m="results/25_gistar_map.html" aria-pressed="false">Gi* hot cells (tested)</button></div>
+  <p class="lead" id="mapLead">Road (orange) and Flooding (blue) hotspots, 2024 – October 2025. Use the layer menu to switch heat maps; click a circle for details.</p>
+  <iframe class="mapframe" id="mapFrame" src="results/12_hotspot_map.html" title="Interactive hotspot map of Bangkok" loading="lazy" style="margin-top:20px"></iframe>
+  <p style="margin-top:10px"><a href="results/12_hotspot_map.html" id="mapNew" target="_blank" rel="noopener">Open the map in a new tab</a> · For filters by type, season and hour, use the <a href="app.html">monitoring app</a>.</p>
 </section>
 <section>
   <div class="head"><span class="plate">02</span><h2>Top hotspots</h2></div>
@@ -52,15 +53,15 @@
   </div>
 </section>
 <section>
-  <div class="head"><span class="plate">03</span><h2>How DBSCAN finds hotspots</h2></div>
+  <div class="head"><span class="plate">03</span><h2>How we find and test hotspots</h2></div>
   <div class="steps3">
     <div><b>01</b><h4>Measure real distance</h4><p>GPS points are compared with the haversine distance, the real distance on the Earth.</p></div>
     <div><b>02</b><h4>Find dense groups</h4><p>A hotspot needs at least 25 complaints within 150 m of each other. Lonely points are marked as noise.</p></div>
-    <div><b>03</b><h4>Describe each hotspot</h4><p>Size, centre, most common district and median fixing time. Checked with the silhouette score.</p></div>
+    <div><b>03</b><h4>Test it with Gi*</h4><p>Getis-Ord Gi* checks each 1 km cell with its neighbours against the city average. z above 1.96 = real hotspot at 95%, above 2.58 at 99%. About 8 in 10 hot cells pass the stricter 99% level (164 of 201 Road, 202 of 249 Flooding).</p></div>
   </div>
 </section>
 </main>
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
 <script src="assets/chart.umd.js"></script>
 <script src="assets/data.js"></script>
 <script src="assets/site.js"></script>
@@ -81,6 +82,11 @@ function show(t){cur=t;document.querySelectorAll("#hsChips button").forEach(b=>b
  body.innerHTML=rows.map((h,i)=>`<tr><td>${i+1}</td><td>${h.district}</td><td class="db"><i style="--w:${(h.n/mn).toFixed(3)};background:${C[t]}"></i><span>${h.n}</span></td><td class="db"><i style="--w:${(h.fix/mf).toFixed(3)};background:${h.fix>m?RED:GREEN}"></i><span>${h.fix}</span></td></tr>`).join("");
  hc.data.datasets=[{data:rows.map(h=>({x:h.n,y:h.fix,r:Math.max(5,Math.sqrt(h.n)/1.2),d:h.district})),backgroundColor:rows.map(h=>(h.fix>m?C[t]:C[t]+"66")),borderColor:C[t],borderWidth:1}];hc.update()}
 document.querySelectorAll("#hsChips button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.t)));show("Road");
+
+const LEADS={"results/12_hotspot_map.html":"Road (orange) and Flooding (blue) hotspots, 2024 – October 2025. Use the layer menu to switch heat maps; click a circle for details.",
+ "results/25_gistar_map.html":"Getis-Ord Gi* hot cells (1 km). Darker = 99% sure, lighter = 95%. Switch Road and Flooding in the layer menu; click a cell for its z-score."};
+document.querySelectorAll("#mapChips button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#mapChips button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  mapFrame.src=b.dataset.m;mapNew.href=b.dataset.m;mapLead.textContent=LEADS[b.dataset.m]}));
 </script>
 </body>
 </html>

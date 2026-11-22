@@ -17,7 +17,7 @@
 <header class="bar solid" id="bar">
   <div class="bar-in">
     <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
-    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html" class="on" aria-current="page"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html" class="on" aria-current="page"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="app.html"><span>App</span></a><a href="translate.html"><span>Translate</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
   </div>
   <div class="meter" id="meter"></div>
 </header>
@@ -53,7 +53,7 @@
     <div class="frow c3">
       <div class="fnode prep"><small>Our project</small><b>Label from text</b><p>Read the complaint text and give the right type, even when it is wrong or empty.</p></div>
       <div class="fnode prep"><small>Our project</small><b>Where and when</b><p>Find hotspots on the map, and the seasons, hours and rain linked with each problem.</p></div>
-      <div class="fnode prep"><small>Our project</small><b>Where to focus</b><p>A priority list and a monitoring app for the city (Milestone 4).</p></div>
+      <div class="fnode prep"><small>Our project</small><b>Where to focus</b><p>A priority list and a <a href="app.html">monitoring app</a> for the city.</p></div>
     </div>
   </div>
 </section>
@@ -64,17 +64,17 @@
     <table>
       <thead><tr><th>Sub-question</th><th>What we ask</th><th>Data mining track</th><th>Status</th></tr></thead>
       <tbody>
-        <tr><td><b>RQ1 What</b></td><td>Which model labels the problem type from text best? Does it still work after Thai to English translation?</td><td>Classification</td><td>First results (M3)</td></tr>
-        <tr><td><b>RQ2 Where</b></td><td>Which districts and spots are hotspots per problem type? Which spots keep coming back?</td><td>Clustering (DBSCAN)</td><td>First results (M3)</td></tr>
-        <tr><td><b>RQ3 When and why</b></td><td>Which season and hour have the most complaints? Is flooding linked with heavy rain?</td><td>Time patterns, correlation</td><td>First results (M3)</td></tr>
-        <tr><td><b>RQ4 Focus</b></td><td>Which place + time + problem go together, and where should the city focus next week?</td><td>Association rules, prediction</td><td>Milestone 4</td></tr>
+        <tr><td><b>RQ1 What</b></td><td>Which model labels the problem type from text best? Does it still work after Thai to English translation?</td><td>Classification</td><td>Done: 91.4%, Thai 91% vs English 73%</td></tr>
+        <tr><td><b>RQ2 Where</b></td><td>Which districts and spots are hotspots per problem type? Are they real or chance?</td><td>Clustering (DBSCAN, HDBSCAN), Gi*</td><td>Done: 450 tested hot cells</td></tr>
+        <tr><td><b>RQ3 When and why</b></td><td>Which season and hour have the most complaints? Is flooding linked with heavy rain?</td><td>Time patterns, correlation</td><td>Done: rho 0.64, Flooding 1.50 in rainy season</td></tr>
+        <tr><td><b>RQ4 Focus</b></td><td>Which place + time + problem go together, and where should the city focus next week?</td><td>Association rules, prediction</td><td>Done: rules, priority list, forecast</td></tr>
       </tbody>
     </table>
   </div>
 </section>
 <section>
   <div class="head"><span class="plate">04</span><h2>Ajarn's feedback</h2></div>
-  <div class="callout"><b>Milestone 1 feedback.</b> The data is interesting, but our team cannot read Thai. Build an app to monitor problems and fixing speed by area and type, and label problem types from text because user-chosen categories can be wrong.<br><br><b>What we did:</b> text labelling became the main task, we machine-translate the Thai to English, and we added spatial and time mining that will feed the monitoring app.</div>
+  <div class="callout"><b>Milestone 1 feedback.</b> The data is interesting, but our team cannot read Thai. Build an app to monitor problems and fixing speed by area and type, and label problem types from text because user-chosen categories can be wrong.<br><br><b>What we did:</b> text labelling became the main task, we machine-translate the Thai to English, and we added spatial and time mining that feed the <a href="app.html">monitoring app</a>; the model also fills the 577,101 empty types.</div>
 </section>
 <section>
   <div class="head"><span class="plate">05</span><h2>Related work</h2></div>
@@ -85,7 +85,7 @@
         <tr><td>[1]</td><td>BMA, 2026</td><td>Traffy Fondue resolved one million complaints</td><td>Context and scale</td></tr>
         <tr><td>[2]</td><td>Caldeira et al., 2022</td><td>Machine learning sorts public complaints (Portugal)</td><td>Same idea on Thai city data</td></tr>
         <tr><td>[3]</td><td>Pongsathornwiwat &amp; Kaewvichit, 2024</td><td>Multi-label text model for Traffy "Others" complaints</td><td>Translation test, spatial and time mining</td></tr>
-        <tr><td>[4]</td><td>KDAI-NLP WangchanBERTa model</td><td>Thai language model fine-tuned on Traffy types</td><td>Baseline to compare with (M4)</td></tr>
+        <tr><td>[4]</td><td>KDAI-NLP WangchanBERTa model</td><td>Thai language model fine-tuned on Traffy types</td><td>Future work: compare with our model</td></tr>
         <tr><td>[5]</td><td>Sed-Young-Wa, 2023</td><td>One regression model for fixing time (error about 20)</td><td>Several models, hotspots, priority score</td></tr>
       </tbody>
     </table>
@@ -93,7 +93,7 @@
   <p style="margin-top:12px;color:var(--muted);font-size:15px">Full references are on the <a href="files.html#refs">Files</a> page. The final paper will cite at least 10 recent papers.</p>
 </section>
 </main>
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
 <script src="assets/chart.umd.js"></script>
 <script src="assets/data.js"></script>
 <script src="assets/site.js"></script>

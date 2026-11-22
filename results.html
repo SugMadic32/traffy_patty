@@ -17,7 +17,7 @@
 <header class="bar solid" id="bar">
   <div class="bar-in">
     <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
-    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html" class="on" aria-current="page"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html" class="on" aria-current="page"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="app.html"><span>App</span></a><a href="translate.html"><span>Translate</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
   </div>
   <div class="meter" id="meter"></div>
 </header>
@@ -34,10 +34,10 @@
 <section id="key">
   <div class="head"><span class="plate">01</span><h2>Key results</h2></div>
   <div class="kpis">
-    <div class="kpi"><b>91.5%</b><span>macro F1, Linear SVM (best text model)</span>
-      <div class="kmini"><div class="kbar"><i style="--w:.915"></i></div></div></div>
-    <div class="kpi"><b>3.8&times;</b><span>flooding complaints on heavy-rain days (20 mm+)</span>
-      <div class="kmini kpair"><div><span>Heavy rain</span><div class="kbar"><i style="--w:1;background:#4dabf7"></i></div><em>153</em></div><div><span>Other days</span><div class="kbar"><i style="--w:.264;background:#9AA3BD"></i></div><em>40</em></div></div></div>
+    <div class="kpi"><b>91.4%</b><span>macro F1, Linear SVM (best text model); 91.5% on 2025</span>
+      <div class="kmini"><div class="kbar"><i style="--w:.914"></i></div></div></div>
+    <div class="kpi"><b>3.9&times;</b><span>flooding complaints on heavy-rain days (20 mm+)</span>
+      <div class="kmini kpair"><div><span>Heavy rain</span><div class="kbar"><i style="--w:1;background:#4dabf7"></i></div><em>153</em></div><div><span>Other days</span><div class="kbar"><i style="--w:.259;background:#9AA3BD"></i></div><em>40</em></div></div></div>
     <div class="kpi"><b>0.64</b><span>Spearman link, daily rain vs. flooding complaints</span>
       <div class="kmini"><div class="kbar"><i style="--w:.64;background:#4dabf7"></i></div></div></div>
     <div class="kpi"><b>1.07</b><span>rainy-season index, the busiest season</span>
@@ -47,7 +47,7 @@
 
 <section id="models">
   <div class="head"><span class="plate">02</span><h2>What: text models</h2></div>
-  <p class="lead">30,000 complaints, 10 problem types, 10-fold stratified cross-validation. Hover any chart to read the numbers.</p>
+  <p class="lead">30,000 complaints, 11 problem types (Flooding included), 10-fold stratified cross-validation. Hover any chart to read the numbers.</p>
   <div class="grid2" style="margin-top:20px">
     <div class="card"><div class="cardhead"><div><h4>Model comparison</h4><p class="note">Mean of 10 folds. The white whisker is ± 1 std.</p></div>
       <div class="chips sm" id="metricChips" role="group" aria-label="Metric"><button type="button" data-k="macro_f1" aria-pressed="true">Macro F1</button><button type="button" data-k="precision" aria-pressed="false">Precision</button><button type="button" data-k="recall" aria-pressed="false">Recall</button><button type="button" data-k="auc" aria-pressed="false">AUC</button></div></div>
@@ -55,26 +55,26 @@
       <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Every model beats the baseline by far.</b> The baseline guesses "no" for every type, so its F1 is 0.</span></p></div>
     <div class="card"><h4>Model profile</h4><p class="note">Five scores on one picture. Bigger shape = better model. Scale starts at 70%.</p>
       <div class="chartbox"><canvas id="radarChart" aria-label="Radar chart of five scores for three models"></canvas></div>
-      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Random Forest is careful but misses a lot:</b> best precision (91.7%), worst recall (76.1%).</span></p></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Random Forest is careful but misses a lot:</b> best precision (92.8%), worst recall (73.6%).</span></p></div>
   </div>
   <div class="tbl" style="margin-top:16px;max-width:none">
     <table><thead><tr><th>Model</th><th>Macro F1 %</th><th>Precision %</th><th>Recall %</th><th>AUC %</th><th>Hamming loss</th><th>Train time</th></tr></thead><tbody id="modelBody"></tbody></table>
   </div>
-  <p class="callout" style="margin-top:16px"><b>Linear SVM wins, and it is also fast.</b> It is the best on macro F1 and the quickest of the three real models. The ± is small (0.3), so the result is stable across the 10 folds.</p>
+  <p class="callout" style="margin-top:16px"><b>Linear SVM wins, and it is also fast.</b> It is the best on macro F1 and the quickest of the three real models (about 6 minutes for 10 folds). The ± is small (0.3), so the result is stable across the 10 folds.</p>
 
   <h3>F1 per problem type</h3>
   <div class="card" style="margin-top:14px">
     <div class="cardhead"><div class="legend2"><span><i style="background:#FFC23D"></i>Linear SVM</span><span><i style="background:#4dabf7"></i>Logistic Regression</span><span><i style="background:#9AA3BD"></i>Random Forest</span></div>
       <div class="chips sm" id="sortChips" role="group" aria-label="Sort"><button type="button" data-s="f1" aria-pressed="true">Sort by F1</button><button type="button" data-s="share" aria-pressed="false">Sort by share</button><button type="button" data-s="gap" aria-pressed="false">Sort by gap</button></div></div>
     <div class="dots" id="dots"></div>
-    <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Road and Safety are easiest; Signs and Drainage are hardest.</b> The long grey line shows Random Forest falls far behind on General complaint (69%) and Traffic (74%).</span></p>
+    <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Road and Safety are easiest; Signs and Drainage are hardest.</b> The long grey line shows Random Forest falls far behind on General complaint (63%) and Traffic (71%). Flooding is back at 92.6%.</span></p>
   </div>
 
   <h3>Thai vs. English</h3>
   <div class="grid2" style="margin-top:14px">
-    <div class="card slope"><h4>What translation costs</h4><p class="note">Same models, same folds, 2,569 machine-translated complaints.</p>
+    <div class="card slope"><h4>What translation costs</h4><p class="note">Same models, same folds, all 30,000 complaints machine-translated.</p>
       <div id="slope"></div>
-      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>About 17 points lost in translation.</b> We keep Thai for the model and use English only so our team can read and check it.</span></p></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>About 18 points lost in translation.</b> We keep Thai for the model and use English only so our team can read and check it.</span></p></div>
     <div class="card"><h4>What the model reads</h4><p class="note">Top 10 English words for each type, strongest first. Pick a type.</p>
       <div class="chips sm" id="kwChips" role="group" aria-label="Problem type"></div><ol class="rank" id="kwBox"></ol></div>
   </div>
@@ -89,8 +89,8 @@
     <div class="card"><h4>Heavy-rain days</h4><p class="note">Average flooding complaints per day.</p>
       <div class="vs" id="vs">
         <div class="r"><b>Heavy rain<small>20 mm or more</small></b><div class="bar"><i style="--w:1;background:#4dabf7"></i><em>153</em></div></div>
-        <div class="r"><b>Other days<small>under 20 mm</small></b><div class="bar lo"><i style="--w:.264;background:#3A4466"></i><em>40</em></div></div>
-        <div class="r"><b>Difference</b><div class="mult">3.8&times;</div></div>
+        <div class="r"><b>Other days<small>under 20 mm</small></b><div class="bar lo"><i style="--w:.259;background:#3A4466"></i><em>40</em></div></div>
+        <div class="r"><b>Difference</b><div class="mult">3.9&times;</div></div>
       </div></div>
     <div class="card"><h4>Rain vs. complaints, every week</h4><p class="note">Each dot is one week. The upward cloud = the link (Spearman rho 0.64).</p>
       <div class="chartbox"><canvas id="scatterChart" aria-label="Scatter of weekly rain and flooding complaints"></canvas></div></div>
@@ -116,19 +116,53 @@
     <div class="card"><h4>Biggest hotspots</h4><p class="note">Complaints in each hotspot. Colour = type.</p>
       <div class="chartbox tall"><canvas id="hsBar" aria-label="Biggest hotspots"></canvas></div></div>
   </div>
-  <p class="callout" style="margin-top:16px"><b>Road hotspots sit in the old centre</b> (Watthana, Phra Nakhon); <b>flooding hotspots are on the east side</b> (Prawet, Bang Na, Saphan Sung). <a href="map.html">Open the full map</a>.</p>
+  <p class="callout" style="margin-top:16px"><b>Road hotspots sit in the old centre</b> (Watthana, Phra Nakhon); <b>flooding hotspots are mostly in the east</b> (Prawet, Bang Kapi, Suan Luang, Phra Khanong). <a href="map.html">Open the full map</a>.</p>
+</section>
+
+<section id="final">
+  <div class="head"><span class="plate">05</span><h2>Final run: test, fill, rules, priority</h2></div>
+  <p class="lead">New at Milestone 4. Each part answers one question Ajarn or a city office would ask.</p>
+  <div class="grid2" style="margin-top:20px">
+    <div class="card"><h4>Does it work on new months?</h4><p class="note">Linear SVM. Grey = 10-fold CV, amber = trained before 2025 and tested on Jan–Oct 2025.</p>
+      <div class="chartbox tall"><canvas id="timeChart" aria-label="F1 per type, cross-validation vs 2025 test"></canvas></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>No drop: 91.4% in CV, 91.5% on 2025.</b> The model is not just remembering old complaints, so it can label new ones.</span></p></div>
+    <div class="card"><h4>ROC curves</h4><p class="note">Out-of-fold scores, one line per type. Top left corner = perfect.</p>
+      <a class="fig" href="results/22_roc_curves.png" style="display:block;margin-top:6px"><img src="results/22_roc_curves.png" alt="ROC curves for 11 problem types, all close to the top left corner, AUC between 99.2 and 99.8 percent" loading="lazy" style="width:100%;height:auto;background:#fff"></a>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>AUC 99.2–99.8% for every type.</b> Lowest: Obstruction and Road, the most mixed-up types.</span></p></div>
+  </div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card"><h4>Filling the empty types</h4><p class="note">577,101 complaints had no type (all of 2026). Our model reads their text and gives one.</p>
+      <div class="chartbox tall"><canvas id="fillChart" aria-label="Predicted types for complaints with no type"></canvas></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Now every recent complaint has a type</b>, so the app can show 2026 too. Road is still the biggest (25%).</span></p></div>
+    <div class="card"><h4>Are the hotspots real? (Getis-Ord Gi*)</h4><p class="note">Each 1 km cell is tested against the city average with its neighbours. z above 1.96 = hot at 95%.</p>
+      <div class="vs" id="giVs" style="margin-top:14px"></div>
+      <div class="tbl" style="margin-top:16px;max-width:none"><table><thead><tr><th>Method</th><th>Clusters</th><th>Noise %</th><th>Silhouette</th></tr></thead><tbody id="clBody"></tbody></table></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>The old town is the strongest hotspot</b> for both Road and Flooding (Samphanthawong z = 16.5). HDBSCAN finds 52 smaller groups where DBSCAN finds 4 tight ones.</span></p>
+      <p style="margin-top:12px"><a class="btn ghost" href="results/25_gistar_map.html" id="giBtn"><span>Open the Gi* map</span></a></p></div>
+  </div>
+  <h3>Patterns that go together (FP-Growth)</h3>
+  <p class="lead">Lift 3 = this pair happens 3 times more often than by chance. <a href="app.html#rules">All rules in the app</a>.</p>
+  <div class="rules" id="rulesBox" style="margin-top:14px"></div>
+  <div class="grid2" style="margin-top:22px">
+    <div class="card"><h4>Act first: priority score</h4><p class="note">Last 12 months. 40% how often + 40% how slow + 20% unfinished, each ranked 0–1.</p>
+      <div class="tbl" style="max-width:none;margin-top:10px"><table><thead><tr><th>#</th><th>District</th><th>Problem</th><th>Per month</th><th>Fix days</th><th>Score</th></tr></thead><tbody id="priBody"></tbody></table></div></div>
+    <div class="card"><h4>Next-week forecast</h4><p class="note">Complaints per district per week. Trained before 2025, tested on 2025 onward. Lower MAE = better. Whisker = ± 1 std over weeks.</p>
+      <div class="chartbox"><canvas id="fcChart" aria-label="Forecast error for four models"></canvas></div>
+      <p class="insight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg><span><b>Linear Regression wins (MAE 32.0)</b>, about 13% better than "same as last week" (36.8). The last 4 weeks matter most. Spikes like floods are still hard.</span></p>
+      <p style="margin-top:12px"><a class="btn ghost" href="app.html#forecast"><span>Next week per district</span></a></p></div>
+  </div>
 </section>
 
 <section id="next">
-  <div class="head"><span class="plate">05</span><h2>What works, what does not, how we fix it</h2></div>
+  <div class="head"><span class="plate">06</span><h2>What works, limits, future work</h2></div>
   <div class="wwn">
-    <div><b class="ok">Working</b><p>Cleaning pipeline, text models far above the baseline, a strong rain link for flooding, clear road and flooding hotspots.</p></div>
-    <div><b class="no">Not yet</b><p>Flooding dropped out of the top 10 text types after cleaning; the Thai vs. English test covered 2,569 complaints only (GPU was off).</p></div>
-    <div><b class="fix">Fix next</b><p>Always include Flooding, translate all 30,000 complaints on GPU, add a time-based test (train 2022–24, test 2025), ROC curves, association rules, priority score, forecast and the app.</p></div>
+    <div><b class="ok">Working</b><p>Text model at 91% on new months, all empty types filled, Gi*-tested hotspots, clear rain and season links, rules, a priority list and a forecast that beats both baselines.</p></div>
+    <div><b class="no">Limits</b><p>English translation loses about 18 points; last update is not always the real fix date; the forecast misses sudden spikes; priority weights are our choice.</p></div>
+    <div><b class="fix">Future work</b><p>A Thai language model (WangchanBERTa), rain forecasts inside the weekly forecast, fixing-speed prediction with SHAP, and testing the app with district offices.</p></div>
   </div>
 </section>
 </main>
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
 <script src="assets/chart.umd.js"></script>
 <script src="assets/data.js"></script>
 <script src="assets/site.js"></script>
@@ -179,15 +213,15 @@ drawDots("f1");
 document.querySelectorAll("#sortChips button").forEach(b=>b.addEventListener("click",()=>{press("#sortChips",b);drawDots(b.dataset.s)}));
 
 /* ---- slope chart Thai -> English ---- */
-(function(){const W=460,H=270,x1=120,x2=340,y=v=>30+(90-v)/(90-60)*(H-70);const C={"Logistic Regression":BLUE,"Linear SVM":AMBER};
+(function(){const W=460,H=270,x1=120,x2=340,y=v=>30+(95-v)/(95-65)*(H-70);const C={"Logistic Regression":BLUE,"Linear SVM":AMBER};
   let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Slope chart: macro F1 drops from about 84 to 67 percent after translation">`;
-  [60,70,80,90].forEach(v=>s+=`<line x1="${x1}" x2="${x2}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.07)"/><text x="${x1-14}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#9AA3BD">${v}%</text>`);
+  [65,75,85,95].forEach(v=>s+=`<line x1="${x1}" x2="${x2}" y1="${y(v)}" y2="${y(v)}" stroke="rgba(255,255,255,.07)"/><text x="${x1-14}" y="${y(v)+4}" text-anchor="end" font-size="11" fill="#9AA3BD">${v}%</text>`);
   s+=`<text x="${x1}" y="${H-12}" text-anchor="middle" font-size="14" font-weight="700" fill="#F1F2F5">Thai</text><text x="${x2}" y="${H-12}" text-anchor="middle" font-size="14" font-weight="700" fill="#F1F2F5">English</text>`;
   T.thaiEn.forEach((r,i)=>{const a=r["Thai macro F1 %"],b=r["English macro F1 %"],c=C[r.Model],dy=i?-8:10;
     s+=`<line x1="${x1}" y1="${y(a)}" x2="${x2}" y2="${y(b)}" stroke="${c}" stroke-width="3"/><circle cx="${x1}" cy="${y(a)}" r="6" fill="${c}"/><circle cx="${x2}" cy="${y(b)}" r="6" fill="${c}"/>
     <text x="${x2+12}" y="${y(b)+dy+4}" font-size="13" font-weight="700" fill="${c}">${b}%</text><text x="${x1-14}" y="${y(a)-dy*0-12+i*0}" text-anchor="end" font-size="0"></text>`});
   const a0=T.thaiEn[0]["Thai macro F1 %"],a1=T.thaiEn[1]["Thai macro F1 %"];
-  s+=`<text x="${x1+10}" y="${y(Math.max(a0,a1))-14}" font-size="13" font-weight="700" fill="#F1F2F5">84–85%</text>`;
+  s+=`<text x="${x1+10}" y="${y(Math.max(a0,a1))-14}" font-size="13" font-weight="700" fill="#F1F2F5">${Math.min(a0,a1)}–${Math.max(a0,a1)}%</text>`;
   const d=Math.round((T.thaiEn[0]["Difference (English - Thai)"]+T.thaiEn[1]["Difference (English - Thai)"])/2);
   s+=`<text x="${(x1+x2)/2+18}" y="${y(76)+4}" font-size="22" font-style="italic" font-weight="700" fill="#FF4747">${d} pts</text></svg>`;
   s+=`<div class="legend2" style="margin-top:8px"><span><i style="background:${AMBER}"></i>Linear SVM</span><span><i style="background:${BLUE}"></i>Logistic Regression</span></div>`;
@@ -254,6 +288,34 @@ const topHS=[...HS].sort((a,b)=>b.n-a.n).slice(0,12);const seen={};topHS.forEach
 whenSeen("hsBar",()=>new Chart(hsBar,{type:"bar",data:{labels:topHS.map(h=>h.lab),datasets:[{data:topHS.map(h=>h.n),backgroundColor:topHS.map(h=>TC[h.type]),borderRadius:2,barPercentage:.75}]},
   options:{indexAxis:"y",layout:{padding:{right:36}},plugins:{legend:{display:false},vlabels:{fmt:v=>v},tooltip:{callbacks:{label:c=>`${topHS[c.dataIndex].type}: ${c.raw} complaints, median fix ${topHS[c.dataIndex].fix} days`}}},
   scales:{x:{beginAtZero:true},y:{grid:{display:false},ticks:{color:"#D5D9E4"}}}}}));
+
+/* ---- final run: time test, fill, Gi*, rules, priority, forecast ---- */
+const TT=T.timeTestType,cvSvm=Object.fromEntries(T.perType.types.map((t,i)=>[t,T.perType.models["Linear SVM"][i]]));
+whenSeen("timeChart",()=>new Chart(timeChart,{type:"bar",data:{labels:TT.types,datasets:[
+  {label:"10-fold CV",data:TT.types.map(t=>cvSvm[t]),backgroundColor:"rgba(154,163,189,.55)",borderRadius:2},
+  {label:"2025 test",data:TT["Linear SVM"],backgroundColor:AMBER,borderRadius:2}]},
+  options:{indexAxis:"y",plugins:{legend:{position:"top",align:"end"},tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw}%`}}},
+  scales:{x:{min:80,max:100,ticks:{callback:v=>v+"%"}},y:{grid:{display:false},ticks:{color:"#D5D9E4"}}}}}));
+const FL=T.filled;
+whenSeen("fillChart",()=>new Chart(fillChart,{type:"bar",data:{labels:FL.map(r=>r.type),datasets:[{data:FL.map(r=>r["predicted complaints"]),backgroundColor:FL.map((r,i)=>r.type==="Flooding"?BLUE:i===0?AMBER:"rgba(255,194,61,.45)"),borderRadius:2,barPercentage:.75}]},
+  options:{indexAxis:"y",layout:{padding:{right:46}},plugins:{legend:{display:false},vlabels:{fmt:v=>Math.round(v/1000)+"k"},tooltip:{callbacks:{label:c=>`${c.raw.toLocaleString("en-US")} complaints (${FL[c.dataIndex]["share of empty rows %"]}% of empty rows)`}}},
+  scales:{x:{ticks:{callback:v=>v/1000+"k"}},y:{grid:{display:false},ticks:{color:"#D5D9E4"}}}}}));
+(function(){const G=T.gistar,mx=Math.max(G.Road.cells,G.Flooding.cells);
+  giVs.innerHTML=["Road","Flooding"].map(t=>`<div class="r"><b>${t}<small>${G[t].c99} at 99%</small></b><div class="bar ${t==="Road"?"":"lo"}"><i style="--w:${(G[t].cells/mx).toFixed(3)};background:${t==="Road"?ORANGE:BLUE}"></i><em>${G[t].cells} hot cells</em></div></div>`).join("");
+  clBody.innerHTML=T.clusterCmp.map(r=>`<tr><td>${r.Method}</td><td>${r.clusters}</td><td>${r["noise %"]}</td><td>${r.silhouette}</td></tr>`).join("");
+  const it=x=>{const [k,v]=x.split("=");return `<span class="it">${k}: ${v}</span>`};
+  const RU=T.rules.slice(0,8),lmax=Math.max(...RU.map(r=>r.lift));
+  rulesBox.innerHTML=RU.map(r=>`<div class="rule"><div class="ifs"><b>If</b>${r.if.split(" + ").map(it).join("<span>+</span>")}<b>then</b><span class="it then">${r.then.split("=")[0]}: ${r.then.split("=")[1]}</span></div>
+    <div class="rm"><span>Lift <b>${r.lift.toFixed(2)}</b></span><span>Confidence <b>${Math.round(r.confidence*100)}%</b></span><span class="lift"><i style="--w:${(r.lift/lmax).toFixed(3)}"></i></span></div></div>`).join("");
+  priBody.innerHTML=T.priority.slice(0,10).map((r,i)=>`<tr><td>${i+1}</td><td>${r.district}</td><td>${r.type}</td><td>${r["per month"]}</td><td>${r.median_fix_days}</td><td><span class="pbar"><i style="--w:${(r.priority/100).toFixed(3)}"></i><b>${r.priority}</b></span></td></tr>`).join("");
+})();
+const FCs=T.forecast;
+const fcW={id:"fcW",afterDatasetsDraw(ch){const g=ch.ctx,x=ch.scales.x;g.save();g.strokeStyle="#F1F2F5";g.lineWidth=2;g.fillStyle="#F1F2F5";g.font="600 12px 'Chakra Petch',sans-serif";g.textBaseline="middle";
+  ch.getDatasetMeta(0).data.forEach((b,i)=>{const m=FCs[i]["MAE mean"],sd=FCs[i]["MAE std (over weeks)"],a=x.getPixelForValue(Math.max(0,m-sd)),z=x.getPixelForValue(m+sd);
+   g.beginPath();g.moveTo(a,b.y);g.lineTo(z,b.y);g.moveTo(z,b.y-5);g.lineTo(z,b.y+5);g.stroke();g.fillText(`${m} ± ${sd}`,z+8,b.y)});g.restore()}};
+whenSeen("fcChart",()=>new Chart(fcChart,{type:"bar",plugins:[fcW],data:{labels:FCs.map(r=>r.Model),datasets:[{data:FCs.map(r=>r["MAE mean"]),backgroundColor:FCs.map(r=>r.Model==="Linear Regression"?AMBER:"rgba(255,194,61,.35)"),borderRadius:2,barPercentage:.7}]},
+  options:{indexAxis:"y",layout:{padding:{right:110}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const r=FCs[c.dataIndex];return `MAE ${r["MAE mean"]} ± ${r["MAE std (over weeks)"]}, RMSE ${r.RMSE}, WAPE ${r["WAPE %"]}%`}}}},
+  scales:{x:{beginAtZero:true,title:{display:true,text:"MAE (complaints per district-week)"}},y:{grid:{display:false},ticks:{color:"#D5D9E4"}}}}}));
 </script>
 </body>
 </html>

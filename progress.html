@@ -17,7 +17,7 @@
 <header class="bar solid" id="bar">
   <div class="bar-in">
     <a class="brand" href="index.html">Ctrl C <i>+</i> Ctrl V</a>
-    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html" class="on" aria-current="page"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="app.html"><span>App</span></a><a href="translate.html"><span>Translate</span></a><a href="progress.html" class="on" aria-current="page"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
   </div>
   <div class="meter" id="meter"></div>
 </header>
@@ -38,7 +38,7 @@
       <circle class="bg" cx="90" cy="90" r="76"/><circle class="fg" id="ringFg" cx="90" cy="90" r="76" stroke-dasharray="477.5" stroke-dashoffset="477.5"/></svg>
       <div class="mid"><div><b id="ringPct">0%</b><span>of board tasks done</span></div></div></div>
     <div>
-      <p class="lead" style="margin-top:0">Two milestones finished, Milestone 3 results are in. Task status from the issue board below:</p>
+      <p class="lead" style="margin-top:0">Three milestones finished and the final run is done. Left: the talk, the paper and the submission. Task status from the issue board below:</p>
       <div class="stack" id="stack" role="img"></div>
       <div class="legend2"><span><i style="background:#3CCB8A;border-radius:0"></i>Done <b id="cDone"></b></span><span><i style="background:#FFC23D;border-radius:0"></i>In progress <b id="cDoing"></b></span><span><i style="background:#FF4747;border-radius:0"></i>Open <b id="cOpen"></b></span></div>
       <div class="countdown" id="countdown" style="margin-top:14px"></div>
@@ -47,31 +47,36 @@
   <div class="mtl">
     <div class="done"><div class="dot">M1</div><b>Pitch</b><span>14–16 Oct · done</span></div>
     <div class="done"><div class="dot">M2</div><b>Lock the data</b><span>27 / 29 Oct · done</span></div>
-    <div class="now"><div class="dot">M3</div><b>First results</b><span>10 / 12 Nov · now</span></div>
-    <div><div class="dot">M4</div><b>Paper and app</b><span>24 / 26 Nov</span></div>
+    <div class="done"><div class="dot">M3</div><b>First results</b><span>10 / 12 Nov · done</span></div>
+    <div class="now"><div class="dot">M4</div><b>Paper and app</b><span>24 / 26 Nov · now</span></div>
   </div>
 </section>
 <section>
   <div class="head"><span class="plate">02</span><h2>Issue board</h2></div>
   <div class="board">
-    <div class="col open"><h4>Open <span>4</span></h4>
-      <div class="issue"><b>Association rules</b><p>Apriori / FP-Growth on district, season, hour band and rain.</p><em>M4</em></div>
-      <div class="issue"><b>Priority score and forecast</b><p>Frequency × slowness; next-week XGBoost vs. last week.</p><em>M4</em></div>
-      <div class="issue"><b>Monitoring app</b><p>Map with season and hour slider, priority list, translate box.</p><em>M4</em></div>
-      <div class="issue"><b>Paper and references</b><p>IEEE 4–6 pages, 10–15 references (5 so far).</p><em>M4</em></div>
+    <div class="col open"><h4>Open <span>3</span></h4>
+      <div class="issue"><b>IEEE paper</b><p>4–6 pages, Word + PDF, at least 10 references (5 so far).</p><em>30 Nov</em></div>
+      <div class="issue"><b>Course Drive submission</b><p>Folder with paper, code + README (names, IDs, how to run), data link, slides.</p><em>30 Nov</em></div>
+      <div class="issue"><b>Classroom form</b><p>Each member: form, folder link, team and class evaluation.</p><em>30 Nov</em></div>
     </div>
-    <div class="col doing"><h4>In progress <span>4</span></h4>
-      <div class="issue"><b>Flooding in the text model</b><p>Fell out of the top 10 types after cleaning; force it in.</p><em>Fix found</em></div>
-      <div class="issue"><b>Full translation</b><p>Only 2,569 of 30,000 translated (GPU was off).</p><em>Re-run on GPU</em></div>
-      <div class="issue"><b>Time-based test</b><p>Train 2022–2024, test on 2025 months the model never saw.</p><em>Before M4</em></div>
-      <div class="issue"><b>ROC curves and errors</b><p>ROC per type; read the most confident wrong answers in English.</p><em>Before M4</em></div>
+    <div class="col doing"><h4>In progress <span>2</span></h4>
+      <div class="issue"><b>Slides and 10-minute talk</b><p>Live broadcast, 10 min + Q&A.</p><em>24 / 26 Nov</em></div>
+      <div class="issue"><b>Final website update</b><p>Final results, app data and translator model on this page.</p><em>Now</em></div>
     </div>
-    <div class="col done"><h4>Done <span>6</span></h4>
-      <div class="issue"><b>Data cleaned</b><p>1,511,479 → 1,508,776 clean rows; 106k duplicates out of the text set.</p></div>
-      <div class="issue"><b>Baseline + 3 text models</b><p>Best Linear SVM, macro F1 91.5 ± 0.3%.</p></div>
-      <div class="issue"><b>Thai to English translation</b><p>NLLB-200 on GPU; Thai 85% vs. English 67%.</p></div>
-      <div class="issue"><b>Hotspot map</b><p>DBSCAN, Road and Flooding.</p></div>
-      <div class="issue"><b>Seasons and rain</b><p>Seasonal index; rain link rho 0.64.</p></div>
+    <div class="col done"><h4>Done <span>14</span></h4>
+      <div class="issue"><b>Data cleaned</b><p>1,526,532 → 1,523,828 rows; 110k duplicates out of the text set.</p></div>
+      <div class="issue"><b>Baseline + 3 text models</b><p>Best Linear SVM, macro F1 91.4 ± 0.3%.</p></div>
+      <div class="issue"><b>Flooding in the text model</b><p>11 types now; Flooding F1 92.6%.</p></div>
+      <div class="issue"><b>Full translation</b><p>All 30,000 with NLLB-200; Thai 91% vs. English 73%.</p></div>
+      <div class="issue"><b>Time-based test</b><p>Train before 2025, test 2025: 91.5%, no drop.</p></div>
+      <div class="issue"><b>ROC curves and mistakes</b><p>AUC 99.2–99.8% per type; confident mistakes read in English.</p></div>
+      <div class="issue"><b>Empty types filled</b><p>577,101 complaints labelled by the model.</p></div>
+      <div class="issue"><b>Hotspots tested</b><p>DBSCAN, HDBSCAN and Getis-Ord Gi* (450 hot cells).</p></div>
+      <div class="issue"><b>Seasons and rain</b><p>Rain link rho 0.64; Flooding index 1.50 in the rainy season.</p></div>
+      <div class="issue"><b>Association rules</b><p>FP-Growth on district, season, hour, rain, type and speed.</p></div>
+      <div class="issue"><b>Priority score</b><p>District × type list, weights shown.</p></div>
+      <div class="issue"><b>Next-week forecast</b><p>Linear Regression best, MAE 32.0 ± 34.3.</p></div>
+      <div class="issue"><b>Monitoring app + translator</b><p>Map with filters, priority, forecast, rules; 30-language translator.</p></div>
       <div class="issue"><b>Project page</b><p>Live since Milestone 2, updated each milestone.</p></div>
     </div>
   </div>
@@ -79,6 +84,10 @@
 <section>
   <div class="head"><span class="plate">03</span><h2>Progress log</h2></div>
   <div class="laps">
+    <article class="lap"><div class="stub"><small>Log entry</small><time datetime="2026-11-22">22 Nov 2026</time></div><div class="body">
+      <div class="row"><span class="st done">Done</span><p>Final run on 1.52M rows: 11 types with Flooding, all 30,000 complaints translated, time-based test (91.5% on 2025), ROC curves, 577,101 empty types filled, Gi* and HDBSCAN, FP-Growth rules, priority score and a next-week forecast. Built the monitoring app and the translator page.</p></div>
+      <div class="row"><span class="st stuck">Stuck</span><p>Colab reset twice and the free GPU limit ran out. Fixed with Google Drive saving and a save point after section 12.</p></div>
+      <div class="row"><span class="st next">Next</span><p>Slides and the 10-minute talk (24 / 26 Nov), then the paper, code, data and slides in the course Drive by 30 Nov.</p></div></div></article>
     <article class="lap"><div class="stub"><small>Log entry</small><time datetime="2026-11-09">9 Nov 2026</time></div><div class="body">
       <div class="row"><span class="st done">Done</span><p>Cleaned 1.51M rows and removed 106k duplicate complaints. Baseline plus Logistic Regression, Linear SVM and Random Forest with 10-fold stratified CV (best macro F1 91.5%). Translated complaints with NLLB-200, built the hotspot map, the seasonal index and the rain link (0.64). Split the site into pages.</p></div>
       <div class="row"><span class="st stuck">Stuck</span><p>Flooding dropped out of the top 10 types; the translation test covered 2,569 complaints only.</p></div>
@@ -97,7 +106,7 @@
   </div>
 </section>
 </main>
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
 <script src="assets/chart.umd.js"></script>
 <script src="assets/data.js"></script>
 <script src="assets/site.js"></script>

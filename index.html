@@ -79,7 +79,7 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offs
 
 .track{margin-top:40px}
 .track-bar{position:relative;height:14px;background:var(--panel);border:1px solid var(--line)}
-.track-fill{position:absolute;left:0;top:0;bottom:0;width:62.5%;background:repeating-linear-gradient(90deg,var(--amber) 0 18px,#E0A82F 18px 36px)}
+.track-fill{position:absolute;left:0;top:0;bottom:0;width:87.5%;background:repeating-linear-gradient(90deg,var(--amber) 0 18px,#E0A82F 18px 36px)}
 .track-car{position:absolute;top:50%;left:62.5%;width:46px;height:22px;transform:translate(-50%,-50%)}
 .stages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:10px}
 .stages button{all:unset;cursor:pointer;padding:10px 12px 0 0;color:var(--muted);font-size:15px}
@@ -391,7 +391,7 @@ tr.best td{background:rgba(255,194,61,.08)}
 <header class="bar" id="bar">
   <div class="bar-in">
     <a class="brand" href="#home">Ctrl C <i>+</i> Ctrl V</a>
-    <nav class="nav" aria-label="Pages"><a href="index.html" class="on" aria-current="page"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
+    <nav class="nav" aria-label="Pages"><a href="index.html" class="on" aria-current="page"><span>Home</span></a><a href="problem.html"><span>Problem</span></a><a href="data.html"><span>Data</span></a><a href="method.html"><span>Method</span></a><a href="results.html"><span>Results</span></a><a href="map.html"><span>Map</span></a><a href="app.html"><span>App</span></a><a href="translate.html"><span>Translate</span></a><a href="progress.html"><span>Progress</span></a><a href="files.html"><span>Files</span></a></nav>
   </div>
   <div class="meter" id="meter"></div>
 </header>
@@ -429,7 +429,7 @@ tr.best td{background:rgba(255,194,61,.08)}
       <div class="fact"><small>Areas</small><b>50</b><span>Bangkok districts</span></div>
       <div class="fact"><small>Checked</small><b>16</b><span>columns, one by one</span></div>
     </div>
-    <p class="meta">Team <b>Ctrl C + Ctrl V</b>: Aung Myo, Aye Chan Ko, Phoo Myat May Zaw. <b>Track:</b> classification, clustering, association rules and prediction, with text and spatial mining. <b>Course:</b> ICT324 Data Mining, Rangsit University International College. <b>Last updated:</b> <time datetime="2026-11-09">9 November 2026</time>.</p>
+    <p class="meta">Team <b>Ctrl C + Ctrl V</b>: Aung Myo, Aye Chan Ko, Phoo Myat May Zaw. <b>Track:</b> classification, clustering, association rules and prediction, with text and spatial mining. <b>Course:</b> ICT324 Data Mining, Rangsit University International College. <b>Last updated:</b> <time datetime="2026-11-22">22 November 2026</time>.</p>
 
     <div class="track">
       <div class="track-bar">
@@ -439,15 +439,15 @@ tr.best td{background:rgba(255,194,61,.08)}
       <div class="stages" role="tablist" aria-label="Milestones">
         <button role="tab" aria-selected="false" data-i="0"><b>M1 Pitch</b>14–16 Oct<br><span class="flag done">Finished</span></button>
         <button role="tab" aria-selected="false" data-i="1"><b>M2 Lock the data</b>27 / 29 Oct<br><span class="flag done">Finished</span></button>
-        <button role="tab" aria-selected="true" data-i="2"><b>M3 First results</b>10 / 12 Nov<br><span class="flag now">Racing now</span></button>
-        <button role="tab" aria-selected="false" data-i="3"><b>M4 Paper and app</b>24 / 26 Nov<br><span class="flag next">Finish line</span></button>
+        <button role="tab" aria-selected="false" data-i="2"><b>M3 First results</b>10 / 12 Nov<br><span class="flag done">Finished</span></button>
+        <button role="tab" aria-selected="true" data-i="3"><b>M4 Paper and app</b>24 / 26 Nov<br><span class="flag now">Racing now</span></button>
       </div>
       <p id="stageText" aria-live="polite"></p>
     </div>
     <div class="journey">
       <p class="crumb" style="margin-top:34px">The journey: CRISP-DM. Each step opens its page.</p>
       <nav class="crisp" aria-label="CRISP-DM steps">
-        <a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="map.html"><b>Step 6</b>Deployment</a>
+        <a href="problem.html"><b>Step 1</b>Business understanding</a><a href="data.html"><b>Step 2</b>Data understanding</a><a href="data.html#cleaning"><b>Step 3</b>Data preparation</a><a href="method.html"><b>Step 4</b>Modeling</a><a href="results.html"><b>Step 5</b>Evaluation</a><a href="app.html"><b>Step 6</b>Deployment</a>
       </nav>
     </div>
   </div>
@@ -588,7 +588,7 @@ tr.best td{background:rgba(255,194,61,.08)}
 
   <div class="subq subq4">
     <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12V4h8l10 10-7 7z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg><b>1. What: text labelling</b><p>Which model reads the complaint text and gives the right problem type, fixing wrong and missing categories? Does it still work after Thai to English translation?</p></div>
-    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b>2. Where: spatial mining</b><p>Which districts and exact spots are hotspots for each problem, counted per 10,000 people so busy areas are not unfairly ranked? Which spots keep coming back?</p></div>
+    <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><b>2. Where: spatial mining</b><p>Which districts and exact spots are hotspots for each problem, and are they real or chance (Getis-Ord Gi*)?</p></div>
     <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>3. When and why</b><p>Which season, month, weekday and hour have the most complaints, and which problems rise in each season? Are flooding and road complaints linked with heavy rain?</p></div>
     <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg><b>4. Where and when to focus</b><p>Which place, time and problem go together, and which hotspots are both frequent and slow to fix? Where should the city focus next week?</p></div>
   </div>
@@ -606,7 +606,7 @@ tr.best td{background:rgba(255,194,61,.08)}
     <li>Machine learning already sorts public complaints in other countries [2].</li>
     <li>On Traffy Fondue, a 2024 study built a multi-label text model for complaints filed under "Others" [3], and a Thai language model fine-tuned on Traffy text is public on Hugging Face [4]. Our text model must match or beat them.</li>
     <li>A student project, Sed-Young-Wa, predicted fixing time with one regression model, with an average error of about 20 [5].</li>
-    <li>The full review, with 10 or more recent papers, comes by Milestone 4.</li>
+    <li>The full review, with 10 or more recent papers, is in the final paper.</li>
   </ul>
 </section>
 
@@ -617,9 +617,9 @@ tr.best td{background:rgba(255,194,61,.08)}
   <div class="tbl" style="margin-top:28px">
     <table>
       <tr><th scope="row">Source</th><td>Traffy Fondue open data, BMA. <a href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv">Download the CSV</a> (large file)</td></tr>
-      <tr><th scope="row">Size</th><td>1,511,479 rows (1,508,776 after cleaning), about 25,000 to 35,000 new complaints per month</td></tr>
+      <tr><th scope="row">Size</th><td>1,526,532 rows (1,523,828 after cleaning), June 2022 to November 2026, about 25,000 to 35,000 new complaints per month</td></tr>
       <tr><th scope="row">Period</th><td>June 2022 to October 2025 is labelled training data. November 2025 to 2026 has no categories, so the text model labels it.</td></tr>
-      <tr><th scope="row">Extra data</th><td>Daily rainfall for Bangkok (weather records) and district population (Thai open government data), joined by date and district at Milestone 3.</td></tr>
+      <tr><th scope="row">Extra data</th><td>Daily rainfall for Bangkok (Open-Meteo weather archive), joined by date.</td></tr>
       <tr><th scope="row">Seasons</th><td>Hot (March to May), rainy (June to October), cool (November to February).</td></tr>
       <tr><th scope="row">Personal data</th><td>The public file has no names or phone numbers. We do not publish complaint photos.</td></tr>
     </table>
@@ -677,14 +677,14 @@ tr.best td{background:rgba(255,194,61,.08)}
 <!-- 4 METHOD -->
 <section id="method">
   <div class="head"><span class="plate">04</span><h2>Method</h2><a class="more" href="method.html">Full page</a></div>
-  <p class="lead">We follow CRISP-DM. Models are compared on the same split: train on 2022 to 2024, test on 2025.</p>
+  <p class="lead">We follow CRISP-DM. Every model is compared with a simple baseline on the same folds, and tested again on months it never saw.</p>
   <ol class="route">
-    <li data-n="1"><h4>Understand and prepare the data</h4><p>Clean the text, labels and GPS points, then join daily rainfall and district population.</p></li>
-    <li data-n="2"><h4>What: label problem types from text</h4><p><b>Baseline:</b> TF-IDF with Logistic Regression. <b>Compared:</b> Linear SVM, Random Forest and a fine-tuned Thai language model (WangchanBERTa), checked against the published Traffy model [4]. A translated Thai to English sample tests if labelling still works. <b>Measured by:</b> micro and macro F1, Hamming loss.</p></li>
-    <li data-n="3"><h4>Where: spatial mining</h4><p><b>DBSCAN</b> and <b>HDBSCAN</b> find hotspots from GPS points, <b>kernel density</b> draws heat maps, and <b>Getis-Ord Gi*</b> tests whether a hotspot is real or chance. Counts per 10,000 people make districts fair to compare. Repeat reports within about 50 m mark chronic spots. <b>Measured by:</b> silhouette score and hotspot significance.</p></li>
+    <li data-n="1"><h4>Understand and prepare the data</h4><p>Clean the text, labels and GPS points, then join daily rainfall.</p></li>
+    <li data-n="2"><h4>What: label problem types from text</h4><p><b>Baseline:</b> majority class. <b>Compared:</b> Logistic Regression, Linear SVM and Random Forest on TF-IDF character n-grams, 10-fold stratified CV, plus a time-based test on 2025. All 30,000 complaints are machine-translated to English to test if labelling still works. <b>Measured by:</b> macro F1, precision, recall, AUC, Hamming loss.</p></li>
+    <li data-n="3"><h4>Where: spatial mining</h4><p><b>DBSCAN</b> and <b>HDBSCAN</b> find hotspots from GPS points, a <b>heat map</b> shows density, and <b>Getis-Ord Gi*</b> tests whether a 1 km cell is a real hotspot or chance. <b>Measured by:</b> silhouette score and Gi* z-score (95% and 99%).</p></li>
     <li data-n="4"><h4>When and why: time patterns and association rules</h4><p>Complaints by season, month, weekday and hour, and their link with rainfall. <b>Apriori</b> and <b>FP-Growth</b> find rules such as <i>rainy season + evening + one district leads to flooding</i>. <b>Measured by:</b> support, confidence and lift.</p></li>
-    <li data-n="5"><h4>Where and when to focus</h4><p>A <b>priority score</b> combines how often a problem happens with how slowly it is fixed, per area and time slot. A <b>next-week forecast</b> per district compares a simple baseline (last week) with XGBoost, measured by MAE.</p></li>
-    <li data-n="6"><h4>Monitoring app</h4><p>A hotspot map with a season and hour slider, a priority list, the next-week forecast, and a box that translates a complaint in any language and predicts its type.</p></li>
+    <li data-n="5"><h4>Where and when to focus</h4><p>A <b>priority score</b> combines how often a problem happens, how slowly it is fixed and how often it is left unfinished, per district and type. A <b>next-week forecast</b> per district compares two simple baselines with Linear Regression and XGBoost, measured by MAE (mean ± std over test weeks).</p></li>
+    <li data-n="6"><h4>Monitoring app</h4><p>The <a href="app.html">monitoring app</a>: district map with type, season and hour filters, a priority list, the next-week forecast and association rules. The <a href="translate.html">translator</a> translates a complaint between 30 languages and predicts its type.</p></li>
   </ol>
   <div class="tracks">
     <div><b>Classification</b><span>Problem type from text</span></div>
@@ -692,13 +692,21 @@ tr.best td{background:rgba(255,194,61,.08)}
     <div><b>Association rules</b><span>Place + time + problem</span></div>
     <div><b>Prediction</b><span>Next-week forecast</span></div>
   </div>
-  <p class="trackn">One project, all four data mining tracks. Stretch goal if time allows: fast or slow fixing prediction explained with SHAP.</p>
+  <p class="trackn">One project, all four data mining tracks. Not done (future work): a Thai language model (WangchanBERTa) and fast or slow fixing prediction with SHAP.</p>
 </section>
 
 <!-- 5 PROGRESS -->
 <section id="progress">
   <div class="head"><span class="plate">05</span><h2>Progress log</h2><a class="more" href="progress.html">Full page</a></div>
   <div class="laps">
+    <article class="lap">
+      <div class="stub"><small>Log entry</small><time datetime="2026-11-22">22 Nov 2026</time></div>
+      <div class="body">
+        <div class="row"><span class="st done">Done</span><p>Final run on 1.52M rows: 11 types with Flooding, all 30,000 complaints translated, time-based test on 2025 (Linear SVM 91.5%), ROC curves, 577,101 empty types filled by the model, Gi* hotspots, FP-Growth rules, priority score and a next-week forecast (Linear Regression best). Built the monitoring app and the translator.</p></div>
+        <div class="row"><span class="st stuck">Stuck</span><p>Colab reset twice and the free GPU limit ran out, so we now save everything to Google Drive with a save point.</p></div>
+        <div class="row"><span class="st next">Next</span><p>10-minute talk on 24 / 26 Nov, then the IEEE paper, code, data and slides in the course Drive by 30 Nov.</p></div>
+      </div>
+    </article>
     <article class="lap">
       <div class="stub"><small>Log entry</small><time datetime="2026-11-09">9 Nov 2026</time></div>
       <div class="body">
@@ -736,13 +744,13 @@ tr.best td{background:rgba(255,194,61,.08)}
 <!-- 6 RESULTS -->
 <section id="results">
   <div class="head"><span class="plate">06</span><h2>Results</h2><a class="more" href="results.html">Full page</a></div>
-  <p class="lead">Milestone 3: first results on the cleaned data. All text models use the same 10 stratified folds (seed 1992) on 30,000 complaints.</p>
+  <p class="lead">Final run, 22 November 2026. Text models use the same 10 stratified folds (seed 1992) on 30,000 complaints, then a second test on 2025 months they never saw.</p>
 
   <div class="rstats">
-    <div><b>91.5%</b><span>macro F1, Linear SVM (best text model)</span></div>
-    <div><b>3.8&times;</b><span>flooding complaints on heavy-rain days, 20 mm+ (153 vs 40 per day)</span></div>
-    <div><b>0.64</b><span>Spearman link, daily rain vs. flooding complaints</span></div>
-    <div><b>106k</b><span>copy-pasted duplicates removed before modelling</span></div>
+    <div><b>91.4%</b><span>macro F1, Linear SVM (10-fold CV, ± 0.3)</span></div>
+    <div><b>91.5%</b><span>on 2025 complaints it never saw: no drop</span></div>
+    <div><b>577k</b><span>empty problem types filled by our model</span></div>
+    <div><b>3.9&times;</b><span>flooding complaints on heavy-rain days, 20 mm+ (153 vs 40 per day)</span></div>
   </div>
 
   <h3>1. Data cleaned</h3>
@@ -750,66 +758,70 @@ tr.best td{background:rgba(255,194,61,.08)}
     <table>
       <thead><tr><th>Step</th><th>Rows after</th><th>Removed</th><th>Why</th></tr></thead>
       <tbody>
-        <tr><td>Raw download</td><td>1,511,479</td><td>0</td><td>Official Traffy Fondue CSV</td></tr>
-        <tr><td>Duplicate tickets</td><td>1,511,479</td><td>0</td><td>No ticket was counted twice</td></tr>
-        <tr><td>Early test records (before June 2022)</td><td>1,509,205</td><td>2,274</td><td>The system launched in mid-2022</td></tr>
-        <tr><td>GPS points outside Bangkok</td><td>1,508,776</td><td>429</td><td>Wrong or missing location</td></tr>
-        <tr><td>District names</td><td>1,508,776</td><td>0</td><td>1,508,376 rows matched to the 50 Bangkok districts</td></tr>
+        <tr><td>Raw download</td><td>1,526,532</td><td>0</td><td>Official Traffy Fondue CSV</td></tr>
+        <tr><td>Duplicate tickets</td><td>1,526,532</td><td>0</td><td>No ticket was counted twice</td></tr>
+        <tr><td>Early test records (before June 2022)</td><td>1,524,258</td><td>2,274</td><td>The system launched in mid-2022</td></tr>
+        <tr><td>GPS points outside Bangkok</td><td>1,523,828</td><td>430</td><td>Wrong or missing location</td></tr>
+        <tr><td>District names</td><td>1,523,828</td><td>0</td><td>1,523,427 rows matched to the 50 Bangkok districts</td></tr>
       </tbody>
     </table>
   </div>
   <ul class="plain" style="margin-top:14px">
-    <li>Problem type is empty for 37.7% of clean rows (100% from November 2025), so those rows are left for the text model to label.</li>
-    <li>Fixing time (finished cases): median 7.0 days, a quarter fixed within 1.8 days; 76,503 cases flagged as outliers (below 0 or above 365 days).</li>
-    <li>In the text set, 106,458 copy-pasted duplicate complaints were removed so the same text cannot be in both training and test folds.</li>
+    <li>Problem type is empty for 38.3% of clean rows (100% in 2026). Our text model labels them.</li>
+    <li>Fixing time (finished cases): median 7.0 days, a quarter fixed within 1.8 days; 76,850 cases flagged as outliers (below 0 or above 365 days).</li>
+    <li>In the text set, 110,474 copy-pasted duplicate complaints were removed so the same text cannot be in both training and test folds.</li>
   </ul>
 
-  <h3>2. What: problem type from text (10 types, multi-label)</h3>
+  <h3>2. What: problem type from text (11 types, multi-label)</h3>
   <div class="tbl">
     <table>
-      <thead><tr><th>Model</th><th>Macro F1 %</th><th>Precision %</th><th>Recall %</th><th>AUC %</th><th>Parameters</th></tr></thead>
+      <thead><tr><th>Model</th><th>Macro F1 %</th><th>Precision %</th><th>Recall %</th><th>AUC %</th><th>2025 test F1 %</th></tr></thead>
       <tbody>
-        <tr><td>Baseline (majority)</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>50.0 ± 0.0</td><td>predicts the most common value for every label</td></tr>
-        <tr><td>Logistic Regression</td><td>90.7 ± 0.3</td><td>87.3 ± 0.5</td><td>94.6 ± 0.4</td><td>99.5 ± 0.0</td><td>TF-IDF char 2–4, 50k; C=4, balanced</td></tr>
-        <tr class="best"><td><b>Linear SVM</b></td><td><b>91.5 ± 0.3</b></td><td>88.9 ± 0.5</td><td>94.3 ± 0.7</td><td>99.5 ± 0.0</td><td>TF-IDF char 2–4, 50k; C=0.5, balanced</td></tr>
-        <tr><td>Random Forest</td><td>82.8 ± 0.6</td><td>91.7 ± 0.7</td><td>76.1 ± 0.9</td><td>98.9 ± 0.0</td><td>TF-IDF char 2–4, 5k; 100 trees</td></tr>
+        <tr><td>Baseline (majority)</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>0.0 ± 0.0</td><td>50.0 ± 0.0</td><td>0.0</td></tr>
+        <tr><td>Logistic Regression</td><td>90.7 ± 0.3</td><td>87.4 ± 0.5</td><td>94.5 ± 0.4</td><td>99.5 ± 0.0</td><td>90.9</td></tr>
+        <tr class="best"><td><b>Linear SVM</b></td><td><b>91.4 ± 0.3</b></td><td>88.9 ± 0.6</td><td>94.2 ± 0.5</td><td>99.5 ± 0.0</td><td><b>91.5</b></td></tr>
+        <tr><td>Random Forest</td><td>81.5 ± 0.6</td><td>92.8 ± 0.6</td><td>73.6 ± 0.8</td><td>98.9 ± 0.1</td><td>–</td></tr>
       </tbody>
     </table>
   </div>
   <ul class="plain" style="margin-top:14px">
-    <li><b>Linear SVM</b> is the best and also the simplest model that is good enough. Random Forest is precise but misses more complaints (recall 76%).</li>
-    <li>Easiest types: Road (95.7%) and Safety (95.5%). Hardest: Drainage (87.4%), Signs (88.3%) and General complaint (90.4%).</li>
-    <li><b>Thai vs. English:</b> on a 2,569-complaint machine-translated sample, Linear SVM scores 84.8% on Thai and 66.9% on English. Translation keeps the main meaning (top English words: dark for lighting, garbage for cleanliness, red light for traffic) but loses about 17 points of detail.</li>
+    <li><b>Linear SVM</b> is the best and also simple and fast. It keeps 91.5% on 2025 data, so it works on new months. Random Forest is precise but misses more (recall 74%).</li>
+    <li>Easiest types: Road and Safety (95.5%). Hardest: Drainage (87.9%) and Signs (88.1%). Flooding is back in the model at 92.6%.</li>
+    <li><b>Thai vs. English:</b> on all 30,000 translated complaints, Linear SVM scores 91.4% on Thai and 72.8% on English. Translation keeps the main meaning (dark for lighting, garbage for cleanliness, flooding for flooding) but loses about 18 points, so the model reads Thai and people read English.</li>
   </ul>
 
   <h3>3. Where, when and why</h3>
   <div class="figs">
     <a class="fig" href="results/20_rain_vs_flooding.png"><img src="results/20_rain_vs_flooding.png" alt="Line chart of daily rain and flooding complaints, rising together in the rainy season" loading="lazy"><span><b>Rain and flooding.</b> Flooding complaints rise with heavy rain (Spearman 0.64).</span></a>
-    <a class="fig" href="results/16_seasonal_index.png"><img src="results/16_seasonal_index.png" alt="Bar chart of seasonal index per problem type" loading="lazy"><span><b>Seasons.</b> Rainy months are busiest (index 1.07), cool months quietest (0.86). General complaint +14%, Traffic +12%, Drainage +10% in the rainy season.</span></a>
-    <a class="fig" href="results/17_hour_weekday_heatmap.png"><img src="results/17_hour_weekday_heatmap.png" alt="Heat map of complaints by hour and weekday" loading="lazy"><span><b>Hours and days.</b> Most reports come on weekdays between about 8:00 and 19:00; weekends and nights are much quieter.</span></a>
-    <a class="fig" href="results/14_complaints_per_month.png"><img src="results/14_complaints_per_month.png" alt="Line chart of complaints per month from 2022 to 2026" loading="lazy"><span><b>Over time.</b> Complaints reported per month since mid-2022.</span></a>
+    <a class="fig" href="results/16_seasonal_index.png"><img src="results/16_seasonal_index.png" alt="Bar chart of seasonal index per problem type" loading="lazy"><span><b>Seasons.</b> Flooding is 50% above normal in the rainy season (index 1.50) and far below in the cool season (0.36).</span></a>
+    <a class="fig" href="results/22_roc_curves.png"><img src="results/22_roc_curves.png" alt="ROC curves of Linear SVM for 11 problem types, all close to the top left corner" loading="lazy"><span><b>ROC curves.</b> AUC 99.2–99.8% for every type: the model ranks complaints very well.</span></a>
+    <a class="fig" href="results/30_forecast.png"><img src="results/30_forecast.png" alt="Forecast of weekly complaints compared with real counts, plus feature importance" loading="lazy"><span><b>Forecast.</b> Weekly complaints follow the real line; the last 4 weeks matter most.</span></a>
   </div>
 
-  <div class="tbl" style="margin-top:22px">
+  <h3>4. New in the final run</h3>
+  <div class="tbl">
     <table>
-      <thead><tr><th>Top hotspots (DBSCAN, 150 m)</th><th>District</th><th>Complaints</th><th>Median fix</th></tr></thead>
+      <thead><tr><th>Analysis</th><th>Main result</th></tr></thead>
       <tbody>
-        <tr><td>Road</td><td>Watthana</td><td>198</td><td>6.0 days</td></tr>
-        <tr><td>Road</td><td>Phra Nakhon</td><td>168</td><td>7.5 days</td></tr>
-        <tr><td>Road</td><td>Pom Prap Sattru Phai</td><td>115</td><td>7.9 days</td></tr>
-        <tr><td>Flooding</td><td>Prawet</td><td>77</td><td>3.0 days</td></tr>
-        <tr><td>Flooding</td><td>Din Daeng</td><td>76</td><td>7.0 days</td></tr>
-        <tr><td>Flooding</td><td>Bangkok Yai</td><td>67</td><td>1.8 days</td></tr>
+        <tr><td>Fill empty types</td><td>577,101 complaints with no type labelled by Linear SVM. Road is the biggest (25%).</td></tr>
+        <tr><td>Getis-Ord Gi*</td><td>201 Road and 249 Flooding hot cells (1 km) at 95% or more; the strongest are in the old town (Samphanthawong, Phra Nakhon).</td></tr>
+        <tr><td>DBSCAN vs HDBSCAN</td><td>DBSCAN: 4 tight clusters (silhouette 0.95). HDBSCAN: 52 clusters (0.62), it finds more, smaller hotspots.</td></tr>
+        <tr><td>Association rules</td><td>Heavy rain + evening → Flooding (lift 3.7). Prawet + rainy season → Flooding (lift 3.8). Slow fix + evening → Street lighting (lift 3.2).</td></tr>
+        <tr><td>Priority score</td><td>Top: Chatuchak General complaint (90.5), Bang Kapi Safety (89.1), Pathum Wan Road (88.9).</td></tr>
+        <tr><td>Next-week forecast</td><td>Linear Regression MAE 32.0 ± 34.3 per district-week, about 13% better than "same as last week" (36.8). XGBoost 34.4.</td></tr>
       </tbody>
     </table>
   </div>
-  <a class="btn" href="results/12_hotspot_map.html" id="mapBtn" style="margin-top:18px"><span>Open the interactive hotspot map</span></a>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px">
+    <a class="btn" href="app.html"><span>Open the monitoring app</span></a>
+    <a class="btn ghost" href="results/25_gistar_map.html" id="mapBtn"><span>Open the Gi* hotspot map</span></a>
+  </div>
 
-  <h3>4. What works, what does not, and how we will fix it</h3>
+  <h3>5. What works, what does not, and what is next</h3>
   <div class="wwn">
-    <div><b class="ok">Working</b><p>Cleaning pipeline, text models well above the baseline, a strong rain link for flooding, and clear road and flooding hotspots.</p></div>
-    <div><b class="no">Not yet</b><p>Flooding dropped out of the top 10 text types after cleaning, and the Thai vs. English test ran on 2,569 complaints only because the GPU was off.</p></div>
-    <div><b class="fix">Fix next</b><p>Always include Flooding in the text model, translate all 30,000 complaints on GPU, then add association rules, the priority score, the next-week forecast and the monitoring app.</p></div>
+    <div><b class="ok">Working</b><p>Text model at 91% on new months, all empty types filled, real (Gi*) hotspots, clear rain and season links, rules, priority list and a forecast that beats the baselines.</p></div>
+    <div><b class="no">Limits</b><p>English translation loses about 18 points; last update is not always the real fix date; the forecast misses sudden spikes (floods, campaigns).</p></div>
+    <div><b class="fix">Future work</b><p>A Thai language model (WangchanBERTa), rain forecasts in the weekly forecast, fixing-speed prediction with SHAP, and testing the app with district offices.</p></div>
   </div>
 </section>
 
@@ -818,17 +830,17 @@ tr.best td{background:rgba(255,194,61,.08)}
 <section id="files">
   <div class="head"><span class="plate">07</span><h2>Files and references</h2><a class="more" href="files.html">Full page</a></div>
   <div class="files">
-    <a class="file" href="results/00_summary.txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><div><b>Milestone 3 summary</b><span>Text, all key numbers</span></div></a>
-    <a class="file" href="results/12_hotspot_map.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Hotspot map</b><span>Interactive map, Milestone 3</span></div></a>
+    <a class="file" href="results/00_summary.txt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg><div><b>Final summary</b><span>Text, all key numbers</span></div></a>
+    <a class="file" href="results/25_gistar_map.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Gi* hotspot map</b><span>Interactive map, final run</span></div></a>
     <a class="file" href="results/06_text_model_results_table.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Text model results</b><span>CSV, 10-fold CV table</span></div></a>
-    <a class="file" href="results/11_translated_complaints_to_check.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-10 4 10M14.5 17h5"/></svg><div><b>Translated complaints</b><span>CSV, Thai and English, 2,569 rows</span></div></a>
-    <a class="file" href="code/ICT324_M3_Traffy_Results.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><div><b>Milestone 3 code</b><span>Colab notebook (.ipynb)</span></div></a>
+    <a class="file" href="results/11_translated_complaints_to_check.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h9M8.5 3v2M6 5c0 4 3 7 6 8M11 5c0 3-3 7-7 8"/><path d="M13 21l4-10 4 10M14.5 17h5"/></svg><div><b>Translated complaints</b><span>CSV, Thai and English, 2,000 of 30,000 rows</span></div></a>
+    <a class="file" href="code/ICT324_Final_Traffy.ipynb"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg><div><b>Final code</b><span>Colab notebook (.ipynb)</span></div></a>
     <a class="file" href="proposal-m2.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>1-page proposal</b><span>PDF, Milestone 2, current plan</span></div></a>
     <a class="file" href="proposal.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg><div><b>First proposal</b><span>PDF, Milestone 1, earlier plan</span></div></a>
     <a class="file" href="sample_20_rows.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M4 15h16M10 4v16"/></svg><div><b>Data sample</b><span>CSV, 20 rows from 2025–2026</span></div></a>
     <a class="file" href="https://publicapi.traffy.in.th/dump-csv-chadchart/bangkok_traffy.csv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><div><b>Full dataset</b><span>Official Traffy CSV</span></div></a>
   </div>
-  <p style="margin-top:14px;color:var(--muted);font-size:15px">Slides and the final paper will be added at Milestone 4.</p>
+  <p style="margin-top:14px;color:var(--muted);font-size:15px">More files (all results, the M3 notebook) on the <a href="files.html">Files page</a>. Slides and the final paper are added after the talk.</p>
   <h3>References</h3>
   <ol class="refs">
     <li>BMA Public Relations Office, "Bangkok Celebrates Digital Milestone as Traffy Fondue Resolves One Million City Complaints," Mar. 2026. <a href="https://pr-bangkok.com/?p=583017">pr-bangkok.com</a></li>
@@ -856,16 +868,16 @@ tr.best td{background:rgba(255,194,61,.08)}
   </div>
 </div>
 
-<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 15 November 2026</span></div></footer>
+<footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
 
 <script>
 /* ---------- real data for the charts ---------- */
 const TYPES=[
-  {th:"ถนน",en:"Road",n:351502},{th:"ทางเท้า",en:"Sidewalk",n:155204},
-  {th:"ความปลอดภัย",en:"Safety",n:129443},{th:"แสงสว่าง",en:"Street lighting",n:104189},
-  {th:"กีดขวาง",en:"Obstruction",n:100738},{th:"ความสะอาด",en:"Cleanliness",n:95677},
-  {th:"ร้องเรียน",en:"General complaint",n:90557},{th:"จราจร",en:"Traffic",n:70716},
-  {th:"ป้าย",en:"Signs",n:60894},{th:"น้ำท่วม",en:"Flooding",n:59537}
+  {th:"ถนน",en:"Road",n:351508},{th:"ทางเท้า",en:"Sidewalk",n:155209},
+  {th:"ความปลอดภัย",en:"Safety",n:129440},{th:"แสงสว่าง",en:"Street lighting",n:104195},
+  {th:"กีดขวาง",en:"Obstruction",n:100739},{th:"ความสะอาด",en:"Cleanliness",n:95667},
+  {th:"ร้องเรียน",en:"General complaint",n:90555},{th:"จราจร",en:"Traffic",n:70718},
+  {th:"ป้าย",en:"Signs",n:60895},{th:"น้ำท่วม",en:"Flooding",n:59536}
 ];
 const MISSING=[{y:"2021",p:25.0,s:""},{y:"2022",p:21.9,s:"used"},{y:"2023",p:9.8,s:"used"},{y:"2024",p:10.8,s:"used"},{y:"2025",p:27.4,s:"used"},{y:"2026",p:100,s:"excl"}];
 function drawTypes(lang){
@@ -881,11 +893,11 @@ new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){e.target.cl
 /* ---------- milestones ---------- */
 const MS=["Milestone 1, finished. We pitched the idea to Ajarn with a printed proposal, three slides and a sample of real data.",
 "Milestone 2, finished. The page went live, the research question was set, and the data was locked: real, public, 1.5 million rows.",
-"Milestone 3, racing now. Data cleaned (Data page), a baseline plus three text models with best Linear SVM at macro F1 91.5% (Results page), the hotspot map (Map page) and the issue board (Progress page).",
-"Milestone 4, finish line. Association rules, priority map and forecast, the monitoring app, a 10-minute talk and the IEEE paper, with slides, code and data linked here."];
+"Milestone 3, finished. Data cleaned, a baseline plus three text models (best Linear SVM), the first hotspot map, seasons and the rain link.",
+"Milestone 4, racing now. Final run done: time-based test, ROC curves, empty types filled by our model, Gi* hotspots, association rules, priority score, next-week forecast, the monitoring app and the translator. Next: the 10-minute talk (24 / 26 Nov) and the IEEE paper (30 Nov)."];
 const tabs=[...document.querySelectorAll(".stages button")];
 function pick(i){tabs.forEach((t,j)=>t.setAttribute("aria-selected",i===j));document.getElementById("stageText").textContent=MS[i]}
-tabs.forEach(t=>t.addEventListener("click",()=>pick(+t.dataset.i)));pick(2);
+tabs.forEach(t=>t.addEventListener("click",()=>pick(+t.dataset.i)));pick(3);
 
 /* ---------- top bar ---------- */
 const bar=document.getElementById("bar"),meter=document.getElementById("meter"),secs=[...document.querySelectorAll("#team, #game, main section")],navs=[...document.querySelectorAll(".nav a")];
@@ -1194,7 +1206,7 @@ addEventListener("scroll",onScroll,{passive:true});onScroll();
     const $=id=>document.getElementById(id);
     const ui={time:$("gTime"),score:$("gScore"),fixed:$("gFixed"),passed:$("gPassed"),prompt:$("gPrompt"),type:$("gType"),where:$("gWhere"),toast:$("gToast"),fix:$("gFix"),start:$("gStart"),over:$("gOver")};
     // hazard types weighted by real Traffy counts
-    const KINDS=[{k:"Road",n:351502},{k:"Street lighting",n:104189},{k:"Obstruction",n:100738},{k:"Cleanliness",n:95677},{k:"Signs",n:60894},{k:"Flooding",n:59537}];
+    const KINDS=[{k:"Road",n:351508},{k:"Street lighting",n:104195},{k:"Obstruction",n:100739},{k:"Cleanliness",n:95667},{k:"Signs",n:60895},{k:"Flooding",n:59536}];
     const TOTAL=KINDS.reduce((a,b)=>a+b.n,0);
     const pickKind=()=>{let r=Math.random()*TOTAL;for(const k of KINDS){if((r-=k.n)<0)return k.k}return "Road"};
     const M={
