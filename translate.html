@@ -10,8 +10,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;1,600;1,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css">
-<link rel="stylesheet" href="assets/pages.css">
+<link rel="stylesheet" href="assets/site.css?v=20261122b">
+<link rel="stylesheet" href="assets/pages.css?v=20261122b">
 </head>
 <body class="sub">
 <header class="bar solid" id="bar">
@@ -21,61 +21,81 @@
   </div>
   <div class="meter" id="meter"></div>
 </header>
-<div class="phero">
+<div class="phero trhero">
   <div class="wrap">
     <p class="crumb">Tool · free for everyone</p>
     <h1>Complaint translator</h1>
-    <p class="psub">Translate a complaint between 30 languages, then see which problem type our model reads from it. It runs inside your browser: no account, no server, and your text never leaves your device.</p>
+    <p class="psub">Write a complaint in your own language. Get it in Thai, English or 28 more, and see which problem type our model reads from it. Runs inside your browser: no account, no server, your text never leaves your device.</p>
+    <div class="trfacts">
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg><b>30</b><span>languages</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg><b>NLLB-200</b><span>Meta translation model</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l3-4 3 2 4-6"/></svg><b>91.4%</b><span>our problem-type model</span></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><b>Private</b><span>text stays on your device</span></div>
+    </div>
   </div>
 </div>
 <main class="wrap page" id="main">
 
 <section id="one">
-  <div class="head"><span class="plate">01</span><h2>Translate one complaint</h2></div>
-  <div class="mstat card" id="mStat">
-    <div class="mst-l"><b id="mTitle">Translation model not loaded</b><span id="mSub">First use downloads the NLLB-200 model once (several hundred MB). After that your browser keeps it, so it opens fast.</span>
-      <div class="mbar" id="mBar" hidden><i id="mFill"></i></div></div>
+  <div class="head"><span class="plate">01</span><h2>Translate a complaint</h2></div>
+
+  <div class="engine" id="mStat">
+    <div class="eng-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div>
+    <div class="eng-main">
+      <b id="mTitle">Translation model not loaded</b>
+      <span id="mSub">First use downloads the model once (about 900 MB, use Wi-Fi). After that your browser keeps it.</span>
+      <ol class="eng-steps" id="mSteps"><li data-s="dl">Download</li><li data-s="prep">Prepare</li><li data-s="ready">Ready</li></ol>
+      <div class="mbar" id="mBar" hidden><i id="mFill"></i></div>
+    </div>
     <button type="button" class="btn" id="loadBtn"><span>Load model</span></button>
   </div>
-  <div class="tgrid">
-    <div class="card tbox">
-      <div class="tsel"><label for="srcLang">From</label><select id="srcLang"></select>
-        <button type="button" class="iconbtn" id="swapBtn" aria-label="Swap languages" title="Swap languages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg></button>
-        <label for="tgtLang">To</label><select id="tgtLang"></select></div>
-      <textarea id="srcText" rows="8" placeholder="Paste or type a complaint in any of the 30 languages…" aria-label="Text to translate"></textarea>
-      <div class="tfoot"><span id="detNote" class="note"></span><span class="note" id="charNote">0 characters</span></div>
-      <div class="exs"><span class="note">Try an example:</span><div class="chips sm" id="exChips"></div></div>
-      <button type="button" class="btn big" id="goBtn"><span>Translate</span></button>
+
+  <div class="console">
+    <div class="cbar">
+      <label class="lsel"><span>From</span><select id="srcLang"></select></label>
+      <button type="button" class="swap" id="swapBtn" aria-label="Swap languages" title="Swap languages"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg></button>
+      <label class="lsel"><span>To</span><select id="tgtLang"></select></label>
     </div>
-    <div class="card tbox">
-      <div class="tsel"><b id="outLang">Translation</b><span style="flex:1"></span>
-        <button type="button" class="iconbtn" id="copyBtn" aria-label="Copy translation" title="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12"/><path d="M5 15H3V3h12v2"/></svg></button></div>
-      <div class="tout" id="outText" aria-live="polite"><span class="note">The translation shows here.</span></div>
-      <div class="tfoot"><span class="note" id="timeNote"></span></div>
-      <div class="ptype">
-        <h4>What problem is this?</h4>
-        <p class="note" id="ptNote">Our Linear SVM model (trained on real Traffy complaints) reads the Thai text. For other languages it reads the Thai translation.</p>
-        <div id="ptBox" class="ptbox"></div>
+    <div class="panes">
+      <div class="pane">
+        <textarea id="srcText" rows="8" placeholder="Type or paste a complaint…" aria-label="Text to translate"></textarea>
+        <div class="pfoot"><span class="det" id="detNote"></span><span class="note" id="charNote">0 characters</span>
+          <button type="button" class="btn go" id="goBtn"><span>Translate</span></button></div>
+      </div>
+      <div class="pane out">
+        <div class="tout" id="outText" aria-live="polite"><span class="note">The translation shows here.</span></div>
+        <div class="pfoot"><span class="note" id="timeNote"></span><span class="note" id="outLang">English</span>
+          <button type="button" class="iconbtn" id="copyBtn" aria-label="Copy translation" title="Copy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></svg></button></div>
       </div>
     </div>
+    <p class="kbd">Tip: press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to translate.</p>
   </div>
+
+  <div class="ptype card">
+    <div class="pt-head"><div><h4>What problem is this?</h4><p class="note" id="ptNote">Our Linear SVM model, trained on real Traffy complaints, reads the Thai text. For other languages it reads a Thai translation.</p></div></div>
+    <div id="ptBox" class="ptbox"></div>
+  </div>
+
+  <h3>Try an example</h3>
+  <div class="excards" id="exChips"></div>
 </section>
 
 <section id="many">
   <div class="head"><span class="plate">02</span><h2>Translate a whole file</h2></div>
-  <p class="lead">Upload a CSV (for example our <code>sample_20_rows.csv</code> or a Traffy export). Pick the text column and the languages. You get the same file back with a translation column, plus the problem type column for Thai text.</p>
+  <p class="lead">Drop a CSV (for example our <code>sample_20_rows.csv</code> or a Traffy export). You get the same file back with a translation column and, for Thai text, a problem-type column.</p>
   <div class="card batch">
-    <div class="brow">
-      <label class="file"><input type="file" id="csvIn" accept=".csv,text/csv"><span>Choose CSV file</span></label>
-      <span class="note" id="csvNote">No file yet. Files stay on your device.</span>
-    </div>
-    <div class="brow" id="bOpts" hidden>
-      <label>Text column <select id="colSel"></select></label>
-      <label>From <select id="bSrc"></select></label>
-      <label>To <select id="bTgt"></select></label>
-      <label>Rows <input type="number" id="bMax" min="1" value="50" style="width:80px"></label>
-      <button type="button" class="btn" id="bGo"><span>Translate rows</span></button><button type="button" class="btn ghost" id="bStop" hidden><span>Stop</span></button>
-      <button type="button" class="btn ghost" id="bDl" disabled><span>Download CSV</span></button>
+    <label class="drop" id="dropZone">
+      <input type="file" id="csvIn" accept=".csv,text/csv">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+      <b>Drop a CSV file here, or click to choose</b>
+      <span class="note" id="csvNote">The file stays on your device.</span>
+    </label>
+    <div class="bopts" id="bOpts" hidden>
+      <label>Text column<select id="colSel"></select></label>
+      <label>From<select id="bSrc"></select></label>
+      <label>To<select id="bTgt"></select></label>
+      <label>Rows<input type="number" id="bMax" min="1" value="50"></label>
+      <div class="bbtns"><button type="button" class="btn" id="bGo"><span>Translate rows</span></button><button type="button" class="btn ghost" id="bStop" hidden><span>Stop</span></button><button type="button" class="btn ghost" id="bDl" disabled><span>Download CSV</span></button></div>
     </div>
     <div class="mbar" id="bBar" hidden><i id="bFill"></i></div>
     <p class="note" id="bNote"></p>
@@ -84,28 +104,31 @@
 </section>
 
 <section id="limits">
-  <div class="head"><span class="plate">03</span><h2>Good to know</h2></div>
-  <div class="cards3">
-    <div class="card"><h4>How it works</h4><ul class="ul">
-      <li><b>Translation:</b> NLLB-200 by Meta (600M, compressed to 8-bit), run with transformers.js. The same model family as our notebook.</li>
-      <li><b>Problem type:</b> our own TF-IDF + Linear SVM model, exported from the final notebook. Same answers as in Python.</li>
-      <li>Long text is split into short pieces, so nothing is cut off.</li></ul></div>
+  <div class="head"><span class="plate">03</span><h2>How it works and its limits</h2></div>
+  <div class="howflow">
+    <div><span class="hn">1</span><b>Your text</b><p>Any of 30 languages. Long text is split into short pieces, so nothing is cut off.</p></div>
+    <div><span class="hn">2</span><b>NLLB-200 in your browser</b><p>Meta's model, made smaller (8-bit), runs with transformers.js. No server.</p></div>
+    <div><span class="hn">3</span><b>Our text model</b><p>TF-IDF + Linear SVM from our final notebook reads the Thai and gives the type.</p></div>
+  </div>
+  <div class="cards3" style="margin-top:16px">
     <div class="card"><h4>Limits</h4><ul class="ul">
-      <li>The first download is large. Use Wi-Fi. Phones with little memory may struggle; a laptop works best.</li>
-      <li>About 1–5 seconds per sentence, depending on the device.</li>
-      <li>Machine translation makes mistakes with slang, typos, mixed languages and place names. Check important text with a person.</li>
-      <li>The problem-type model knows Bangkok complaint words. For other topics its guess means little.</li></ul></div>
+      <li>The first download is about 900 MB. Phones with little memory may struggle; a laptop works best.</li>
+      <li>About 1–5 seconds per sentence.</li>
+      <li>Mistakes with slang, typos, mixed languages and place names. Check important text with a person.</li></ul></div>
+    <div class="card"><h4>The problem-type model</h4><ul class="ul">
+      <li>Knows the 11 Bangkok complaint types.</li>
+      <li>For other topics, its guess means little.</li>
+      <li>Score above 0 = yes. Further from 0 = more sure.</li></ul></div>
     <div class="card"><h4>Use it for</h4><ul class="ul">
-      <li>Reading Thai complaints when you cannot read Thai (our team's problem).</li>
-      <li>Letting residents write in their own language, then sending the city a Thai version.</li>
-      <li>Checking whether the type a resident chose matches the text.</li>
-      <li>NLLB-200 is free for study and research, not for selling.</li></ul></div>
+      <li>Reading Thai complaints when you cannot read Thai.</li>
+      <li>Writing to the city in your own language.</li>
+      <li>Checking if the type a resident chose matches the text. NLLB-200 is free for study, not for selling.</li></ul></div>
   </div>
 </section>
 </main>
 <footer><div class="in"><span>Team Ctrl C + Ctrl V, ICT324, Rangsit University International College</span><span>Last updated 22 November 2026</span></div></footer>
-<script src="assets/site.js"></script>
-<script src="assets/textmodel.js"></script>
-<script src="assets/translate.js"></script>
+<script src="assets/site.js?v=20261122b"></script>
+<script src="assets/textmodel.js?v=20261122b"></script>
+<script src="assets/translate.js?v=20261122b"></script>
 </body>
 </html>

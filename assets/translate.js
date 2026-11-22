@@ -64,22 +64,24 @@
   const waiting = new Map(), files = {};
   function getWorker() {
     if (worker) return worker;
-    try { worker = new Worker("assets/translate-worker.js", { type: "module" }); }
-    catch (e) { setStat("err", "This browser cannot run the translator", "Please use a recent Chrome, Edge, Firefox or Safari."); return null; }
-    worker.onerror = () => setStat("err", "The translator could not start", "Check your internet connection (the model loads from Hugging Face) and reload the page.");
+    try { worker = new Worker("assets/translate-worker.js?v=" + (window.SITE_V || "1"), { type: "module" }); }
+    catch (e) { setStat("err", "This browser cannot run the translator", "Please use a recent Chrome, Edge, Firefox or Safari.", ""); return null; }
+    worker.onerror = () => setStat("err", "The translator could not start", "Check your internet connection (the model loads from Hugging Face) and reload the page.", "");
     worker.onmessage = ({ data: d }) => {
       if (d.kind === "progress") {
         if (d.status === "progress" && d.file) { files[d.file] = [d.loaded, d.total]; }
         const v = Object.values(files), L = v.reduce((a, x) => a + x[0], 0), T = v.reduce((a, x) => a + x[1], 0);
-        if (T) { $("mBar").hidden = false; $("mFill").style.width = (L / T * 100).toFixed(1) + "%";
-          setStat("", "Downloading the translation model…", `${(L / 1e6).toFixed(0)} of ${(T / 1e6).toFixed(0)} MB · only the first time`); }
-        if (d.status === "ready" || d.status === "done") {}
+        if (T && !ready) {
+          $("mBar").hidden = false; $("mFill").style.width = (L / T * 100).toFixed(1) + "%";
+          if (L < T) setStat("loading", "Downloading the translation model…", `${(L / 1e6).toFixed(0)} of ${(T / 1e6).toFixed(0)} MB · only the first time, then saved in your browser`, "dl");
+          else setStat("loading", "Preparing the model…", "Download done. Starting it up in your browser, this can take up to a minute.", "prep");
+        }
       } else if (d.kind === "ready") {
         ready = true; $("mBar").hidden = true;
-        setStat("ready", "Translation model ready", "Saved in your browser. Next time it opens without downloading.");
+        setStat("ready", "Translation model ready", "Saved in your browser. Next time it opens without downloading.", "ready");
         $("loadBtn").hidden = true;
       } else if (d.kind === "error" && d.id == null) {
-        setStat("err", "Could not load the model", d.message + " · check your connection and try again."); $("loadBtn").hidden = false; $("loadBtn").disabled = false;
+        setStat("err", "Could not load the model", d.message + " · check your connection and try again.", ""); $("loadBtn").hidden = false; $("loadBtn").disabled = false;
       } else {
         const w = waiting.get(d.id); if (!w) return;
         if (d.kind === "partial") w.onPart && w.onPart(d.done, d.total);
@@ -88,8 +90,12 @@
     };
     return worker;
   }
-  function setStat(cls, title, sub) { const b = $("mStat"); b.className = "mstat card " + cls; $("mTitle").textContent = title; $("mSub").textContent = sub; }
-  function loadModel() { const w = getWorker(); if (!w) return; $("loadBtn").disabled = true; if (!ready) setStat("", "Starting the translator…", "Getting the model files ready."); w.postMessage({ kind: "load" }); }
+  function setStat(cls, title, sub, step) {
+    const b = $("mStat"); b.className = "engine " + cls; $("mTitle").textContent = title; $("mSub").textContent = sub;
+    const order = ["dl", "prep", "ready"], k = order.indexOf(step);
+    document.querySelectorAll("#mSteps li").forEach((li, i) => { li.className = k < 0 ? "" : i < k || step === "ready" ? "done" : i === k ? "on" : ""; });
+  }
+  function loadModel() { const w = getWorker(); if (!w) return; $("loadBtn").disabled = true; if (!ready) setStat("loading", "Starting the translator…", "Getting the model files ready.", "dl"); w.postMessage({ kind: "load" }); }
   function translateChunks(chunks, src, tgt, onPart) {
     const w = getWorker(); if (!w) throw new Error("this browser cannot run the translator");
     const id = ++reqId;
@@ -105,16 +111,30 @@
   let tm = null, tmTried = false;
   async function textModel() {
     if (tm || tmTried) return tm; tmTried = true;
-    try { const r = await fetch("assets/text_model.json"); if (!r.ok) throw 0; tm = new window.TextModel(await r.json()); }
+    try { const r = await fetch("assets/text_model.json?v=" + (window.SITE_V || "1")); if (!r.ok) throw 0; tm = new window.TextModel(await r.json()); }
     catch (e) { tm = null; }
     return tm;
   }
+  const IC = {
+    "Road": '<path d="M8 3 5 21M16 3l3 18M12 4v3M12 10v3M12 16v3"/>',
+    "Sidewalk": '<circle cx="12" cy="5" r="2"/><path d="M12 7v6l-3 7M12 13l3 7M9 10h6"/>',
+    "Safety": '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    "Street lighting": '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/>',
+    "Obstruction": '<rect x="3" y="8" width="18" height="6" rx="1"/><path d="M7 8l-2 6M13 8l-2 6M19 8l-2 6M6 14v6M18 14v6"/>',
+    "Cleanliness": '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/><path d="M10 11v6M14 11v6"/>',
+    "General complaint": '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
+    "Traffic": '<rect x="8" y="2" width="8" height="20" rx="3"/><circle cx="12" cy="7" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="17" r="1.5"/>',
+    "Signs": '<path d="M12 22V12M5 4h11l3 4-3 4H5z"/>',
+    "Drainage": '<path d="M3 8h10a4 4 0 0 1 4 4v8M3 12h8a2 2 0 0 1 2 2v6"/><path d="M19 15c1 1.3 1.5 2.3 1.5 3a1.5 1.5 0 0 1-3 0c0-.7.5-1.7 1.5-3z"/>',
+    "Flooding": '<path d="M3 15c2 0 2-1.5 4.5-1.5S10 15 12 15s2.5-1.5 4.5-1.5S19 15 21 15M3 19c2 0 2-1.5 4.5-1.5S10 19 12 19s2.5-1.5 4.5-1.5S19 19 21 19"/><path d="M12 3c2 2.7 3 4.7 3 6a3 3 0 0 1-6 0c0-1.3 1-3.3 3-6z"/>'
+  };
+  const icon = t => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[t] || IC["General complaint"]}</svg>`;
   function showTypes(res, how) {
     const box = $("ptBox");
     if (!res) { box.innerHTML = '<p class="note">The problem-type model is not on this site yet (it comes from the final notebook run).</p>'; return; }
     const top = res.slice(0, 6), mx = Math.max(1, ...top.map(r => Math.abs(r.score))), yes = res.filter(r => r.yes);
-    box.innerHTML = `<p class="note">${how}${yes.length ? ` · <b style="color:var(--text)">${yes.map(r => esc(r.type)).join(", ")}</b>` : " · no clear type (all scores below 0)"}</p>` +
-      top.map(r => `<div class="pt ${r.yes ? "yes" : ""}"><span>${esc(r.type)}</span><i style="--w:${Math.max(.03, (r.score + mx) / (2 * mx)).toFixed(3)}"></i><em>${r.yes ? "yes" : "no"} · ${r.score.toFixed(2)}</em></div>`).join("") +
+    box.innerHTML = `<div class="ptsum"><span class="note">${esc(how)}:</span>${yes.length ? yes.map(r => `<span class="tag">${esc(r.type)}</span>`).join("") : '<span>no clear type (all scores below 0)</span>'}</div>` +
+      top.map(r => `<div class="ptc ${r.yes ? "yes" : ""}">${icon(r.type)}<b>${esc(r.type)}<em>${r.yes ? "yes" : "no"} · ${r.score.toFixed(2)}</em></b><span class="sb"><i style="--w:${Math.max(.04, (r.score + mx) / (2 * mx)).toFixed(3)}"></i></span></div>`).join("") +
       '<p class="note">Score above 0 = the model says yes. Further from 0 = more sure.</p>';
   }
 
@@ -126,7 +146,7 @@
   function srcCode() { return $("srcLang").value === "auto" ? detect($("srcText").value) : $("srcLang").value; }
   function updateDetect() {
     const t = $("srcText").value; $("charNote").textContent = t.length.toLocaleString("en-US") + " characters";
-    if ($("srcLang").value === "auto") { const d = detect(t); $("detNote").textContent = t.trim() ? (d ? "Detected: " + NAME[d] : "Could not detect, pick the language") : ""; }
+    if ($("srcLang").value === "auto") { const d = detect(t); $("detNote").textContent = t.trim() ? (d ? "Detected: " + NAME[d] : "Pick the language") : ""; }
     else $("detNote").textContent = "";
   }
   async function go() {
@@ -227,11 +247,14 @@
   /* ---------- wire up ---------- */
   fillSelect($("srcLang"), true, "auto"); fillSelect($("tgtLang"), false, "eng_Latn");
   fillSelect($("bSrc"), true, "auto"); fillSelect($("bTgt"), false, "eng_Latn");
-  $("exChips").innerHTML = EX.map((e, i) => `<button type="button" data-i="${i}" aria-pressed="false">${esc(e[0])}</button>`).join("");
+  $("exChips").innerHTML = EX.map((e, i) => { const [lg, tp] = e[0].split(" · ");
+    return `<button type="button" data-i="${i}"><span class="lg">${esc(lg)}</span><span class="tp">${esc(tp.charAt(0).toUpperCase() + tp.slice(1))}</span><span class="tx">${esc(e[2])}</span></button>`; }).join("");
   $("exChips").querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
     const e = EX[+b.dataset.i]; $("srcText").value = e[2]; $("srcLang").value = "auto";
-    $("tgtLang").value = e[1] === "eng_Latn" ? "tha_Thai" : "eng_Latn"; updateDetect();
+    $("tgtLang").value = e[1] === "eng_Latn" ? "tha_Thai" : "eng_Latn"; updateDetect(); $("outLang").textContent = NAME[$("tgtLang").value];
+    $("srcText").focus(); $("srcText").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
   }));
+  $("tgtLang").addEventListener("change", () => { $("outLang").textContent = NAME[$("tgtLang").value]; });
   $("srcText").addEventListener("input", updateDetect); $("srcLang").addEventListener("change", updateDetect);
   $("srcText").addEventListener("keydown", e => { if ((e.ctrlKey || e.metaKey) && e.key === "Enter") go(); });
   $("swapBtn").addEventListener("click", () => {
@@ -242,11 +265,15 @@
   });
   $("copyBtn").addEventListener("click", async () => {
     if ($("outText").querySelector(".note")) return;
-    try { await navigator.clipboard.writeText($("outText").textContent); $("copyBtn").title = "Copied"; setTimeout(() => $("copyBtn").title = "Copy", 1500); } catch (e) {}
+    try { await navigator.clipboard.writeText($("outText").textContent); $("copyBtn").classList.add("ok"); $("copyBtn").title = "Copied"; setTimeout(() => { $("copyBtn").classList.remove("ok"); $("copyBtn").title = "Copy"; }, 1500); } catch (e) {}
   });
   $("loadBtn").addEventListener("click", loadModel);
   $("goBtn").addEventListener("click", go);
   $("csvIn").addEventListener("change", e => onFile(e.target.files[0]));
+  const dz = $("dropZone");
+  ["dragenter", "dragover"].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.add("over"); }));
+  ["dragleave", "drop"].forEach(ev => dz.addEventListener(ev, e => { e.preventDefault(); dz.classList.remove("over"); }));
+  dz.addEventListener("drop", e => { const f = e.dataTransfer && e.dataTransfer.files[0]; if (f) onFile(f); });
   $("bGo").addEventListener("click", runBatch);
   $("bStop").addEventListener("click", () => { if (curBatch) curBatch.stop = true; });
   // the model is already in this browser's cache? then start it quietly

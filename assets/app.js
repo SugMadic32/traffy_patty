@@ -8,7 +8,7 @@
   const st = { type: "All", season: "All", band: "All", color: "count", sel: null };
   let A, map, dLayer, giLayer, dbLayer, markers = {};
 
-  fetch("assets/app_data.json").then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  fetch("assets/app_data.json?v=" + (window.SITE_V || "1")).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
     .then(d => { A = d; init(); })
     .catch(() => {
       $("appStat").innerHTML = "<b>App data not found.</b> Run the final notebook and add <code>app_data.json</code> to the assets folder.";

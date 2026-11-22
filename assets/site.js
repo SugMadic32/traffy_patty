@@ -1,3 +1,4 @@
+window.SITE_V="20261122b";
 /* Shared script for all sub-pages: progress bar, file viewer, chart defaults */
 (function(){
   const meter=document.getElementById("meter");
