@@ -1,0 +1,4 @@
+Model,10-fold CV macro F1 %,2025 test macro F1 %,2025 precision %,2025 recall %,2025 AUC %,Drop (points)
+Baseline (majority),0.0,0.0,0.0,0.0,50.0,0.0
+Logistic Regression,90.7,90.9,87.6,94.7,99.5,0.2
+Linear SVM,91.4,91.5,89.2,94.2,99.5,0.1

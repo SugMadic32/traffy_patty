@@ -1,0 +1,2 @@
+,count,mean,std,min,25%,50%,75%,max,IQR outliers (> Q3+1.5·IQR),flagged <0 or >365 days
+"fix_days (finished, 0-365)",1173491.0,39.51,72.13,0.0,1.83,6.98,35.47,365.0,174728,76850

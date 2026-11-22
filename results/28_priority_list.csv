@@ -1,0 +1,551 @@
+district,type,per month,median_fix_days,unfinished %,reopened %,priority
+Chatuchak,General complaint,150.4,15.9,33.0,8.4,90.5
+Bang Kapi,Safety,152.1,15.9,25.9,6.4,89.1
+Pathum Wan,Road,244.8,14.9,21.8,4.7,88.9
+Khlong Toei,Traffic,113.5,13.0,45.8,3.1,88.6
+Watthana,Traffic,116.2,12.9,34.5,1.9,87.5
+Bang Na,Road,158.5,11.9,28.0,3.6,87.3
+Bang Kapi,Road,342.5,13.9,19.0,3.6,87.0
+Watthana,Obstruction,138.2,12.9,25.6,6.4,86.5
+Huai Khwang,Road,221.8,10.1,30.2,3.8,86.3
+Watthana,Road,298.8,12.0,18.5,4.1,84.7
+Prawet,Street lighting,108.8,48.2,17.2,3.8,83.9
+Chatuchak,Obstruction,193.5,8.8,34.6,7.1,83.8
+Ratchathewi,Road,239.5,12.0,16.4,5.1,83.1
+Pathum Wan,Safety,85.8,14.0,24.4,5.0,82.9
+Chatuchak,Street lighting,154.9,36.2,13.0,4.9,82.6
+Chatuchak,Road,469.8,11.0,16.9,3.7,82.3
+Pathum Wan,Traffic,110.1,12.7,21.5,4.2,82.2
+Watthana,Safety,127.8,10.6,23.9,6.7,81.9
+Din Daeng,Road,242.3,9.9,20.9,4.1,81.9
+Khlong Toei,Road,250.8,7.6,24.1,4.2,80.4
+Bangkok Noi,Road,173.6,10.6,18.4,4.7,80.3
+Lat Krabang,Street lighting,129.8,65.5,9.6,1.9,80.2
+Bang Rak,Road,186.1,9.4,21.1,4.3,80.1
+Ratchathewi,Safety,98.2,13.3,18.7,5.1,79.9
+Khlong Sam Wa,Road,213.1,11.2,14.8,4.4,79.8
+Prawet,Road,318.4,9.6,17.3,5.3,79.6
+Chatuchak,Traffic,99.1,8.3,38.2,4.4,79.2
+Prawet,Safety,105.5,9.9,23.9,5.1,79.0
+Bang Kapi,General complaint,70.3,12.4,25.1,7.5,78.9
+Khan Na Yao,Road,109.9,12.8,16.1,2.1,78.8
+Din Daeng,General complaint,79.4,12.1,21.9,9.1,78.7
+Suan Luang,Safety,99.7,9.5,25.7,4.4,78.4
+Chatuchak,Safety,232.8,7.8,21.1,4.3,78.3
+Saphan Sung,Road,126.7,9.9,21.2,5.3,78.3
+Bang Kapi,Street lighting,215.1,29.9,6.3,2.7,78.3
+Bang Na,Street lighting,76.9,21.4,17.3,1.4,78.1
+Lat Krabang,Road,200.2,9.3,17.3,4.2,77.6
+Suan Luang,Street lighting,105.6,27.1,11.4,3.7,77.5
+Bang Rak,Traffic,55.8,11.6,43.2,4.6,77.3
+Khlong Toei,Safety,152.0,6.8,30.6,3.6,77.2
+Pathum Wan,Obstruction,155.9,12.6,11.2,13.5,77.1
+Pathum Wan,Sidewalk,194.4,10.5,13.2,12.8,76.8
+Chatuchak,Sidewalk,234.8,10.0,13.1,7.4,76.8
+Suan Luang,Traffic,46.9,14.5,61.5,3.6,76.7
+Khlong Sam Wa,Safety,71.0,13.1,19.1,4.6,76.4
+Watthana,Sidewalk,165.8,10.4,14.2,9.6,76.4
+Lat Krabang,Safety,80.8,10.2,23.2,4.4,76.3
+Khlong Toei,Street lighting,89.8,41.9,10.1,3.8,76.2
+Bang Phlat,Road,124.5,6.6,42.5,3.1,76.0
+Ratchathewi,Street lighting,73.0,43.8,12.2,5.8,76.0
+Ratchathewi,Traffic,103.9,8.1,23.8,4.4,76.0
+Prawet,General complaint,101.4,10.7,17.7,11.7,76.0
+Phra Khanong,Sidewalk,54.2,11.4,35.5,5.4,75.9
+Don Mueang,Safety,62.9,12.1,23.7,5.3,75.9
+Phra Khanong,Road,163.4,8.3,18.6,3.5,75.9
+Bang Rak,Obstruction,102.4,7.5,26.6,7.7,75.4
+Suan Luang,Road,228.8,6.9,20.8,4.1,75.3
+Bueng Kum,Road,195.5,11.0,9.6,5.0,75.0
+Bangkok Noi,Safety,85.6,9.8,21.8,5.6,75.0
+Bang Bon,Safety,49.3,15.4,26.2,5.6,74.7
+Don Mueang,Road,147.6,9.0,15.8,4.5,74.4
+Phaya Thai,Street lighting,65.5,71.0,11.8,5.2,74.1
+Din Daeng,Safety,91.4,8.0,23.4,4.5,74.0
+Phasi Charoen,Safety,66.5,10.5,23.8,4.5,74.0
+Phaya Thai,Road,152.6,10.0,12.5,5.7,73.9
+Saphan Sung,Street lighting,90.8,40.5,6.9,4.7,73.8
+Bang Khen,Street lighting,58.1,36.9,15.5,6.2,73.7
+Phaya Thai,Safety,77.4,8.0,25.8,9.6,73.5
+Bang Khae,Street lighting,79.8,125.0,6.6,4.1,73.5
+Pathum Wan,Signs,86.1,8.9,21.2,4.1,73.5
+Watthana,Street lighting,97.5,28.4,6.8,4.1,73.1
+Bang Khae,Safety,82.1,7.8,24.7,6.0,72.8
+Huai Khwang,Traffic,53.7,9.0,57.6,3.4,72.7
+Bang Kapi,Sidewalk,135.8,9.0,14.7,13.0,72.6
+Min Buri,Street lighting,62.8,29.6,13.7,3.5,72.6
+Huai Khwang,Safety,112.3,6.0,30.0,3.6,72.6
+Bang Bon,Road,134.7,8.3,15.6,3.3,72.4
+Lak Si,Road,119.3,6.1,25.9,3.9,72.3
+Nong Chok,Street lighting,99.9,27.1,5.8,3.5,72.3
+Nong Chok,Road,276.2,9.2,8.4,3.8,72.3
+Phasi Charoen,Road,142.8,7.0,19.4,5.2,72.1
+Min Buri,Road,175.1,7.2,15.6,2.9,72.0
+Bang Na,Safety,81.5,6.7,33.5,3.1,72.0
+Din Daeng,Sidewalk,90.2,7.0,24.5,7.5,71.8
+Phra Khanong,Street lighting,75.1,34.0,7.2,1.6,71.6
+Chom Thong,Road,151.0,6.7,19.3,3.5,71.2
+Bang Khae,Road,228.6,6.8,15.6,4.8,71.1
+Ratchathewi,General complaint,51.9,11.3,22.6,9.5,70.8
+Wang Thonglang,General complaint,52.1,11.8,21.8,10.1,70.8
+Bang Sue,Road,179.8,7.2,13.5,5.9,70.5
+Bang Rak,Signs,44.8,12.3,25.7,5.4,70.4
+Bueng Kum,Street lighting,63.3,56.6,7.5,4.5,70.4
+Taling Chan,Road,166.8,6.0,19.8,4.7,70.4
+Bueng Kum,Safety,53.9,11.7,20.4,6.2,70.3
+Lat Phrao,Street lighting,70.2,38.8,6.8,2.1,70.2
+Sathon,Road,168.6,5.4,23.9,6.5,70.1
+Saphan Sung,Safety,49.4,10.8,24.8,3.7,70.0
+Huai Khwang,Street lighting,71.8,33.3,6.5,5.5,69.9
+Bang Na,General complaint,44.4,11.8,26.6,6.9,69.9
+Min Buri,Safety,69.9,7.7,23.8,4.4,69.7
+Yan Nawa,Road,144.2,5.2,26.4,4.4,69.6
+Bang Sue,Street lighting,59.1,43.9,8.6,5.1,69.5
+Bang Sue,Sidewalk,62.4,10.6,17.9,5.3,69.4
+Khlong Toei,Obstruction,157.4,4.9,30.4,7.1,69.4
+Bang Khun Thian,Street lighting,55.2,13.7,14.8,3.5,69.2
+Khlong Sam Wa,Street lighting,70.2,30.6,6.6,2.6,69.1
+Lat Phrao,Safety,78.6,7.8,19.4,6.7,69.0
+Bangkok Noi,Traffic,34.0,15.8,44.6,2.9,69.0
+Pathum Wan,General complaint,44.2,12.9,22.1,5.7,68.8
+Chatuchak,Signs,96.0,7.1,17.9,5.0,68.7
+Bang Phlat,Street lighting,34.7,73.1,22.8,4.6,68.6
+Bang Khen,Safety,95.7,6.2,22.0,6.4,68.4
+Bang Kapi,Traffic,50.3,7.9,45.5,2.6,68.4
+Ratchathewi,Sidewalk,141.8,8.6,9.4,9.5,68.4
+Lat Krabang,General complaint,54.6,10.8,18.8,5.5,68.4
+Lat Phrao,Road,234.0,6.9,10.8,4.1,68.3
+Yan Nawa,Street lighting,80.0,18.1,3.9,3.2,68.3
+Bang Phlat,Safety,63.2,6.4,43.4,5.5,68.1
+Khlong San,Road,123.3,7.1,14.8,7.4,68.1
+Nong Chok,Safety,95.2,9.8,10.7,4.5,67.7
+Bang Khen,Road,213.5,6.0,13.6,5.5,67.6
+Bang Rak,Safety,69.8,6.8,25.3,6.2,67.6
+Lak Si,Street lighting,30.9,44.7,27.0,4.3,67.5
+Din Daeng,Traffic,48.0,7.8,50.2,4.9,67.4
+Taling Chan,Safety,68.3,7.0,23.0,6.5,67.2
+Din Daeng,Street lighting,60.1,55.3,4.6,3.2,67.1
+Huai Khwang,Sidewalk,102.4,5.1,29.8,6.5,67.1
+Phra Khanong,Safety,64.5,6.6,29.2,3.7,66.9
+Don Mueang,Street lighting,34.8,54.3,20.9,3.1,66.8
+Bang Khun Thian,Safety,84.1,5.8,26.4,4.4,66.8
+Phaya Thai,General complaint,41.5,12.8,21.1,17.5,66.6
+Prawet,Flooding,121.5,9.0,7.8,5.2,66.5
+Bang Sue,Safety,93.2,7.0,15.7,5.0,66.4
+Din Daeng,Obstruction,82.5,5.3,32.4,7.3,66.3
+Phaya Thai,Traffic,40.8,25.6,17.8,6.7,66.3
+Dusit,Road,103.7,6.8,15.4,4.2,66.1
+Pom Prap Sattru Phai,Road,127.8,5.8,18.9,10.2,66.0
+Thon Buri,Street lighting,44.7,46.6,11.6,4.3,65.8
+Bang Kapi,Signs,44.8,10.0,24.2,6.1,65.8
+Watthana,General complaint,71.4,7.9,16.7,7.2,65.8
+Sai Mai,Road,160.4,5.3,18.6,4.6,65.8
+Huai Khwang,General complaint,49.3,8.0,27.5,7.4,65.7
+Bangkok Noi,General complaint,45.0,12.0,18.5,8.1,65.7
+Wang Thonglang,Safety,72.3,6.1,23.6,4.5,65.7
+Bueng Kum,Sidewalk,76.1,11.1,6.9,5.9,65.6
+Prawet,Cleanliness,151.5,9.0,3.7,11.1,65.5
+Taling Chan,Street lighting,52.3,22.9,9.1,5.4,65.5
+Phaya Thai,Obstruction,58.0,11.2,12.2,11.6,65.3
+Khan Na Yao,Safety,36.3,10.9,33.0,3.2,65.2
+Chom Thong,Street lighting,43.2,113.2,9.3,6.0,64.3
+Khan Na Yao,Street lighting,38.8,31.1,15.7,3.7,64.2
+Bang Kapi,Obstruction,77.2,5.1,30.0,7.6,64.1
+Chatuchak,Cleanliness,129.9,8.0,6.1,4.6,64.1
+Watthana,Signs,42.5,10.8,21.0,5.7,64.0
+Lat Phrao,General complaint,52.9,11.1,12.8,6.3,63.9
+Dusit,Street lighting,47.9,51.9,6.6,4.3,63.7
+Saphan Sung,Traffic,24.2,15.2,73.5,2.4,63.6
+Sathon,Safety,69.8,5.4,30.3,5.3,63.4
+Chatuchak,Flooding,47.6,10.9,15.9,2.6,63.4
+Pathum Wan,Street lighting,49.5,30.9,6.9,2.7,63.2
+Bang Rak,Sidewalk,166.4,5.7,12.6,8.0,63.2
+Wang Thonglang,Road,209.8,5.5,12.2,3.7,63.1
+Khan Na Yao,Signs,45.7,44.7,7.1,0.5,63.0
+Bang Rak,General complaint,39.8,13.3,16.9,8.6,63.0
+Don Mueang,General complaint,38.5,13.1,18.2,9.3,62.8
+Bang Khun Thian,Road,229.0,4.2,18.1,3.8,62.6
+Phra Khanong,Traffic,26.8,11.7,65.5,2.8,62.6
+Din Daeng,Signs,34.0,10.4,32.8,6.9,62.6
+Sai Mai,Safety,63.2,5.6,29.4,6.9,62.5
+Phra Nakhon,Road,278.4,4.6,15.1,4.8,62.3
+Prawet,Obstruction,69.3,5.0,32.8,12.6,62.3
+Don Mueang,Traffic,27.7,14.3,27.4,4.8,62.3
+Chom Thong,Traffic,33.3,9.5,54.8,7.0,62.1
+Phaya Thai,Sidewalk,70.2,7.6,13.3,8.2,62.1
+Sathon,General complaint,51.4,7.6,20.9,11.3,62.0
+Bang Kapi,Cleanliness,83.3,7.9,8.0,4.2,61.8
+Bang Phlat,Traffic,20.2,18.4,55.8,7.0,61.8
+Khlong Sam Wa,General complaint,46.7,10.3,15.9,6.6,61.6
+Sai Mai,Street lighting,34.0,38.3,15.4,7.1,61.6
+Wang Thonglang,Street lighting,47.9,36.6,5.0,3.1,61.5
+Bang Phlat,General complaint,30.6,10.5,41.1,3.3,61.4
+Khlong Toei,General complaint,55.5,6.4,22.2,6.5,61.3
+Bang Rak,Street lighting,43.1,18.3,10.3,2.1,61.3
+Khan Na Yao,Cleanliness,52.7,23.8,1.3,2.5,61.1
+Ratchathewi,Signs,54.4,7.2,18.2,4.6,61.1
+Khlong Toei,Signs,48.2,6.5,29.1,3.1,61.1
+Watthana,Drainage,53.3,9.4,13.0,5.0,60.9
+Yan Nawa,Safety,70.3,4.7,30.8,6.9,60.8
+Ratchathewi,Obstruction,93.1,7.0,8.4,9.9,60.8
+Bangkok Noi,Street lighting,38.7,39.5,10.1,4.3,60.7
+Taling Chan,Traffic,31.6,9.9,37.7,6.9,60.6
+Pathum Wan,Drainage,26.8,12.8,27.6,4.3,60.6
+Phra Nakhon,Safety,75.5,5.5,19.6,5.8,60.5
+Bang Kho Laem,Road,127.8,4.7,17.3,5.0,60.3
+Huai Khwang,Obstruction,56.9,4.9,44.1,5.6,60.1
+Bueng Kum,General complaint,40.6,11.9,14.4,5.5,59.9
+Wang Thonglang,Traffic,32.6,8.1,50.6,1.5,59.5
+Chom Thong,Safety,53.6,6.9,18.8,5.4,59.5
+Prawet,Traffic,43.8,6.0,40.9,5.3,59.3
+Phra Khanong,General complaint,36.8,13.0,14.7,7.0,59.2
+Bang Na,Traffic,47.3,5.7,47.9,3.3,59.2
+Phasi Charoen,Street lighting,31.2,21.9,16.0,2.7,59.0
+Bueng Kum,Obstruction,36.5,9.8,21.7,8.0,58.8
+Phra Nakhon,Street lighting,37.6,32.8,9.1,5.1,58.8
+Wang Thonglang,Obstruction,45.0,5.9,33.7,4.1,58.5
+Khlong San,Obstruction,72.8,6.3,12.1,10.2,58.5
+Saphan Sung,General complaint,39.1,9.3,19.6,6.8,58.1
+Suan Luang,General complaint,40.9,7.0,25.3,7.7,58.0
+Huai Khwang,Drainage,37.4,10.6,17.4,5.6,58.0
+Bang Khae,Traffic,43.2,5.7,65.5,5.8,57.8
+Thawi Watthana,Road,120.6,4.7,14.7,3.8,57.7
+Chatuchak,Drainage,100.8,5.6,11.2,4.0,57.7
+Phra Khanong,Obstruction,52.6,4.6,59.0,3.6,57.6
+Sathon,Street lighting,43.8,19.8,3.8,3.4,57.3
+Khan Na Yao,Sidewalk,27.2,10.8,25.7,0.9,57.3
+Thawi Watthana,Safety,41.0,7.0,23.2,5.1,56.9
+Saphan Sung,Signs,14.3,16.5,38.4,6.4,56.8
+Bang Bon,General complaint,33.7,11.0,17.8,7.2,56.7
+Phasi Charoen,General complaint,40.7,8.1,18.9,7.2,56.6
+Bang Phlat,Obstruction,141.0,1.0,68.4,8.2,56.5
+Khlong Toei,Sidewalk,200.8,3.1,16.8,9.2,56.1
+Lak Si,Safety,51.8,4.9,30.4,4.8,56.0
+Bangkok Noi,Drainage,38.8,8.3,19.3,6.4,56.0
+Prawet,Sidewalk,72.8,5.9,11.6,13.2,55.8
+Din Daeng,Drainage,62.0,7.1,8.9,4.6,55.7
+Pom Prap Sattru Phai,Safety,42.5,6.9,20.8,10.0,55.5
+Suan Luang,Obstruction,50.8,4.5,42.9,7.2,55.5
+Suan Luang,Signs,27.4,8.9,30.7,7.0,55.3
+Chom Thong,General complaint,36.0,8.9,19.4,11.3,55.2
+Khan Na Yao,Obstruction,24.5,10.1,28.2,5.1,55.2
+Yan Nawa,General complaint,43.8,6.0,23.8,8.4,55.1
+Lat Krabang,Flooding,33.6,10.3,17.4,6.2,55.0
+Pathum Wan,Flooding,13.2,13.0,37.3,7.0,54.9
+Nong Chok,General complaint,52.8,7.7,9.8,6.2,54.9
+Bang Bon,Street lighting,29.8,94.4,7.3,3.4,54.4
+Khlong San,Street lighting,27.3,27.5,12.2,4.6,54.1
+Phra Nakhon,General complaint,72.8,4.9,15.3,9.8,54.1
+Nong Khaem,Street lighting,40.1,18.6,1.7,9.6,54.1
+Pom Prap Sattru Phai,Sidewalk,100.6,4.2,13.3,22.3,54.1
+Sathon,Traffic,36.0,5.9,54.9,2.8,54.1
+Bang Kho Laem,Street lighting,26.3,36.1,12.0,4.1,54.0
+Bang Kho Laem,Safety,60.7,4.9,20.2,2.6,54.0
+Bang Khae,General complaint,61.5,5.2,17.1,7.2,53.8
+Nong Khaem,Road,127.5,4.8,8.2,3.9,53.7
+Thawi Watthana,Street lighting,29.8,36.6,8.4,6.1,53.6
+Rat Burana,Road,84.8,4.4,14.6,4.3,53.6
+Bangkok Noi,Flooding,21.5,31.8,15.5,8.9,53.5
+Lat Krabang,Traffic,36.8,5.7,45.0,3.4,53.5
+Bang Khen,General complaint,59.8,6.0,12.1,8.5,53.5
+Suan Luang,Sidewalk,77.1,4.1,17.2,8.5,53.4
+Thon Buri,Road,199.8,3.6,11.3,8.3,53.3
+Khlong Toei,Drainage,48.5,5.3,21.5,5.3,53.2
+Khlong San,Safety,45.0,6.7,16.1,5.6,53.1
+Prawet,Drainage,55.5,6.9,8.4,6.6,53.0
+Bangkok Yai,Road,70.7,5.5,11.0,5.5,52.8
+Lat Phrao,Sidewalk,56.3,6.1,11.2,9.3,52.8
+Ratchathewi,Drainage,30.3,11.6,13.7,6.6,52.6
+Rat Burana,Safety,34.9,7.8,19.1,4.1,52.5
+Nong Chok,Traffic,16.2,11.2,29.2,3.6,52.4
+Min Buri,Sidewalk,47.5,5.6,20.7,4.9,52.4
+Khan Na Yao,Traffic,19.8,9.1,41.6,3.4,52.3
+Bang Na,Sidewalk,79.0,2.6,29.6,5.4,52.3
+Bang Khen,Signs,40.8,8.5,12.1,6.7,52.2
+Thung Khru,Road,116.6,3.6,13.5,3.9,52.0
+Sathon,Sidewalk,129.5,3.7,12.1,6.7,51.6
+Phasi Charoen,Traffic,22.8,7.4,45.3,6.2,51.4
+Pom Prap Sattru Phai,Street lighting,20.8,65.0,10.8,5.2,51.4
+Bang Na,Obstruction,52.8,3.5,34.1,5.2,51.1
+Ratchathewi,Cleanliness,60.3,6.3,6.9,7.5,50.9
+Thung Khru,Street lighting,32.9,16.7,4.6,4.6,50.9
+Wang Thonglang,Sidewalk,72.3,5.0,10.4,4.6,50.9
+Thon Buri,Safety,72.2,3.5,19.6,5.5,50.8
+Bangkok Noi,Signs,43.4,5.1,22.8,6.7,50.6
+Bang Kapi,Drainage,58.1,6.0,7.9,4.7,50.6
+Bang Phlat,Sidewalk,94.9,1.0,30.0,8.2,50.5
+Don Mueang,Flooding,24.9,12.8,12.7,6.7,50.0
+Khlong Sam Wa,Flooding,19.1,15.2,15.7,4.8,50.0
+Lat Phrao,Obstruction,61.7,3.1,26.5,6.2,50.0
+Bang Khae,Obstruction,67.2,2.1,48.6,6.3,50.0
+Bangkok Yai,Safety,35.3,7.5,15.8,8.3,49.7
+Phra Nakhon,Signs,42.9,5.0,23.5,8.5,49.6
+Pom Prap Sattru Phai,General complaint,37.6,7.2,14.6,9.5,49.3
+Phra Nakhon,Sidewalk,139.8,2.9,12.9,12.5,49.2
+Yan Nawa,Sidewalk,106.9,2.7,16.4,4.3,49.1
+Lat Phrao,Drainage,36.3,11.8,2.8,5.3,49.0
+Min Buri,General complaint,40.2,6.6,15.1,6.2,48.9
+Pom Prap Sattru Phai,Traffic,22.8,6.7,44.0,6.6,48.7
+Bang Khun Thian,Flooding,46.9,5.0,19.0,5.0,48.7
+Din Daeng,Cleanliness,74.8,5.0,6.5,6.2,48.6
+Don Mueang,Drainage,29.4,10.2,12.7,8.8,48.5
+Nong Chok,Flooding,37.2,10.2,6.3,4.9,48.4
+Phra Nakhon,Flooding,17.1,12.7,17.1,4.9,48.1
+Lat Krabang,Sidewalk,50.3,5.2,14.4,7.9,48.1
+Yan Nawa,Obstruction,82.8,1.9,22.4,3.2,47.9
+Bang Khun Thian,General complaint,52.5,4.4,17.3,7.5,47.9
+Bang Kho Laem,Obstruction,48.9,3.1,37.3,12.4,47.9
+Phra Nakhon,Traffic,41.0,3.9,35.6,4.9,47.5
+Phaya Thai,Flooding,8.8,50.7,13.3,9.5,47.5
+Pom Prap Sattru Phai,Obstruction,69.6,2.8,21.1,11.4,47.2
+Phra Nakhon,Drainage,27.5,10.0,12.7,3.6,47.1
+Samphanthawong,Road,67.3,4.0,13.5,8.3,47.1
+Prawet,Signs,40.2,6.0,14.9,14.1,46.9
+Pom Prap Sattru Phai,Signs,14.4,9.0,27.7,15.6,46.9
+Din Daeng,Flooding,37.8,7.1,11.0,3.8,46.7
+Bang Na,Drainage,38.4,7.0,11.7,2.2,46.6
+Dusit,Safety,43.8,5.0,17.5,5.9,46.6
+Phasi Charoen,Drainage,24.4,8.7,17.7,2.4,46.6
+Phra Nakhon,Obstruction,94.7,1.5,20.7,8.8,46.6
+Lak Si,General complaint,35.1,5.9,19.0,6.4,46.4
+Bangkok Noi,Obstruction,114.8,2.4,13.0,4.5,46.1
+Khlong San,Traffic,34.9,5.4,22.2,13.8,46.0
+Bang Khen,Sidewalk,64.3,2.7,21.8,7.5,45.9
+Pathum Wan,Cleanliness,52.3,5.8,7.2,10.4,45.7
+Saphan Sung,Cleanliness,50.8,6.5,2.8,7.4,45.6
+Bang Khun Thian,Sidewalk,45.8,3.0,31.3,3.8,45.3
+Bangkok Noi,Sidewalk,233.4,2.1,7.6,5.0,45.3
+Phra Khanong,Signs,15.7,9.5,21.3,5.9,45.3
+Taling Chan,Sidewalk,48.2,3.8,20.9,6.9,45.2
+Phasi Charoen,Obstruction,51.2,2.8,27.4,6.5,45.1
+Sai Mai,Traffic,35.6,4.0,43.1,7.0,45.1
+Bang Sue,Traffic,31.6,5.9,20.8,10.0,45.0
+Bang Sue,General complaint,40.9,5.4,15.5,7.1,45.0
+Don Mueang,Obstruction,34.0,6.8,13.7,7.1,44.9
+Bangkok Yai,Street lighting,22.2,15.7,6.0,2.3,44.7
+Bang Kho Laem,General complaint,31.6,5.8,21.1,8.2,44.7
+Sathon,Obstruction,201.5,1.2,10.1,4.1,44.5
+Lak Si,Traffic,18.4,6.1,43.4,3.6,44.5
+Huai Khwang,Signs,32.2,5.1,23.8,5.2,44.3
+Nong Khaem,Safety,44.7,5.1,12.9,5.8,44.1
+Yan Nawa,Traffic,32.0,4.0,52.9,4.2,43.9
+Nong Khaem,General complaint,38.8,6.2,10.3,9.7,43.7
+Khan Na Yao,General complaint,22.2,7.5,18.8,5.6,43.7
+Bang Kapi,Flooding,50.2,5.0,9.5,5.5,43.5
+Bang Kho Laem,Sidewalk,73.3,3.1,11.0,8.4,43.5
+Khan Na Yao,Flooding,8.8,10.0,20.8,6.6,43.3
+Min Buri,Traffic,24.4,5.7,27.6,3.1,43.1
+Phra Khanong,Drainage,46.4,5.9,6.1,5.2,43.0
+Suan Luang,Cleanliness,51.5,5.0,8.1,7.6,43.0
+Nong Chok,Obstruction,23.3,6.7,20.7,5.7,42.9
+Chom Thong,Sidewalk,40.2,4.9,17.2,10.4,42.9
+Khlong Toei,Flooding,21.0,6.0,25.8,8.7,42.9
+Saphan Sung,Obstruction,15.1,6.6,36.5,3.9,42.8
+Lat Krabang,Signs,18.9,6.8,23.3,3.5,42.4
+Bang Khen,Cleanliness,87.7,3.7,3.6,5.6,42.3
+Pom Prap Sattru Phai,Flooding,7.9,11.1,15.8,4.2,42.2
+Sai Mai,General complaint,40.9,4.8,15.7,6.5,42.2
+Dusit,Traffic,32.3,4.1,29.6,3.6,42.1
+Thon Buri,Sidewalk,133.6,2.1,7.7,13.3,42.1
+Bang Rak,Cleanliness,58.2,4.5,6.6,7.4,42.0
+Khlong San,Sidewalk,62.8,4.0,7.8,9.2,41.9
+Lak Si,Sidewalk,34.4,3.7,34.9,5.1,41.9
+Khlong San,General complaint,32.7,6.0,14.0,7.4,41.9
+Phaya Thai,Drainage,30.9,7.2,10.0,4.9,41.7
+Bang Kho Laem,Traffic,16.5,5.8,52.5,3.0,41.7
+Taling Chan,General complaint,34.2,5.1,17.6,5.6,41.6
+Sathon,Flooding,13.2,11.2,12.6,6.9,41.3
+Dusit,Sidewalk,47.2,3.9,15.2,5.7,41.1
+Lat Krabang,Cleanliness,64.8,3.2,9.9,7.2,40.9
+Lat Phrao,Traffic,37.6,3.0,33.7,6.2,40.9
+Khlong Sam Wa,Sidewalk,45.2,5.0,8.5,3.1,40.9
+Bueng Kum,Signs,25.4,7.4,12.1,7.5,40.7
+Thung Khru,General complaint,30.3,5.1,20.3,5.5,40.6
+Don Mueang,Sidewalk,35.0,5.5,14.3,9.8,40.5
+Phasi Charoen,Sidewalk,65.0,2.8,13.1,10.0,40.4
+Bang Khun Thian,Obstruction,36.3,3.6,24.3,8.3,40.1
+Khlong San,Drainage,17.9,11.0,7.9,5.1,39.9
+Lak Si,Cleanliness,41.1,5.9,4.5,5.1,39.9
+Bang Phlat,Signs,20.0,5.0,37.9,6.7,39.9
+Bueng Kum,Cleanliness,56.1,4.6,3.6,7.9,39.8
+Bang Khun Thian,Traffic,22.2,4.4,56.4,2.6,39.7
+Thon Buri,Obstruction,67.9,2.7,11.8,12.3,39.4
+Thawi Watthana,General complaint,25.0,7.0,12.0,6.7,39.2
+Sathon,Signs,50.4,1.8,22.3,6.6,39.0
+Sai Mai,Sidewalk,42.4,2.6,24.2,4.7,39.0
+Bang Bon,Traffic,19.2,4.9,55.7,1.7,39.0
+Saphan Sung,Sidewalk,19.9,8.1,12.1,7.5,39.0
+Khlong Sam Wa,Traffic,27.8,4.1,27.2,5.7,39.0
+Huai Khwang,Cleanliness,58.0,3.2,9.8,6.6,38.9
+Thung Khru,Safety,48.1,3.4,13.7,3.5,38.7
+Lak Si,Obstruction,32.3,4.0,22.9,4.1,38.5
+Yan Nawa,Flooding,11.2,6.3,25.4,2.2,38.4
+Sai Mai,Flooding,14.2,10.4,11.1,8.2,38.4
+Bang Phlat,Drainage,23.8,4.1,40.0,8.4,38.3
+Don Mueang,Cleanliness,42.2,5.6,4.5,7.1,38.3
+Bang Khae,Sidewalk,80.1,1.6,10.7,5.4,38.2
+Thon Buri,General complaint,54.3,3.2,10.0,8.4,38.0
+Samphanthawong,Street lighting,5.3,19.5,4.7,6.2,38.0
+Bang Bon,Sidewalk,30.9,4.1,21.6,10.2,38.0
+Ratchathewi,Flooding,15.2,10.2,9.9,6.0,37.9
+Pom Prap Sattru Phai,Drainage,15.5,7.9,15.1,6.5,37.8
+Min Buri,Obstruction,32.6,4.1,20.5,4.3,37.5
+Thon Buri,Traffic,32.8,3.6,23.6,8.4,37.3
+Bueng Kum,Traffic,20.8,4.8,26.1,4.0,36.8
+Dusit,Obstruction,37.8,3.1,20.9,5.1,36.8
+Khlong Sam Wa,Cleanliness,60.1,3.1,6.9,6.8,36.5
+Bang Sue,Obstruction,39.7,3.3,17.6,6.7,36.5
+Samphanthawong,Sidewalk,41.1,4.4,8.9,10.8,36.4
+Bang Sue,Drainage,35.8,5.5,7.9,2.6,36.4
+Sathon,Drainage,32.5,4.6,15.6,2.8,36.4
+Phra Nakhon,Cleanliness,70.3,3.0,4.4,6.6,36.4
+Taling Chan,Obstruction,30.2,3.8,23.4,7.7,36.2
+Bang Na,Signs,29.6,3.1,30.4,5.4,36.2
+Thon Buri,Signs,95.4,1.7,5.9,10.8,36.2
+Thawi Watthana,Traffic,19.2,4.3,36.1,4.8,36.1
+Bangkok Yai,Signs,10.0,8.7,13.3,9.2,36.1
+Lat Krabang,Obstruction,27.5,3.5,29.7,6.7,36.0
+Samphanthawong,Obstruction,36.4,2.9,22.2,8.5,35.6
+Dusit,Signs,21.4,5.2,20.2,3.9,35.6
+Bang Khen,Traffic,38.3,2.3,23.9,9.3,35.4
+Bang Bon,Obstruction,24.0,3.7,31.2,7.6,35.3
+Lat Krabang,Drainage,19.5,7.8,9.0,5.6,35.2
+Huai Khwang,Flooding,29.8,3.9,20.9,4.5,35.1
+Suan Luang,Flooding,42.3,4.0,8.7,6.9,35.0
+Lat Phrao,Cleanliness,85.2,2.1,2.2,4.7,35.0
+Khlong San,Signs,17.9,5.8,19.1,10.7,34.9
+Bang Na,Flooding,30.5,4.5,15.8,3.8,34.8
+Rat Burana,Street lighting,22.1,6.5,11.3,3.0,34.6
+Chom Thong,Obstruction,27.8,3.0,32.3,12.0,34.4
+Bang Kho Laem,Cleanliness,69.0,2.8,4.0,3.7,34.3
+Khan Na Yao,Drainage,9.5,5.9,22.8,3.5,34.3
+Rat Burana,General complaint,19.9,5.9,15.5,4.6,34.3
+Bang Phlat,Cleanliness,35.7,2.1,27.6,6.3,34.2
+Phasi Charoen,Flooding,12.9,6.7,16.8,7.1,34.1
+Bangkok Noi,Cleanliness,46.3,3.9,6.3,9.7,33.9
+Bang Na,Cleanliness,51.0,3.2,6.7,4.9,33.7
+Watthana,Cleanliness,67.5,2.6,4.6,8.6,33.5
+Bang Sue,Cleanliness,66.8,1.9,7.1,5.4,33.4
+Bangkok Yai,General complaint,22.5,5.9,11.5,10.4,33.3
+Taling Chan,Signs,22.1,4.0,23.8,6.0,32.9
+Bang Kho Laem,Flooding,13.9,5.9,19.2,12.6,32.9
+Wang Thonglang,Cleanliness,90.0,0.8,2.6,2.9,32.8
+Saphan Sung,Drainage,18.8,7.3,7.6,4.0,32.7
+Min Buri,Signs,20.2,4.8,20.7,3.7,32.7
+Khlong Sam Wa,Drainage,14.3,9.2,6.4,4.1,32.7
+Yan Nawa,Signs,26.7,2.9,29.7,4.4,32.7
+Bang Kho Laem,Signs,35.1,0.9,30.6,12.1,32.6
+Bang Khun Thian,Drainage,29.2,4.1,16.0,4.0,32.5
+Bang Khae,Signs,34.6,1.6,29.2,2.7,32.5
+Yan Nawa,Drainage,29.8,3.1,21.8,2.2,32.3
+Khlong Toei,Cleanliness,55.1,1.6,11.2,6.7,32.3
+Bang Khae,Drainage,31.2,5.2,7.2,6.9,32.2
+Khlong San,Flooding,10.9,8.8,7.6,5.3,32.0
+Sathon,Cleanliness,55.9,2.8,4.2,6.7,31.9
+Bangkok Yai,Obstruction,26.0,5.6,9.6,9.9,31.8
+Suan Luang,Drainage,40.2,4.1,6.4,6.6,31.8
+Min Buri,Cleanliness,53.2,3.1,3.3,7.2,31.8
+Phaya Thai,Signs,31.5,4.1,12.2,7.4,31.6
+Bang Khen,Drainage,41.7,3.0,12.0,4.2,31.6
+Bang Khen,Obstruction,56.2,1.9,8.0,10.5,31.5
+Nong Khaem,Traffic,16.4,3.8,35.0,7.1,31.5
+Bang Khun Thian,Signs,16.6,4.2,24.6,10.6,31.3
+Samphanthawong,Signs,7.1,4.9,24.7,9.4,31.2
+Wang Thonglang,Signs,69.8,0.8,6.6,3.0,31.2
+Samphanthawong,Safety,20.3,4.7,18.4,12.3,31.0
+Nong Chok,Drainage,25.9,6.0,5.1,4.2,31.0
+Sai Mai,Cleanliness,60.7,2.1,4.9,4.5,30.6
+Phasi Charoen,Signs,26.4,2.8,24.9,10.1,30.6
+Taling Chan,Drainage,24.1,3.1,23.9,4.5,30.5
+Bueng Kum,Drainage,26.2,6.1,2.5,7.3,30.5
+Samphanthawong,Traffic,13.1,3.8,48.4,9.6,30.5
+Bangkok Yai,Sidewalk,38.9,3.9,7.1,8.1,30.4
+Dusit,General complaint,23.1,4.7,14.8,6.5,30.2
+Nong Chok,Sidewalk,20.1,6.0,8.3,10.8,29.8
+Bang Rak,Drainage,29.6,3.8,14.9,4.8,29.7
+Bang Khun Thian,Cleanliness,54.2,2.3,4.3,8.2,29.7
+Khlong Sam Wa,Obstruction,24.9,4.0,16.7,7.7,29.6
+Rat Burana,Flooding,8.8,5.8,16.2,3.8,29.6
+Bang Khae,Cleanliness,62.9,1.8,2.8,7.4,29.5
+Phra Khanong,Cleanliness,43.2,3.3,5.4,8.3,29.5
+Thawi Watthana,Sidewalk,31.9,1.8,23.0,6.0,29.1
+Saphan Sung,Flooding,28.8,4.2,10.1,5.2,28.7
+Chom Thong,Signs,16.7,4.0,22.5,7.5,28.7
+Nong Khaem,Sidewalk,40.3,3.0,7.9,8.1,28.3
+Samphanthawong,General complaint,15.6,4.2,20.3,7.5,28.0
+Min Buri,Flooding,17.3,3.9,21.2,3.4,28.0
+Watthana,Flooding,29.7,4.9,5.9,2.5,27.9
+Bangkok Yai,Traffic,11.7,5.9,12.9,9.3,27.8
+Nong Chok,Cleanliness,51.2,2.5,1.8,4.2,27.5
+Rat Burana,Sidewalk,21.6,3.5,19.7,5.4,27.3
+Bueng Kum,Flooding,20.8,5.9,5.6,8.4,27.3
+Min Buri,Drainage,19.8,4.0,17.2,5.5,27.2
+Bang Sue,Signs,48.2,1.0,8.5,5.9,26.8
+Chom Thong,Flooding,25.0,4.2,10.3,3.0,26.8
+Rat Burana,Traffic,18.3,3.1,22.3,4.1,25.9
+Pom Prap Sattru Phai,Cleanliness,36.2,3.1,7.4,14.7,25.6
+Chom Thong,Drainage,26.5,4.1,8.5,2.5,25.6
+Taling Chan,Cleanliness,41.3,1.9,8.5,6.0,25.3
+Lat Phrao,Signs,40.2,1.2,12.0,5.8,25.2
+Phasi Charoen,Cleanliness,36.9,3.0,6.8,7.4,25.1
+Thawi Watthana,Obstruction,19.8,2.8,22.8,5.9,25.1
+Nong Khaem,Cleanliness,47.4,2.1,2.1,7.7,24.9
+Sai Mai,Obstruction,27.6,2.1,18.7,13.3,24.6
+Lak Si,Flooding,24.9,1.8,22.4,3.7,24.4
+Chom Thong,Cleanliness,39.0,2.3,7.7,9.0,24.4
+Bang Kho Laem,Drainage,31.2,3.3,8.0,6.7,24.4
+Thon Buri,Cleanliness,47.3,1.5,5.8,13.2,24.3
+Bang Khen,Flooding,32.8,2.1,13.0,6.1,24.2
+Bang Phlat,Flooding,13.2,2.7,33.5,7.6,24.0
+Wang Thonglang,Drainage,44.0,2.1,3.2,6.2,23.8
+Nong Khaem,Obstruction,22.2,2.2,20.6,7.1,23.0
+Bang Sue,Flooding,19.6,4.3,9.8,5.5,22.9
+Khlong San,Cleanliness,31.2,3.6,3.7,6.4,22.0
+Dusit,Drainage,13.9,5.7,6.0,3.0,22.0
+Thung Khru,Drainage,23.5,4.2,5.3,6.4,21.7
+Lat Phrao,Flooding,27.4,3.9,5.2,6.1,21.6
+Bang Khae,Flooding,31.1,2.8,8.0,5.4,21.3
+Thung Khru,Traffic,16.3,3.2,16.8,6.1,21.2
+Bangkok Yai,Drainage,18.2,4.9,6.0,9.2,21.2
+Lak Si,Signs,16.9,1.8,26.1,4.9,21.2
+Phaya Thai,Cleanliness,36.5,2.0,7.1,6.8,21.1
+Rat Burana,Drainage,15.2,4.9,8.2,2.2,21.1
+Bang Bon,Signs,19.1,2.2,20.5,17.0,20.6
+Bang Bon,Drainage,20.0,3.7,10.4,2.5,20.4
+Lak Si,Drainage,20.6,1.4,21.1,4.9,20.1
+Don Mueang,Signs,26.3,3.0,8.9,5.4,20.1
+Thung Khru,Cleanliness,38.7,1.9,4.1,7.5,19.7
+Thawi Watthana,Signs,16.2,2.2,21.0,7.2,19.7
+Thawi Watthana,Flooding,24.7,3.7,5.7,5.1,19.6
+Thon Buri,Drainage,28.2,2.6,9.7,8.6,19.6
+Wang Thonglang,Flooding,39.4,1.3,3.8,5.5,18.9
+Rat Burana,Cleanliness,26.2,2.8,8.9,7.0,18.7
+Thawi Watthana,Drainage,15.4,3.9,10.8,2.7,18.7
+Bang Bon,Cleanliness,29.4,3.1,1.7,5.4,18.5
+Khlong Sam Wa,Signs,25.4,1.1,15.4,2.3,18.5
+Thung Khru,Obstruction,22.2,2.2,13.9,5.6,18.4
+Nong Chok,Signs,17.1,3.4,11.2,4.9,18.0
+Sai Mai,Signs,15.0,3.5,11.7,2.8,17.1
+Samphanthawong,Drainage,10.5,3.9,11.1,9.5,17.1
+Sai Mai,Drainage,17.8,3.8,7.0,5.6,16.9
+Dusit,Flooding,8.2,4.7,6.1,3.1,16.5
+Bang Bon,Flooding,24.7,3.1,4.1,5.1,16.4
+Bang Rak,Flooding,11.4,3.0,15.3,7.3,16.3
+Phra Khanong,Flooding,29.3,2.0,7.1,4.3,16.2
+Yan Nawa,Cleanliness,30.2,2.1,5.2,4.7,15.9
+Thon Buri,Flooding,17.0,2.9,11.8,7.4,15.7
+Nong Khaem,Flooding,17.0,4.0,2.9,5.9,15.3
+Dusit,Cleanliness,22.6,2.6,6.6,6.3,14.0
+Samphanthawong,Flooding,5.4,2.9,13.8,7.7,14.0
+Thung Khru,Flooding,20.4,3.0,5.3,4.1,13.8
+Samphanthawong,Cleanliness,17.5,3.6,3.8,15.7,13.7
+Bangkok Yai,Cleanliness,22.9,2.7,5.5,8.0,13.6
+Taling Chan,Flooding,23.2,1.2,10.1,4.7,13.4
+Thung Khru,Sidewalk,17.8,2.8,7.9,12.6,12.9
+Rat Burana,Signs,13.2,2.2,12.6,4.4,12.1
+Rat Burana,Obstruction,20.8,2.7,4.0,7.6,11.7
+Nong Khaem,Signs,13.1,1.9,13.4,3.2,11.3
+Nong Khaem,Drainage,15.5,2.9,7.0,3.2,11.3
+Thung Khru,Signs,15.0,1.1,14.4,3.3,11.2
+Bangkok Yai,Flooding,18.9,2.6,6.2,4.0,10.7
+Thawi Watthana,Cleanliness,23.8,1.6,2.1,6.3,9.3

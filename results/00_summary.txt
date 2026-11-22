@@ -1,14 +1,18 @@
-Milestone 3 summary (auto-generated)
-- Data: 1,511,479 raw rows -> 1,508,776 clean rows (June 2022 onward, inside Bangkok, no duplicates). See 02_cleaning_log.csv.
-- Empty problem type: 37.7% of clean rows. Rows matched to the 50 Bangkok districts: 100.0%.
-- Text set: removed 106,458 copy-pasted duplicate complaints before sampling.
-- Text labelling (30,000 complaints, 10 types, 10-fold stratified CV, seed 1992):
-  - Baseline (majority): macro F1 0.0 ± 0.0%, AUC 50.0%
-  - Logistic Regression: macro F1 90.7 ± 0.3%, AUC 99.5%
-  - Linear SVM: macro F1 91.5 ± 0.3%, AUC 99.5%
-  - Random Forest: macro F1 82.8 ± 0.6%, AUC 98.9%
-- Best macro F1: Linear SVM (91.5%). Simplest model within one std of it: Linear SVM.
-- Thai vs. English (machine translated): Logistic Regression 84.2% vs 67.3%; Linear SVM 84.8% vs 66.9%
-- Hotspots: see 12_hotspot_map.html and 13_top_hotspots.csv.
-- Seasonal index (Rainy): General complaint 1.14, Traffic 1.12, Drainage 1.10, Safety 1.09
-- Rain vs. flooding complaints (Spearman): 0.64
+Final summary (auto-generated 2026-11-22 16:37)
+- Data: 1,526,532 raw rows -> 1,523,828 clean rows (2022-06-01 to 2026-11-22). See 02_cleaning_log.csv.
+- Empty problem type: 38.3% of clean rows; text model filled 577,101 of them.
+- Text set: 30,000 complaints, 11 types (Road, Sidewalk, Safety, Street lighting, Obstruction, Cleanliness, General complaint, Traffic, Signs, Drainage, Flooding), 10-fold stratified CV, seed 1992; 110,474 duplicates removed.
+  - Baseline (majority): macro F1 0.0 ± 0.0%, precision 0.0%, recall 0.0%, AUC 50.0%
+  - Logistic Regression: macro F1 90.7 ± 0.3%, precision 87.4%, recall 94.5%, AUC 99.5%
+  - Linear SVM: macro F1 91.4 ± 0.3%, precision 88.9%, recall 94.2%, AUC 99.5%
+  - Random Forest: macro F1 81.5 ± 0.6%, precision 92.8%, recall 73.6%, AUC 98.9%
+- Best macro F1: Linear SVM (91.4%). Simplest model within one std of it: Linear SVM.
+- Time-based test (train < 2025, test 2025): Baseline (majority) 0.0% (CV 0.0%); Logistic Regression 90.9% (CV 90.7%); Linear SVM 91.5% (CV 91.4%)
+- Thai vs. English: Logistic Regression 90.7% vs 73.1% (n=30,000); Linear SVM 91.4% vs 72.8% (n=30,000)
+- Hotspots: DBSCAN 30 listed; Gi* hot cells: Flooding 249, Road 201
+- DBSCAN vs HDBSCAN: DBSCAN (150 m, 25): 4 clusters, silhouette 0.95; HDBSCAN (min size 25): 52 clusters, silhouette 0.62
+- Seasonal index (Rainy): Flooding 1.50, General complaint 1.14, Traffic 1.12, Drainage 1.10
+- Rain vs flooding complaints (Spearman): 0.64
+- Top rules: district=Bueng Kum + fix=fast (within 1 day) -> type=Cleanliness (lift 5.709) | district=Sathon + fix=fast (within 1 day) -> type=Obstruction (lift 4.752) | season=Hot + type=Flooding -> type=Drainage (lift 4.185)
+- Top priority: Chatuchak General complaint (90.5) | Bang Kapi Safety (89.1) | Pathum Wan Road (88.9)
+- Forecast (MAE per district-week): Naive (last week) 36.78 ± 37.14; 4-week average 35.85 ± 37.67; Linear Regression 32.02 ± 34.27; XGBoost 34.37 ± 37.24

@@ -1,11 +1,11 @@
-,Road,Sidewalk,Safety,Street lighting,Obstruction,Cleanliness,General complaint,Traffic,Signs,Drainage
-#1,problem,sidewalk,dangerous,dark,parking,garbage,report,traffic,sign,pipe
-#2,road,foot,accidents,lights,blocking,trash,hot,red,signs,pipeline
-#3,street,square,accident,light,parked,smell,complaint,stuck,billboard,pipes
-#4,streets,footpaths,danger,lighting,obstructing,cleanliness,reported,cars,signage,tube
-#5,roads,footpath,safety,lit,traffic,clean,complaints,crowded,badge,water
-#6,complainant,pedestrian,risk,area dark,barrier,smelling,reporting,red light,license,sewer
-#7,causing,walk,harmful,night,obstacles,waste,class,thing,circle,drainage
-#8,highway,corridor,dangerously,fireworks,blocked,dumpster,day,car,going little,fountain
-#9,seen,footprint,afraid,lightning,roadblock,dumps,story,parked road,traffic lights,branch
-#10,number,pavement,sidewalk lit,extinguished,parked sidewalk,smells,ve,glass,plates,people people
+,Road,Sidewalk,Safety,Street lighting,Obstruction,Cleanliness,General complaint,Traffic,Signs,Drainage,Flooding
+#1,problem,sidewalk,dangerous,dark,blocking,garbage,hot,traffic,sign,pipeline,flooding
+#2,road,foot,accident,lights,parking,trash,complaint,red light,signs,pipes,flood
+#3,street,footpaths,accidents,light,obstacles,cleanliness,report,red,badge,pipe,flooded
+#4,streets,footpath,danger,lighting,wheelchair,waste,want help,stuck,billboard,tube,water
+#5,roads,square,safety,lit,barrier,smelling,complaints,cars,signage,sewer,floodwaters
+#6,problem area,pedestrian,unsafe,electricity,obstructing,smell,heat,red lights,plate,fountain,floods
+#7,horse,corridor,safe,extinguished,parked,dump,class,car,signals,pipelines,rain
+#8,ridge,pavement,risk,area dark,blocked,sanitation,complaining,crowded,marked,piping,rains
+#9,problem inside,footprint,dangerously,fires,obstruct,smells,complained,congested,billboards,plumbing,drainage
+#10,causing,pedestrians,harm,power,trolley,dumpster,reporting,green light,badges,waterfall,raining

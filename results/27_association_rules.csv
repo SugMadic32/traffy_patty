@@ -1,0 +1,61 @@
+if,then,support,confidence,lift
+district=Bueng Kum + fix=fast (within 1 day),type=Cleanliness,0.002,0.58,5.709
+district=Sathon + fix=fast (within 1 day),type=Obstruction,0.002,0.507,4.752
+season=Hot + type=Flooding,type=Drainage,0.003,0.256,4.185
+rain=dry (under 1 mm) + type=Flooding,type=Drainage,0.003,0.252,4.118
+type=Drainage + type=Road,type=Flooding,0.005,0.252,4.069
+type=Obstruction + type=Safety,type=Traffic,0.003,0.289,3.864
+district=Prawet + season=Rainy,type=Flooding,0.004,0.237,3.833
+district=Bueng Kum + type=Cleanliness,fix=fast (within 1 day),0.002,0.489,3.793
+rain=heavy (20 mm+) + time=Evening 18-24,type=Flooding,0.004,0.227,3.664
+type=Flooding + type=Road,type=Drainage,0.005,0.224,3.661
+district=Nong Chok + time=Evening 18-24,type=Street lighting,0.002,0.399,3.588
+fix=fast (within 1 day) + rain=heavy (20 mm+),type=Flooding,0.002,0.217,3.499
+type=Cleanliness + type=Signs,fix=fast (within 1 day),0.003,0.441,3.421
+season=Rainy + type=Drainage,type=Flooding,0.007,0.207,3.346
+time=Afternoon 12-18 + type=Flooding,type=Drainage,0.004,0.204,3.336
+fix=slow (over 30 days) + type=Drainage,type=Flooding,0.003,0.206,3.321
+rain=heavy (20 mm+) + season=Rainy,type=Flooding,0.01,0.2,3.236
+district=Sathon + type=Obstruction,fix=fast (within 1 day),0.002,0.415,3.216
+fix=slow (over 30 days) + time=Evening 18-24,type=Street lighting,0.029,0.355,3.192
+fix=slow (over 30 days) + time=Night 0-6,type=Street lighting,0.005,0.354,3.183
+district=Sathon + time=Evening 18-24,type=Obstruction,0.002,0.321,3.012
+district=Bang Kapi + fix=slow (over 30 days),type=Street lighting,0.003,0.298,2.685
+district=Sathon + rain=dry (under 1 mm),type=Obstruction,0.002,0.278,2.608
+district=Bang Kapi + time=Evening 18-24,type=Street lighting,0.003,0.284,2.553
+season=Hot + time=Night 0-6,type=Street lighting,0.003,0.279,2.508
+district=Sathon,type=Obstruction,0.006,0.263,2.465
+type=Safety + type=Traffic,type=Obstruction,0.003,0.254,2.377
+district=Bangkok Noi + time=Morning 6-12,type=Sidewalk,0.003,0.384,2.325
+district=Sathon + season=Rainy,type=Obstruction,0.003,0.245,2.294
+district=Pom Prap Sattru Phai + time=Morning 6-12,type=Sidewalk,0.002,0.374,2.263
+fix=slow (over 30 days) + season=Hot,type=Street lighting,0.013,0.25,2.247
+district=Bueng Kum + type=Road,type=Cleanliness,0.002,0.224,2.201
+rain=dry (under 1 mm) + time=Night 0-6,type=Street lighting,0.005,0.242,2.175
+fix=slow (over 30 days) + season=Cool,type=Street lighting,0.013,0.238,2.142
+season=Cool + type=Signs,fix=fast (within 1 day),0.005,0.274,2.124
+fix=slow (over 30 days) + rain=dry (under 1 mm),type=Street lighting,0.021,0.234,2.104
+district=Bangkok Noi + time=Evening 18-24,type=Sidewalk,0.003,0.347,2.1
+district=Bangkok Noi + season=Hot,type=Sidewalk,0.002,0.346,2.097
+fix=slow (over 30 days) + type=Safety,type=Street lighting,0.008,0.231,2.075
+time=Evening 18-24 + type=Safety,type=Street lighting,0.009,0.23,2.066
+district=Prawet + rain=dry (under 1 mm),type=Cleanliness,0.003,0.21,2.061
+district=Pom Prap Sattru Phai + season=Rainy,type=Sidewalk,0.003,0.338,2.045
+district=Pom Prap Sattru Phai,type=Sidewalk,0.005,0.331,2.004
+season=Hot + type=Street lighting,fix=slow (over 30 days),0.013,0.482,1.981
+time=Night 0-6,type=Street lighting,0.01,0.219,1.973
+fix=fast (within 1 day) + type=Signs,type=Cleanliness,0.003,0.201,1.972
+time=Evening 18-24 + type=Street lighting,fix=slow (over 30 days),0.029,0.479,1.971
+district=Pom Prap Sattru Phai + rain=dry (under 1 mm),type=Sidewalk,0.002,0.323,1.957
+district=Bangkok Noi + season=Cool,type=Sidewalk,0.002,0.323,1.957
+type=Road + type=Street lighting,fix=slow (over 30 days),0.018,0.475,1.954
+district=Nong Khaem,fix=fast (within 1 day),0.003,0.251,1.947
+district=Bang Kapi + type=Street lighting,fix=slow (over 30 days),0.003,0.472,1.942
+district=Bangkok Noi + rain=dry (under 1 mm),type=Sidewalk,0.003,0.32,1.941
+time=Afternoon 12-18 + type=Traffic,type=Obstruction,0.005,0.206,1.932
+season=Cool + time=Evening 18-24,type=Street lighting,0.016,0.215,1.931
+district=Chatuchak + type=Street lighting,fix=slow (over 30 days),0.003,0.468,1.925
+rain=dry (under 1 mm) + time=Evening 18-24,type=Street lighting,0.025,0.214,1.923
+district=Bang Kapi + rain=dry (under 1 mm),type=Street lighting,0.003,0.213,1.921
+season=Rainy + type=Street lighting,fix=slow (over 30 days),0.025,0.466,1.918
+district=Sathon + rain=dry (under 1 mm),fix=fast (within 1 day),0.002,0.247,1.916

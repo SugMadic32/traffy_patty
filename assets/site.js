@@ -74,7 +74,7 @@
     if(ext==="ipynb"){kind.textContent="Colab notebook";body.innerHTML=`<div class="v-msg"><h4>Milestone 3 notebook</h4><p>This is the Python code that cleaned the data and produced every result on this page.</p><p>Download it, then open it in Google Colab (File, Upload notebook) and choose Run all.</p></div>`;show();return}
     window.open(href,"_blank","noopener");
   }
-  document.querySelectorAll("a.file, a.fig, #mapBtn").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();open(a)}));
+  document.querySelectorAll("a.file, a.fig, #mapBtn, #giBtn").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();open(a)}));
   window.openFile=open;
   V.querySelectorAll("[data-close]").forEach(el=>el.addEventListener("click",close));
   addEventListener("keydown",e=>{if(!V.hidden&&e.key==="Escape"){e.preventDefault();e.stopPropagation();close()}},true);

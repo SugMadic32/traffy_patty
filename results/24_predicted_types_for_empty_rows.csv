@@ -1,0 +1,12 @@
+type,predicted complaints,share of empty rows %
+Road,145666,25.2
+Safety,64177,11.1
+Cleanliness,61432,10.6
+Obstruction,60327,10.5
+Sidewalk,59709,10.3
+Street lighting,53464,9.3
+General complaint,50510,8.8
+Flooding,50492,8.7
+Signs,33566,5.8
+Traffic,31519,5.5
+Drainage,28324,4.9
